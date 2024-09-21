@@ -95,18 +95,194 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BrownMouseTransitionDown_0
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 2110
+        width: 418
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bbca27d4fa404555bb42306c1f73f48
+      internalID: -1547039983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionDown_1
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 2110
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53b1b0ab91054121bf1a7be65da66d4
+      internalID: 471940247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionDown_2
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 2110
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0d1e42f17172466ba110cb36d9564cb
+      internalID: -389644948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionDown_3
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 1087
+        width: 418
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ecd44d581cd49f680cb67d573b843c
+      internalID: -422185902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionDown_4
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 1087
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e0987bff444e43fcad47d4c0c5eafdc
+      internalID: 2028010334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionDown_5
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1087
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 238003be0108a4e4f965b0ebb0a1d07e
+      internalID: -221333918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionDown_6
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 62
+        width: 418
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31dd091c684b64c8096b9e001df6279b
+      internalID: 995271960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionDown_7
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 62
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b35e3839fed9455ab0b3b507a1508cc
+      internalID: 1938813696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8af659f9378f545d789f9f15b323c337
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BrownMouseTransitionDown_0: -1547039983
+      BrownMouseTransitionDown_1: 471940247
+      BrownMouseTransitionDown_2: -389644948
+      BrownMouseTransitionDown_3: -422185902
+      BrownMouseTransitionDown_4: 2028010334
+      BrownMouseTransitionDown_5: -221333918
+      BrownMouseTransitionDown_6: 995271960
+      BrownMouseTransitionDown_7: 1938813696
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

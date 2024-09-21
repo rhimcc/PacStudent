@@ -95,18 +95,194 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BrownMouseDeadUp_0
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 2110
+        width: 418
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49e9a320bb7324844a2172b5022cc6a4
+      internalID: 859796619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseDeadUp_1
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 2110
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c41174e4e4bf840d295db924454e6aca
+      internalID: -1305452852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseDeadUp_2
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 2143
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f21b59af97f64ce48be3a7084c6dfb5
+      internalID: -588708493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseDeadUp_3
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 1087
+        width: 418
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52abe471f62b9489d9ba40586b014536
+      internalID: 886861593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseDeadUp_4
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 1087
+        width: 420
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97d4bde0af83b489f9dc30b36a441de1
+      internalID: -1362918662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseDeadUp_5
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1087
+        width: 420
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3e7bbffe16054abfb62e1522d877b88
+      internalID: -1229190996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseDeadUp_6
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 94
+        width: 418
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cda798b42e5f442d78525d91c2dd6c41
+      internalID: -1429508975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseDeadUp_7
+      rect:
+        serializedVersion: 2
+        x: 1347
+        y: 127
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fa05833bb5f247aaa78916a5df27ff9
+      internalID: -1918776966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1c6c962e7cfd445569d78d3bb6389fa0
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BrownMouseDeadUp_0: 859796619
+      BrownMouseDeadUp_1: -1305452852
+      BrownMouseDeadUp_2: -588708493
+      BrownMouseDeadUp_3: 886861593
+      BrownMouseDeadUp_4: -1362918662
+      BrownMouseDeadUp_5: -1229190996
+      BrownMouseDeadUp_6: -1429508975
+      BrownMouseDeadUp_7: -1918776966
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

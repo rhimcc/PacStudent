@@ -95,18 +95,238 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_0
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 3389
+        width: 774
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e26239b1a021c4558b24c84327d942a5
+      internalID: 1081340790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_1
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 3389
+        width: 838
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a262c5a4775f8415e89953f90b80bdb0
+      internalID: -347592733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_2
+      rect:
+        serializedVersion: 2
+        x: 2173
+        y: 3389
+        width: 870
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b892724ccd3d4fc58124b8adbb7698e
+      internalID: 1007879697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_3
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 2365
+        width: 870
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e291839ef352e493198be7f295602830
+      internalID: -439932371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_4
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 2365
+        width: 870
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95e373b63fc344484be3009e9fc8aaae
+      internalID: 1048033467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_5
+      rect:
+        serializedVersion: 2
+        x: 2173
+        y: 2365
+        width: 870
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00423150012cb49248e86f120ccc09a6
+      internalID: -161606012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_6
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1341
+        width: 838
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95987507c11bd4ab796754fc60c53d2a
+      internalID: -777929428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_7
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 1341
+        width: 838
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e146701d0ab1471787eef3c51ae95c1
+      internalID: 1138713435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_8
+      rect:
+        serializedVersion: 2
+        x: 2173
+        y: 1341
+        width: 774
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcaa53070fe36486eac902bc49fbf9ca
+      internalID: -1187710867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseScaredLeft_9
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 317
+        width: 774
+        height: 486
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97d7673bdf028415f89c110548e54166
+      internalID: -912228721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 261d2048a7ebd4445a82281d4173655d
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BrownMouseScaredLeft_0: 1081340790
+      BrownMouseScaredLeft_1: -347592733
+      BrownMouseScaredLeft_2: 1007879697
+      BrownMouseScaredLeft_3: -439932371
+      BrownMouseScaredLeft_4: 1048033467
+      BrownMouseScaredLeft_5: -161606012
+      BrownMouseScaredLeft_6: -777929428
+      BrownMouseScaredLeft_7: 1138713435
+      BrownMouseScaredLeft_8: -1187710867
+      BrownMouseScaredLeft_9: -912228721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -95,18 +95,194 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BrownMouseNormalDown_0
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 2110
+        width: 418
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f2f673b99e48425dadd0c384ee8c821
+      internalID: 1672342400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseNormalDown_1
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 2110
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d45cedf485664476ab176907eedfe93
+      internalID: -930798587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseNormalDown_2
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 2110
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1faf44a62403f410c8b448a910314003
+      internalID: -1678084238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseNormalDown_3
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 1087
+        width: 418
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc9eba5a31c584368a22e10d225b4edb
+      internalID: 2038610573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseNormalDown_4
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 1087
+        width: 420
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7193c3c6241614f9db9cd788aa51a224
+      internalID: 417195874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseNormalDown_5
+      rect:
+        serializedVersion: 2
+        x: 2366
+        y: 1087
+        width: 420
+        height: 898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 756bc0315148e4c478f9a2ae597f225e
+      internalID: -2059336712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseNormalDown_6
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 62
+        width: 418
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdfeaac4e00f34e889439ca2acc85ac9
+      internalID: 2016333287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseNormalDown_7
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 62
+        width: 420
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d948b9b5078242839919b559df7d244
+      internalID: 378741317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: fc56447743c5c4fc8934e0d15d5bea81
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BrownMouseNormalDown_0: 1672342400
+      BrownMouseNormalDown_1: -930798587
+      BrownMouseNormalDown_2: -1678084238
+      BrownMouseNormalDown_3: 2038610573
+      BrownMouseNormalDown_4: 417195874
+      BrownMouseNormalDown_5: -2059336712
+      BrownMouseNormalDown_6: 2016333287
+      BrownMouseNormalDown_7: 378741317
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

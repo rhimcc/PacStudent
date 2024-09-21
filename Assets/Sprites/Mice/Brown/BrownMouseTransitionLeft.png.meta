@@ -95,18 +95,238 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_0
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 3389
+        width: 774
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7f5698f738cd4a71a878e6588cd4a76
+      internalID: -561026727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_1
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 3389
+        width: 838
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2c62162bec24e8d9a8c5d7c9de41ec
+      internalID: 327273085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_2
+      rect:
+        serializedVersion: 2
+        x: 2237
+        y: 3389
+        width: 870
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 174b50ffbf0a74e79b1290d493bae2db
+      internalID: -777788942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_3
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 2365
+        width: 870
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c156c062899a4326a64dfaaf487712e
+      internalID: 1413394811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_4
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 2365
+        width: 870
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a5c1a75d76fb4863affd4ad51090896
+      internalID: 1936603847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_5
+      rect:
+        serializedVersion: 2
+        x: 2237
+        y: 2365
+        width: 870
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f1c4d46d0092487da7ef9979eac9c72
+      internalID: -1785538831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_6
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1341
+        width: 838
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68f2611be94224b38923c6b4c9dbe70c
+      internalID: 2085775220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_7
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 1341
+        width: 838
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dd9ee079b32c4214a2ab1e45c77f0b5
+      internalID: 911556537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_8
+      rect:
+        serializedVersion: 2
+        x: 2237
+        y: 1341
+        width: 774
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f44b89d8e9bc4a3b948e8dcbcb282aa
+      internalID: -1250903539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BrownMouseTransitionLeft_9
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 317
+        width: 774
+        height: 486
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4975c6a383a78413686ce7d6a2913389
+      internalID: 1823125416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7abae74d6c65746d589e74055b331dc8
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BrownMouseTransitionLeft_0: -561026727
+      BrownMouseTransitionLeft_1: 327273085
+      BrownMouseTransitionLeft_2: -777788942
+      BrownMouseTransitionLeft_3: 1413394811
+      BrownMouseTransitionLeft_4: 1936603847
+      BrownMouseTransitionLeft_5: -1785538831
+      BrownMouseTransitionLeft_6: 2085775220
+      BrownMouseTransitionLeft_7: 911556537
+      BrownMouseTransitionLeft_8: -1250903539
+      BrownMouseTransitionLeft_9: 1823125416
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
