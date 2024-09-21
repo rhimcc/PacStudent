@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4587a6e71e8584103813cad236c0170d
+guid: d754cc2e1d58e4b618b7ef29d791096e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,10 +100,10 @@ TextureImporter:
       name: BrownMouseDeadRight_0
       rect:
         serializedVersion: 2
-        x: 125
-        y: 3389
-        width: 774
-        height: 486
+        x: 0
+        y: 3072
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 840f3f0ff8bba4ae4a7f84ac077ba5f6
-      internalID: 71967651
+      spriteID: 01753b92bf046452586b0739bb6f11a8
+      internalID: 592913049
       vertices: []
       indices: 
       edges: []
@@ -121,10 +121,10 @@ TextureImporter:
       name: BrownMouseDeadRight_1
       rect:
         serializedVersion: 2
-        x: 1085
-        y: 3389
-        width: 838
-        height: 486
+        x: 1024
+        y: 3072
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e31df246231b4a2db17a2f79b156125
-      internalID: -1694284393
+      spriteID: 771529483626a474e8faca5df0f6050d
+      internalID: -1771500927
       vertices: []
       indices: 
       edges: []
@@ -142,10 +142,10 @@ TextureImporter:
       name: BrownMouseDeadRight_2
       rect:
         serializedVersion: 2
-        x: 2077
-        y: 3389
-        width: 870
-        height: 486
+        x: 2048
+        y: 3072
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3f9a9a58b6d84cd697a7c9e8ff8193f
-      internalID: 594470589
+      spriteID: ca03bf51e40234fb2a95469885284ba7
+      internalID: 1440740752
       vertices: []
       indices: 
       edges: []
@@ -163,10 +163,10 @@ TextureImporter:
       name: BrownMouseDeadRight_3
       rect:
         serializedVersion: 2
-        x: 29
-        y: 2365
-        width: 870
-        height: 486
+        x: 0
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e20b32c6ea4544ed9879e9580eba61b5
-      internalID: -2060271171
+      spriteID: a7bece3f4418c4ca2a1ca2fdcccd64f2
+      internalID: -96638880
       vertices: []
       indices: 
       edges: []
@@ -184,10 +184,10 @@ TextureImporter:
       name: BrownMouseDeadRight_4
       rect:
         serializedVersion: 2
-        x: 1053
-        y: 2365
-        width: 870
-        height: 486
+        x: 1024
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4a642af293944aeaa1ca6804be9ae1e
-      internalID: 196927686
+      spriteID: 14c554bd7730746f4b5d61f1d54befe7
+      internalID: 973355347
       vertices: []
       indices: 
       edges: []
@@ -205,10 +205,10 @@ TextureImporter:
       name: BrownMouseDeadRight_5
       rect:
         serializedVersion: 2
-        x: 2077
-        y: 2365
-        width: 870
-        height: 486
+        x: 2048
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bab53ac9ed07e4b36b252376f4eaff07
-      internalID: 1397090880
+      spriteID: fa46f73d87d37423ebc89c94ba62a707
+      internalID: 1739848646
       vertices: []
       indices: 
       edges: []
@@ -226,10 +226,10 @@ TextureImporter:
       name: BrownMouseDeadRight_6
       rect:
         serializedVersion: 2
-        x: 61
-        y: 1341
-        width: 838
-        height: 486
+        x: 0
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,8 +237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9f337def61b9429987c5fa85a4f5881
-      internalID: -1145611767
+      spriteID: cada5519b41544374ae180c7c106cbf2
+      internalID: -2103178625
       vertices: []
       indices: 
       edges: []
@@ -247,10 +247,10 @@ TextureImporter:
       name: BrownMouseDeadRight_7
       rect:
         serializedVersion: 2
-        x: 1085
-        y: 1341
-        width: 838
-        height: 486
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19d854b97ba394a8bb16ac57c333ce87
-      internalID: -772156999
+      spriteID: 11071e3e23fae493cb2bbbf2633d9e93
+      internalID: -1518880091
       vertices: []
       indices: 
       edges: []
@@ -268,10 +268,10 @@ TextureImporter:
       name: BrownMouseDeadRight_8
       rect:
         serializedVersion: 2
-        x: 2173
-        y: 1341
-        width: 774
-        height: 486
+        x: 2048
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,8 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fb056b08924f4fcd992214237f43e57
-      internalID: 401044167
+      spriteID: d48a382a35f954daf98226f64253817a
+      internalID: -2058865875
       vertices: []
       indices: 
       edges: []
@@ -289,10 +289,10 @@ TextureImporter:
       name: BrownMouseDeadRight_9
       rect:
         serializedVersion: 2
-        x: 125
-        y: 317
-        width: 774
-        height: 486
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,8 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d9edbe8b28b9484486c1f0f84aedc93
-      internalID: -281621447
+      spriteID: 116dcbf775bfb4cd9881f8949e6ca302
+      internalID: 456794598
       vertices: []
       indices: 
       edges: []
@@ -309,7 +309,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: fc3f896ec2a244a7f9a6fa46abbee00f
+    spriteID: 95b465b53a6184f889a985e05461eb82
     internalID: 0
     vertices: []
     indices: 
@@ -317,16 +317,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BrownMouseDeadRight_0: 71967651
-      BrownMouseDeadRight_1: -1694284393
-      BrownMouseDeadRight_2: 594470589
-      BrownMouseDeadRight_3: -2060271171
-      BrownMouseDeadRight_4: 196927686
-      BrownMouseDeadRight_5: 1397090880
-      BrownMouseDeadRight_6: -1145611767
-      BrownMouseDeadRight_7: -772156999
-      BrownMouseDeadRight_8: 401044167
-      BrownMouseDeadRight_9: -281621447
+      BrownMouseDeadRight_0: 592913049
+      BrownMouseDeadRight_1: -1771500927
+      BrownMouseDeadRight_2: 1440740752
+      BrownMouseDeadRight_3: -96638880
+      BrownMouseDeadRight_4: 973355347
+      BrownMouseDeadRight_5: 1739848646
+      BrownMouseDeadRight_6: -2103178625
+      BrownMouseDeadRight_7: -1518880091
+      BrownMouseDeadRight_8: -2058865875
+      BrownMouseDeadRight_9: 456794598
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

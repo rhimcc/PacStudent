@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 302e9c607bc1b41cb97b7468d4f0cf60
+guid: 4909ae21669ac4badbb9776d11b2c5a6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -50,7 +50,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -100,10 +100,10 @@ TextureImporter:
       name: BrownMouseNormalUp_0
       rect:
         serializedVersion: 2
-        x: 319
-        y: 2110
-        width: 418
-        height: 900
+        x: 0
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eefd79e786f54344bc2b8f37a2bbf27
-      internalID: -712940444
+      spriteID: c5f5df6a49b5144cfa7b24f648c3ee0e
+      internalID: 999986959
       vertices: []
       indices: 
       edges: []
@@ -121,10 +121,10 @@ TextureImporter:
       name: BrownMouseNormalUp_1
       rect:
         serializedVersion: 2
-        x: 1342
-        y: 2110
-        width: 420
-        height: 900
+        x: 1024
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02f0a00f419bb48358a27bf93349de2e
-      internalID: -622489698
+      spriteID: c88e1bb3d31964a0bae324400586be59
+      internalID: 1799364766
       vertices: []
       indices: 
       edges: []
@@ -142,10 +142,10 @@ TextureImporter:
       name: BrownMouseNormalUp_2
       rect:
         serializedVersion: 2
-        x: 2366
-        y: 2143
-        width: 420
-        height: 900
+        x: 2048
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5ec814494b2b414fb51744975a6afb7
-      internalID: 537409051
+      spriteID: 7fe4d1935be2d492bbb2ae4e01680d74
+      internalID: -694139671
       vertices: []
       indices: 
       edges: []
@@ -163,10 +163,10 @@ TextureImporter:
       name: BrownMouseNormalUp_3
       rect:
         serializedVersion: 2
-        x: 319
-        y: 1087
-        width: 418
-        height: 900
+        x: 0
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 089cd04b26d7f4233960f478da885e6f
-      internalID: -1878424584
+      spriteID: 122c136951d87433993101097e34ad54
+      internalID: 501130794
       vertices: []
       indices: 
       edges: []
@@ -184,10 +184,10 @@ TextureImporter:
       name: BrownMouseNormalUp_4
       rect:
         serializedVersion: 2
-        x: 1342
-        y: 1087
-        width: 420
-        height: 900
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d0c1f174294c461a8235ee836e8c1ee
-      internalID: -972499620
+      spriteID: 0fb6a0e0a435a4ffb877032c1fe06cf7
+      internalID: 348175892
       vertices: []
       indices: 
       edges: []
@@ -205,10 +205,10 @@ TextureImporter:
       name: BrownMouseNormalUp_5
       rect:
         serializedVersion: 2
-        x: 2366
-        y: 1087
-        width: 420
-        height: 900
+        x: 2048
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f03e7ac0a94d41989a6f4360326856c
-      internalID: -262712739
+      spriteID: b6c6833f30d8144a8a13b49006c81d52
+      internalID: -1294059996
       vertices: []
       indices: 
       edges: []
@@ -226,10 +226,10 @@ TextureImporter:
       name: BrownMouseNormalUp_6
       rect:
         serializedVersion: 2
-        x: 319
-        y: 94
-        width: 418
-        height: 900
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,8 +237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f7921e6484b64708aa118a8e68075b9
-      internalID: -1723259523
+      spriteID: e82dbe767eb7e45658ae68c512e1761c
+      internalID: -775395175
       vertices: []
       indices: 
       edges: []
@@ -247,10 +247,10 @@ TextureImporter:
       name: BrownMouseNormalUp_7
       rect:
         serializedVersion: 2
-        x: 1342
-        y: 127
-        width: 420
-        height: 900
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e4f90946adbe4e7b85974f3db1f8108
-      internalID: 2085476794
+      spriteID: 4e5567c91005a4a5585e51353238a437
+      internalID: 1295358631
       vertices: []
       indices: 
       edges: []
@@ -267,7 +267,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c929c26d0773c4dcf91de45e34b1638f
+    spriteID: 71c03de8d02f64a3c9850c344c6d8b85
     internalID: 0
     vertices: []
     indices: 
@@ -275,14 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BrownMouseNormalUp_0: -712940444
-      BrownMouseNormalUp_1: -622489698
-      BrownMouseNormalUp_2: 537409051
-      BrownMouseNormalUp_3: -1878424584
-      BrownMouseNormalUp_4: -972499620
-      BrownMouseNormalUp_5: -262712739
-      BrownMouseNormalUp_6: -1723259523
-      BrownMouseNormalUp_7: 2085476794
+      BrownMouseNormalUp_0: 999986959
+      BrownMouseNormalUp_1: 1799364766
+      BrownMouseNormalUp_2: -694139671
+      BrownMouseNormalUp_3: 501130794
+      BrownMouseNormalUp_4: 348175892
+      BrownMouseNormalUp_5: -1294059996
+      BrownMouseNormalUp_6: -775395175
+      BrownMouseNormalUp_7: 1295358631
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

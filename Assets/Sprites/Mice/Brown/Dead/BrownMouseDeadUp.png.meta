@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0a77cf9322528448884b78402d918f44
+guid: 5850606ad0a654ee19d08bebbb73a21a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,10 +100,10 @@ TextureImporter:
       name: BrownMouseDeadUp_0
       rect:
         serializedVersion: 2
-        x: 319
-        y: 2110
-        width: 418
-        height: 900
+        x: 0
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49e9a320bb7324844a2172b5022cc6a4
-      internalID: 859796619
+      spriteID: e08a4710efa49434f8f19ab4e8738549
+      internalID: 1085311733
       vertices: []
       indices: 
       edges: []
@@ -121,10 +121,10 @@ TextureImporter:
       name: BrownMouseDeadUp_1
       rect:
         serializedVersion: 2
-        x: 1342
-        y: 2110
-        width: 420
-        height: 900
+        x: 1024
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c41174e4e4bf840d295db924454e6aca
-      internalID: -1305452852
+      spriteID: 626794ddd2e5a41c3a1c971f0837307f
+      internalID: -1009001612
       vertices: []
       indices: 
       edges: []
@@ -142,10 +142,10 @@ TextureImporter:
       name: BrownMouseDeadUp_2
       rect:
         serializedVersion: 2
-        x: 2366
-        y: 2143
-        width: 420
-        height: 900
+        x: 2048
+        y: 2048
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f21b59af97f64ce48be3a7084c6dfb5
-      internalID: -588708493
+      spriteID: 158f2270a411f4a338f9ba26fa657500
+      internalID: 1664662375
       vertices: []
       indices: 
       edges: []
@@ -163,10 +163,10 @@ TextureImporter:
       name: BrownMouseDeadUp_3
       rect:
         serializedVersion: 2
-        x: 319
-        y: 1087
-        width: 418
-        height: 898
+        x: 0
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52abe471f62b9489d9ba40586b014536
-      internalID: 886861593
+      spriteID: 63939ed7247ac42a8988393a0cbb68fb
+      internalID: -549100412
       vertices: []
       indices: 
       edges: []
@@ -184,10 +184,10 @@ TextureImporter:
       name: BrownMouseDeadUp_4
       rect:
         serializedVersion: 2
-        x: 1342
-        y: 1087
-        width: 420
-        height: 898
+        x: 1024
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,8 +195,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97d4bde0af83b489f9dc30b36a441de1
-      internalID: -1362918662
+      spriteID: 8226fd15fc2d64985a9386f24da25530
+      internalID: 701983218
       vertices: []
       indices: 
       edges: []
@@ -205,10 +205,10 @@ TextureImporter:
       name: BrownMouseDeadUp_5
       rect:
         serializedVersion: 2
-        x: 2366
-        y: 1087
-        width: 420
-        height: 898
+        x: 2048
+        y: 1024
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3e7bbffe16054abfb62e1522d877b88
-      internalID: -1229190996
+      spriteID: d79c8df2fcda440c2832c0dcabd6711f
+      internalID: -657914282
       vertices: []
       indices: 
       edges: []
@@ -226,10 +226,10 @@ TextureImporter:
       name: BrownMouseDeadUp_6
       rect:
         serializedVersion: 2
-        x: 328
-        y: 94
-        width: 418
-        height: 900
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,8 +237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cda798b42e5f442d78525d91c2dd6c41
-      internalID: -1429508975
+      spriteID: 532c2fe79808447808729cae29206996
+      internalID: -915655062
       vertices: []
       indices: 
       edges: []
@@ -247,10 +247,10 @@ TextureImporter:
       name: BrownMouseDeadUp_7
       rect:
         serializedVersion: 2
-        x: 1347
-        y: 127
-        width: 420
-        height: 900
+        x: 1024
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fa05833bb5f247aaa78916a5df27ff9
-      internalID: -1918776966
+      spriteID: 5e4289d4497ff4de1b33cb8bc02234aa
+      internalID: 1722502412
       vertices: []
       indices: 
       edges: []
@@ -267,7 +267,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1c6c962e7cfd445569d78d3bb6389fa0
+    spriteID: 9aebb844c9056441db7e39e2bf3868b0
     internalID: 0
     vertices: []
     indices: 
@@ -275,14 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BrownMouseDeadUp_0: 859796619
-      BrownMouseDeadUp_1: -1305452852
-      BrownMouseDeadUp_2: -588708493
-      BrownMouseDeadUp_3: 886861593
-      BrownMouseDeadUp_4: -1362918662
-      BrownMouseDeadUp_5: -1229190996
-      BrownMouseDeadUp_6: -1429508975
-      BrownMouseDeadUp_7: -1918776966
+      BrownMouseDeadUp_0: 1085311733
+      BrownMouseDeadUp_1: -1009001612
+      BrownMouseDeadUp_2: 1664662375
+      BrownMouseDeadUp_3: -549100412
+      BrownMouseDeadUp_4: 701983218
+      BrownMouseDeadUp_5: -657914282
+      BrownMouseDeadUp_6: -915655062
+      BrownMouseDeadUp_7: 1722502412
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
