@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 19069b4eb78f74060a5bf6379f7b85cd
+guid: 340de1a5c392b42ea93f14ae2654f156
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BrownMouseNormalRight_0
+      name: BrownMouseScaredRight_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb8ab200393104d779c09c2b8d5470f4
-      internalID: -1468873364
+      spriteID: 1e12c15dfc77e482680481555a971a00
+      internalID: 608343721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_1
+      name: BrownMouseScaredRight_1
       rect:
         serializedVersion: 2
         x: 1024
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef7884d2d500c41be923a1ea31e96b9e
-      internalID: -1200263298
+      spriteID: 02687ad6f117c4a4d8043faf764a9a5a
+      internalID: 2030962881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_2
+      name: BrownMouseScaredRight_2
       rect:
         serializedVersion: 2
         x: 2048
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84bf039c2a6554700b43c01c883171b5
-      internalID: -1507371262
+      spriteID: 97af9ce814e364eb2afcfcffa98572a8
+      internalID: -1869027804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_3
+      name: BrownMouseScaredRight_3
       rect:
         serializedVersion: 2
         x: 0
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6db5d500ce7ef4818b4e9cfc682d5536
-      internalID: -1770068724
+      spriteID: 494139b9c684d487280d3069033ed73f
+      internalID: 1971881458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_4
+      name: BrownMouseScaredRight_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c32b09cbaa714b399625dd4d4f6fe35
-      internalID: -186463394
+      spriteID: 779d6bd72c52444188cebac43797d224
+      internalID: 865230698
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_5
+      name: BrownMouseScaredRight_5
       rect:
         serializedVersion: 2
         x: 2048
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 827eede43cdd248f1beb15e89f45c68f
-      internalID: -120363105
+      spriteID: b8bee8a7b67d849f591699c34ba17610
+      internalID: -1596174791
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_6
+      name: BrownMouseScaredRight_6
       rect:
         serializedVersion: 2
         x: 0
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7289ae2db43ff4631a772411953b7753
-      internalID: -959652540
+      spriteID: 90d00b198ff814f4e91d929796fa34bc
+      internalID: -121729886
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_7
+      name: BrownMouseScaredRight_7
       rect:
         serializedVersion: 2
         x: 1024
@@ -258,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5191a7c9b8eed4ff39f74753d10c16af
-      internalID: 1630475088
+      spriteID: e57301cc4a7be423e857958a20a963f7
+      internalID: 1843597542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_8
+      name: BrownMouseScaredRight_8
       rect:
         serializedVersion: 2
         x: 2048
@@ -279,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e4a8278ad007488c9040d06085b362d
-      internalID: -808686186
+      spriteID: 6177fcf19ea004d5e9f9d992b8b1d707
+      internalID: -204008550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BrownMouseNormalRight_9
+      name: BrownMouseScaredRight_9
       rect:
         serializedVersion: 2
         x: 0
@@ -300,8 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 534b0d7743a6242e786637e1ddd911a3
-      internalID: 1422024787
+      spriteID: 1f9306edbaec747e487a4b4015cb6e72
+      internalID: 1008945027
       vertices: []
       indices: 
       edges: []
@@ -309,7 +309,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2ac6b5d4915ea4892a17456adb112ec1
+    spriteID: f6fc7f75bdea04578ae9ee400a781562
     internalID: 0
     vertices: []
     indices: 
@@ -317,16 +317,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BrownMouseNormalRight_0: -1468873364
-      BrownMouseNormalRight_1: -1200263298
-      BrownMouseNormalRight_2: -1507371262
-      BrownMouseNormalRight_3: -1770068724
-      BrownMouseNormalRight_4: -186463394
-      BrownMouseNormalRight_5: -120363105
-      BrownMouseNormalRight_6: -959652540
-      BrownMouseNormalRight_7: 1630475088
-      BrownMouseNormalRight_8: -808686186
-      BrownMouseNormalRight_9: 1422024787
+      BrownMouseScaredRight_0: 608343721
+      BrownMouseScaredRight_1: 2030962881
+      BrownMouseScaredRight_2: -1869027804
+      BrownMouseScaredRight_3: 1971881458
+      BrownMouseScaredRight_4: 865230698
+      BrownMouseScaredRight_5: -1596174791
+      BrownMouseScaredRight_6: -121729886
+      BrownMouseScaredRight_7: 1843597542
+      BrownMouseScaredRight_8: -204008550
+      BrownMouseScaredRight_9: 1008945027
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
