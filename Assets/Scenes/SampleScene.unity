@@ -37231,6 +37231,8 @@ GameObject:
   - component: {fileID: 1502551222}
   - component: {fileID: 1502551221}
   - component: {fileID: 1502551220}
+  - component: {fileID: 1502551223}
+  - component: {fileID: 1502551224}
   m_Layer: 0
   m_Name: PacMan
   m_TagString: Untagged
@@ -37323,12 +37325,36 @@ Transform:
   m_GameObject: {fileID: 1502551219}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: -99, y: 101.4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1502551223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502551219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0e6eed7996c4819ae56d79bef06880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1502551224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502551219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc47e1d852414e9ca881991379325b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1503405817
 GameObject:
   m_ObjectHideFlags: 0
