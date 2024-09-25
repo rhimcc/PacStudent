@@ -16,14 +16,6 @@ public class PacManMovement : MonoBehaviour
 
     void Update()
     {
-        print("Right: " + animationController.GetBool("Right"));
-        print("Down: " + animationController.GetBool("Down"));
-        print("Left: " + animationController.GetBool("Left"));
-        print("Up: " + animationController.GetBool("Up"));
-        //print("transform position: ");
-        //print(transform.position);
-        //print("active tween end pos");
-        //print(tweener.activeTween.EndPos);
 
         if (transform.position == tweener.activeTween.EndPos)
         {
