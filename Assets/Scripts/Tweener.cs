@@ -36,10 +36,7 @@ public class Tweener: MonoBehaviour
     public void AddTween(Transform targetObject, Vector3 startPos, Vector3 endPos)
     {
         float distance = Vector3.Distance(startPos, endPos);
-        print("distance: " + distance);
-        print("speed: " + speed);
         float duration = distance / speed;
-        print("duration: " + duration);
         activeTween = new Tween(targetObject, startPos, endPos, Time.time, duration);
     }
 }
