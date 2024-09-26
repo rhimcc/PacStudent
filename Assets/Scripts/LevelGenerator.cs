@@ -32,17 +32,21 @@ public class LevelGenerator : MonoBehaviour
     public GameObject pellet;
     public GameObject tJunction;
     private int count = 0;
+    private int rowCount = 0;
+    private int colCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        rowCount = levelMap.GetLength(0);
+        colCount = levelMap.GetLength(1);
         var existingMap = GameObject.Find("Level 01");
         GameObject.Destroy(existingMap);
 
-        for (int row = 0; row < levelMap.GetLength(0); row++)
+        for (int row = 0; row < rowCount; row++)
         {
             print("row: " + row);
-            for (int col = 0; col < levelMap.GetLength(1); col++)
+            for (int col = 0; col < colCount; col++)
             {
                 print("col: " + col);
 
@@ -55,8 +59,8 @@ public class LevelGenerator : MonoBehaviour
     void createElement(int row, int col)
     {
         count++;
-        int x = (levelMap.GetLength(0) - col) * spriteSize;
-        int y = (levelMap.GetLength(1) - row) * spriteSize;
+        int x = (colCount - col) * spriteSize;
+        int y = (rowCount - row) * spriteSize;
 
 
         Vector3 position = new Vector3(-x, y, 0);
@@ -73,12 +77,15 @@ public class LevelGenerator : MonoBehaviour
                 break;
             case 2:
                 newObj = Instantiate(outerWall);
+                newObj.transform.rotation = Quaternion.Euler(0, 0, getWallRotation(row, col));
+                print(newObj.transform);
                 break;
             case 3:
                 newObj = Instantiate(innerCorner);
                 break;
             case 4:
                 newObj = Instantiate(innerWall);
+                newObj.transform.rotation = Quaternion.Euler(0, 0, getWallRotation(row, col));
                 break;
             case 5:
                 newObj = Instantiate(pellet);
@@ -101,6 +108,44 @@ public class LevelGenerator : MonoBehaviour
         }
         newObj.transform.position = position;
     }
+
+    int getWallRotation(int row, int col)
+    {
+        int elementInt = levelMap[row, col];
+        if (row + 1 <= rowCount && row - 1 >= 0) {
+        if (levelMap[row + 1, col] == elementInt || levelMap[row - 1, col] == elementInt)
+          {
+            return 90;
+          }
+        }
+        return 0;
+    }
+
+    bool[] getCornerSides(int row, int col)
+    {
+        bool[] cornerSides = new bool[4]; // LEFT, RIGHT, UP, DOWN
+        int elementInt = levelMap[row, col];
+        if ((row + 1 <= rowCount && row - 1 >= 0) || (col + 1 <= colCount && col - 1 >= 0))
+        {
+            if (levelMap[row + 1, col] == elementInt + 1)
+            {
+                cornerSides[3] = true;
+            } else if (levelMap[row - 1, col] == elementInt + 1)
+            {
+                cornerSides[2] = true;
+            }
+            if (levelMap[row, col + 1] == elementInt + 1)
+            {
+                cornerSides[1] = true;
+            } else if (levelMap[row, col - 1] == elementInt + 1)
+            {
+                cornerSides[0] = true;
+            }
+        }
+        print(cornerSides);
+        return cornerSides;
+    }
+
 
     // Update is called once per frame
     void Update()
