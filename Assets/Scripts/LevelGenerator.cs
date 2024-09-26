@@ -6,23 +6,23 @@ public class LevelGenerator : MonoBehaviour
 {
     int spriteSize = 8;
     int[,] levelMap =
-{
-{1,2,2,2,2,2,2,2,2,2,2,2,2,7},
-{2,5,5,5,5,5,5,5,5,5,5,5,5,4},
-{2,5,3,4,4,3,5,3,4,4,4,3,5,4},
-{2,6,4,0,0,4,5,4,0,0,0,4,5,4},
-{2,5,3,4,4,3,5,3,4,4,4,3,5,3},
-{2,5,5,5,5,5,5,5,5,5,5,5,5,5},
-{2,5,3,4,4,3,5,3,3,5,3,4,4,4},
-{2,5,3,4,4,3,5,4,4,5,3,4,4,3},
-{2,5,5,5,5,5,5,4,4,5,5,5,5,4},
-{1,2,2,2,2,1,5,4,3,4,4,3,0,4},
-{0,0,0,0,0,2,5,4,3,4,4,3,0,3},
-{0,0,0,0,0,2,5,4,4,0,0,0,0,0},
-{0,0,0,0,0,2,5,4,4,0,3,4,4,0},
-{2,2,2,2,2,1,5,3,3,0,4,0,0,0},
-{0,0,0,0,0,0,5,0,0,0,4,0,0,0},
-};
+    {
+    {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
+    {2,5,5,5,5,5,5,5,5,5,5,5,5,4},
+    {2,5,3,4,4,3,5,3,4,4,4,3,5,4},
+    {2,6,4,0,0,4,5,4,0,0,0,4,5,4},
+    {2,5,3,4,4,3,5,3,4,4,4,3,5,3},
+    {2,5,5,5,5,5,5,5,5,5,5,5,5,5},
+    {2,5,3,4,4,3,5,3,3,5,3,4,4,4},
+    {2,5,3,4,4,3,5,4,4,5,3,4,4,3},
+    {2,5,5,5,5,5,5,4,4,5,5,5,5,4},
+    {1,2,2,2,2,1,5,4,3,4,4,3,0,4},
+    {0,0,0,0,0,2,5,4,3,4,4,3,0,3},
+    {0,0,0,0,0,2,5,4,4,0,0,0,0,0},
+    {0,0,0,0,0,2,5,4,4,0,3,4,4,0},
+    {2,2,2,2,2,1,5,3,3,0,4,0,0,0},
+    {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
+    };
 
     public GameObject outerCorner;
     public GameObject outerWall;
@@ -34,137 +34,178 @@ public class LevelGenerator : MonoBehaviour
     private int count = 0;
     private int rowCount = 0;
     private int colCount = 0;
+    private string[] directions = { "left", "right", "up", "down" };
 
     // Start is called before the first frame update
     void Start()
     {
         rowCount = levelMap.GetLength(0);
         colCount = levelMap.GetLength(1);
-        var existingMap = GameObject.Find("Level 01");
+        var existingMap = GameObject.Find("LevelMap");
         GameObject.Destroy(existingMap);
 
         for (int row = 0; row < rowCount; row++)
         {
-            print("row: " + row);
             for (int col = 0; col < colCount; col++)
             {
-                print("col: " + col);
-
                 createElement(row, col);
-                print(count);
             }
         }
     }
 
     void createElement(int row, int col)
     {
-        count++;
-        int x = (colCount - col) * spriteSize;
-        int y = (rowCount - row) * spriteSize;
-
-
+        int x = (colCount - col) * spriteSize - 4;
+        int y = (rowCount - row) * spriteSize - 4;
         Vector3 position = new Vector3(-x, y, 0);
         int elementInt = levelMap[row, col];
-        Debug.Log($"Instantiating {elementInt} at ({-x}, {y})");
         GameObject newObj = null;
 
         switch (elementInt)
         {
             case 0:
                 break;
+
             case 1:
                 newObj = Instantiate(outerCorner);
+                newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
                 break;
+
             case 2:
                 newObj = Instantiate(outerWall);
-                newObj.transform.rotation = Quaternion.Euler(0, 0, getWallRotation(row, col));
-                print(newObj.transform);
+                newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
                 break;
+
             case 3:
                 newObj = Instantiate(innerCorner);
+                newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
                 break;
+
             case 4:
                 newObj = Instantiate(innerWall);
-                newObj.transform.rotation = Quaternion.Euler(0, 0, getWallRotation(row, col));
+                newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
                 break;
+
             case 5:
                 newObj = Instantiate(pellet);
                 break;
+
             case 6:
                 newObj = Instantiate(bonus);
                 break;
+
             case 7:
                 newObj = Instantiate(tJunction);
                 break;
-      
+
             default:
                 break;
 
         }
-        if (newObj == null)
+
+        if (newObj != null)
         {
-            Debug.LogError($"Prefab for element {elementInt} is not assigned.");
-            return; // Exit the method early
+            newObj.transform.position = position;
         }
-        newObj.transform.position = position;
     }
 
-    int getWallRotation(int row, int col)
+    int getRotation(int row, int col)
     {
         int elementInt = levelMap[row, col];
-        if (row + 1 <= rowCount && row - 1 >= 0) {
-        if (levelMap[row + 1, col] == elementInt || levelMap[row - 1, col] == elementInt)
-          {
-            return 90;
-          }
+        int left = (col > 0) ? levelMap[row, col - 1] : -1;
+        int right = (col < colCount - 1) ? levelMap[row, col + 1] : -1;
+        int up = (row > 0) ? levelMap[row - 1, col] : -1;
+        int down = (row < rowCount - 1) ? levelMap[row + 1, col] : -1;
+        print("row: " + row + ", col: " + col + ", left: " + left + ", right: " + right + ", up: " + up + ", down: " + down + ", ELEMENT: " + elementInt);
+
+        if (elementInt == 2 || elementInt == 4) // if it is a wall
+        {
+
+            if (up == elementInt || up == elementInt - 1)
+            {
+                if (down == elementInt || down == elementInt - 1)
+                {
+                    return 90;
+                }
+            }
+        }
+
+        if (elementInt == 1 || elementInt == 3) // if it is a corner
+        {
+              
+            if (left == -1 ) //if it is on the very far left
+            {
+                if (up == elementInt || up == elementInt + 1)
+                {
+                    return 90;
+                } 
+                if (down == elementInt || down == elementInt + 1)
+                {
+                    return 0;
+                }
+            }
+            if (right == -1) // if it is on the very far right
+            {
+                if (up == elementInt || up == elementInt + 1)
+                {
+                    return 90;
+                }
+                if (down == elementInt || down == elementInt + 1)
+                {
+                    return 0;
+                }
+            }
+            if (left == elementInt || left == elementInt + 1 && wallIsHorizontal(row, col - 1)) // if left is connected to a wall or a corner, and the connected wall is horizontal
+            {
+                if (up == elementInt || up == elementInt + 1)
+                {
+                    print("left, up");
+                    return 180;
+                }
+                if (down == elementInt || down == elementInt + 1)
+                {
+
+                    print("left, down");
+                    return 270;
+                }
+            }
+            if (right == elementInt  || right == elementInt + 1 && wallIsHorizontal(row, col + 1)) // if the right is connected to wall or corner and the connected wall is horizontal
+            {
+                if (up == elementInt || up == elementInt + 1)
+                {
+
+                    print("right, up");
+                    return 90;
+                }
+                if (down == elementInt || down == elementInt + 1)
+                {
+
+                    print("right, down");
+                    return 0;
+                }
+            }
         }
         return 0;
     }
 
-    bool[] getCornerSides(int row, int col)
+    bool wallIsHorizontal(int row, int col)
     {
-        bool[] cornerSides = new bool[4]; // LEFT, RIGHT, UP, DOWN
         int elementInt = levelMap[row, col];
-        if ((row + 1 <= rowCount && row - 1 >= 0) || (col + 1 <= colCount && col - 1 >= 0))
+        int left = (col > 0) ? levelMap[row, col - 1] : -1;
+        int right = (col < colCount - 1) ? levelMap[row, col + 1] : -1;
+        int up = (row > 0) ? levelMap[row - 1, col] : -1;
+        int down = (row < rowCount - 1) ? levelMap[row + 1, col] : -1;
+        if (up == elementInt || up == elementInt - 1)
         {
-            if (levelMap[row + 1, col] == elementInt + 1)
+            if (down == elementInt || down == elementInt - 1)
             {
-                cornerSides[3] = true;
-            } else if (levelMap[row - 1, col] == elementInt + 1)
-            {
-                cornerSides[2] = true;
-            }
-            if (levelMap[row, col + 1] == elementInt + 1)
-            {
-                cornerSides[1] = true;
-            } else if (levelMap[row, col - 1] == elementInt + 1)
-            {
-                cornerSides[0] = true;
+                return false;
             }
         }
-        print(cornerSides);
-        return cornerSides;
+        return true;
     }
-
-
-    // Update is called once per frame
+ 
     void Update()
     {
-        
     }
-
- 
 }
-/* Determine the position of each piece
-● Determine a way for your code to decide which rotation angle each of
-the wall and corner pieces should be at to align with each other.Hint:
-have you code look at the pieces around it to determine how it should
-be rotated to connect to them (in the case of walls)
-● Mirror the above 2D array or instantiated pieces three times
-(horizontally, vertically, and horizontally-and-vertically) to get the other
-three quadrants of the level to make the full level.
-o For the vertical mirroring, you will need to ignore or delete the
-bottom row of the 2D array so that there is only a single row of
-empty spots.
-● Adjust the game camera to react to the size of the level such that in
-Play mode the entire level layout can be seen. */
