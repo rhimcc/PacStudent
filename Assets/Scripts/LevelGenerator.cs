@@ -121,13 +121,14 @@ public class LevelGenerator : MonoBehaviour
         if (elementInt == 2 || elementInt == 4) // if it is a wall
         {
 
-            if (up == elementInt || up == elementInt - 1)
+            if (up == elementInt || up == elementInt - 1 || up == 7)
             {
-                if (down == elementInt || down == elementInt - 1)
+                if (down == elementInt || down == elementInt - 1 || down == 7 || down == -1)
                 {
                     return 90;
                 }
             }
+           
         }
 
         if (elementInt == 1 || elementInt == 3) // if it is a corner
@@ -135,55 +136,114 @@ public class LevelGenerator : MonoBehaviour
               
             if (left == -1 ) //if it is on the very far left
             {
-                if (up == elementInt || up == elementInt + 1)
+                if (amountOfNeighbouringElements(row, col) > 2)
                 {
-                    return 90;
-                } 
-                if (down == elementInt || down == elementInt + 1)
-                {
-                    return 0;
+                    return getAngleOfPellet(row, col);
                 }
+                else
+                {
+                    if (right == elementInt || right == elementInt + 1)
+                    {
+                        print("there is something to the right");
+                        if (up == elementInt || up == elementInt + 1)
+                        {
+                            return 90;
+                        }
+                        if (down == elementInt || down == elementInt + 1)
+                        {
+                            return 0;
+                        }
+                    }
+                    else
+                    {
+                        print("there is nothing to the right");
+                        if (up == elementInt || up == elementInt + 1)
+                        {
+                            return 180;
+                        }
+                        if (down == elementInt || down == elementInt + 1)
+                        {
+                            return 270;
+                        }
+                    }
+                }
+              
             }
             if (right == -1) // if it is on the very far right
             {
-                if (up == elementInt || up == elementInt + 1)
+                if (amountOfNeighbouringElements(row, col) > 2)
                 {
-                    return 90;
+                    return getAngleOfPellet(row, col);
                 }
-                if (down == elementInt || down == elementInt + 1)
+                else
                 {
-                    return 0;
+                    if (left == elementInt || left == elementInt + 1)
+                    {
+                        print("there is something to the left");
+                        if (up == elementInt || up == elementInt + 1)
+                        {
+                            return 180;
+                        }
+                        if (down == elementInt || down == elementInt + 1)
+                        {
+                            return 270;
+                        }
+                    }
+                    else
+                    {
+                        print("there is nothing to the left");
+                        if (up == elementInt || up == elementInt + 1)
+                        {
+                            return 90;
+                        }
+                        if (down == elementInt || down == elementInt + 1)
+                        {
+                            return 0;
+                        }
+                    }
                 }
+
             }
-            if (left == elementInt || left == elementInt + 1 && wallIsHorizontal(row, col - 1)) // if left is connected to a wall or a corner, and the connected wall is horizontal
+
+            if (amountOfNeighbouringElements(row, col) == 2)
             {
-                if (up == elementInt || up == elementInt + 1)
+                if (left == elementInt || left == elementInt + 1 && wallIsHorizontal(row, col - 1)) // if left is connected to a wall or a corner, and the connected wall is horizontal
                 {
-                    print("left, up");
-                    return 180;
-                }
-                if (down == elementInt || down == elementInt + 1)
-                {
+                    if (up == elementInt || up == elementInt + 1)
+                    {
+                        print("left, up");
+                        return 180;
+                    }
+                    if (down == elementInt || down == elementInt + 1)
+                    {
 
-                    print("left, down");
-                    return 270;
+                        print("left, down");
+                        return 270;
+                    }
                 }
+                if (right == elementInt || right == elementInt + 1 && wallIsHorizontal(row, col + 1)) // if the right is connected to wall or corner and the connected wall is horizontal
+                {
+                    if (up == elementInt || up == elementInt + 1)
+                    {
+
+                        print("right, up");
+                        return 90;
+                    }
+                    if (down == elementInt || down == elementInt + 1)
+                    {
+
+                        print("right, down");
+                        return 0;
+                    }
+                }
+
             }
-            if (right == elementInt  || right == elementInt + 1 && wallIsHorizontal(row, col + 1)) // if the right is connected to wall or corner and the connected wall is horizontal
-            {
-                if (up == elementInt || up == elementInt + 1)
-                {
-
-                    print("right, up");
-                    return 90;
-                }
-                if (down == elementInt || down == elementInt + 1)
-                {
-
-                    print("right, down");
-                    return 0;
-                }
+            if (amountOfNeighbouringElements(row, col) > 2) {
+            
+                return getAngleOfPellet(row, col);
             }
+
+            
         }
         return 0;
     }
@@ -207,5 +267,92 @@ public class LevelGenerator : MonoBehaviour
  
     void Update()
     {
+    }
+
+    int amountOfNeighbouringElements(int row, int col)
+    {
+        int amount = 0;
+        int elementInt = levelMap[row, col];
+        if (row + 1 < rowCount)
+        {
+            if (levelMap[row + 1, col] == elementInt || levelMap[row + 1, col] == elementInt + 1)
+            {
+                amount++;
+            }
+        }
+
+        if (row - 1 > 0)
+        {
+            if (levelMap[row - 1, col] == elementInt || levelMap[row - 1, col] == elementInt + 1)
+            {
+                amount++;
+            }
+        }
+
+        if (col + 1 < colCount)
+        {
+            if (levelMap[row, col + 1] == elementInt || levelMap[row, col + 1] == elementInt + 1)
+            {
+                amount++;
+            }
+        }
+        if (col - 1 > 0)
+        {
+            if (levelMap[row, col - 1] == elementInt || levelMap[row, col - 1] == elementInt + 1)
+            {
+                amount++;
+            }
+        }
+      
+       
+        print("amount of neighboring: " + amount);
+        return amount;
+    }
+
+    int getAngleOfPellet(int row, int col) // is only called if a corner is surrounded by 3 or 4 elements
+    {
+        int row1 = row + 1;
+        int col1 = col + 1;
+        int row0 = row - 1;
+        int col0 = col - 1;
+        if (row + 1 < rowCount && col + 1 < colCount)
+        {
+            if (levelMap[row + 1, col + 1] == 5 || levelMap[row + 1, col + 1] == 6) // bottom right corner
+            {
+                print("pellet is in bottom right");
+                return 0;
+            }
+        }
+
+        if (row - 1 > 0 && col + 1 < colCount) {
+            if (levelMap[row - 1, col + 1] == 6 || levelMap[row - 1, col + 1] == 5) // top right corner
+            {
+
+                print("pellet is in top right");
+                return 90;
+            }
+        }
+    
+        if (row - 1 > 0 && col - 1 > 0)
+        {
+            if (levelMap[row - 1, col - 1] == 6 || levelMap[row - 1, col - 1] == 5) // top left corner
+            {
+
+                print("pellet is in top left");
+                return 180;
+            }
+        }
+
+        if (row + 1 < rowCount && col - 1 > 0)
+        {
+            if (levelMap[row + 1, col - 1] == 6 || levelMap[row + 1, col - 1] == 5) // bottom left corner
+            {
+
+                print("pellet is in bottom left");
+                return 270;
+            }
+        }
+      
+        return 0;
     }
 }
