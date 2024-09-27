@@ -6,23 +6,24 @@ public class LevelGenerator : MonoBehaviour
 {
     int spriteSize = 8;
     int[,] levelMap =
- {
-{1,2,2,2,2,2,2,2,2,2,2,2,2,7},
-{2,5,5,5,5,5,5,5,5,5,5,5,5,4},
-{2,5,3,4,4,3,5,3,4,4,4,3,5,4},
-{2,6,4,0,0,4,5,4,0,0,0,4,5,4},
-{2,5,3,4,4,3,5,3,4,4,4,3,5,3},
-{2,5,5,5,5,5,5,5,5,5,5,5,5,5},
-{2,5,3,4,4,3,5,3,3,5,3,4,4,4},
-{2,5,3,4,4,3,5,4,4,5,3,4,4,3},
-{2,5,5,5,5,5,5,4,4,5,5,5,5,4},
-{1,2,2,2,2,1,5,4,3,4,4,3,0,4},
-{0,0,0,0,0,2,5,4,3,4,4,3,0,3},
-{0,0,0,0,0,2,5,4,4,0,0,0,0,0},
-{0,0,0,0,0,2,5,4,4,0,3,4,4,0},
-{2,2,2,2,2,1,5,3,3,0,4,0,0,0},
-{0,0,0,0,0,0,5,0,0,0,4,0,0,0},
-};
+         {
+        {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
+        {2,5,5,5,5,5,5,5,5,5,5,5,5,4},
+        {2,5,3,4,4,3,5,3,4,4,4,3,5,4},
+        {2,6,4,0,0,4,5,4,0,0,0,4,5,4},
+        {2,5,3,4,4,3,5,3,4,4,4,3,5,3},
+        {2,5,5,5,5,5,5,5,5,5,5,5,5,5},
+        {2,5,3,4,4,3,5,3,3,5,3,4,4,4},
+        {2,5,3,4,4,3,5,4,4,5,3,4,4,3},
+        {2,5,5,5,5,5,5,4,4,5,5,5,5,4},
+        {1,2,2,2,2,1,5,4,3,4,4,3,0,4},
+        {0,0,0,0,0,2,5,4,3,4,4,3,0,3},
+        {0,0,0,0,0,2,5,4,4,0,0,0,0,0},
+        {0,0,0,0,0,2,5,4,4,0,3,4,4,0},
+        {2,2,2,2,2,1,5,3,3,0,4,0,0,0},
+        {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
+
+        };
 
     public GameObject outerCorner;
     public GameObject outerWall;
@@ -36,16 +37,20 @@ public class LevelGenerator : MonoBehaviour
     private int colCount = 0;
     private string[] directions = { "left", "right", "up", "down" };
     private GameObject levelCorner;
+    private Camera m_MainCamera;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        m_MainCamera = Camera.main;
+        m_MainCamera.enabled = true;
         rowCount = levelMap.GetLength(0);
         colCount = levelMap.GetLength(1);
         var existingMap = GameObject.Find("LevelMap");
         GameObject.Destroy(existingMap);
         levelCorner = new GameObject("Corner");
+        m_MainCamera.orthographicSize = rowCount * spriteSize + 4;
 
         for (int row = 0; row < rowCount; row++)
         {
@@ -74,7 +79,6 @@ public class LevelGenerator : MonoBehaviour
         Vector3 position = new Vector3(-x, y, 0);
         int elementInt = levelMap[row, col];
         GameObject newObj = null;
-
         switch (elementInt)
         {
             case 0:
