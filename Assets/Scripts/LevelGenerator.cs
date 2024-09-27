@@ -35,6 +35,8 @@ public class LevelGenerator : MonoBehaviour
     private int rowCount = 0;
     private int colCount = 0;
     private string[] directions = { "left", "right", "up", "down" };
+    private GameObject levelCorner;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -43,20 +45,32 @@ public class LevelGenerator : MonoBehaviour
         colCount = levelMap.GetLength(1);
         var existingMap = GameObject.Find("LevelMap");
         GameObject.Destroy(existingMap);
+        levelCorner = new GameObject("Corner");
 
         for (int row = 0; row < rowCount; row++)
         {
             for (int col = 0; col < colCount; col++)
             {
-                createElement(row, col);
+                int x = (colCount - col) * spriteSize - 4;
+                int y = (rowCount - row) * spriteSize - 4;
+                createElement(row, col, x, y, 1, 1);
             }
         }
+        duplicateCorner(0, 0, -1, 1);
+        duplicateCorner(0, spriteSize, 1, -1);
+        duplicateCorner(0, spriteSize, -1, -1);
     }
 
-    void createElement(int row, int col)
+    void duplicateCorner(int x, int y, int xScale, int yScale)
     {
-        int x = (colCount - col) * spriteSize - 4;
-        int y = (rowCount - row) * spriteSize - 4;
+        GameObject newCorner = Instantiate(levelCorner);
+        newCorner.transform.localScale = new Vector3(xScale, yScale, 0);
+        newCorner.transform.position = new Vector3(x, y, 0);
+    }
+
+    void createElement(int row, int col, int x, int y, int xScale, int yScale)
+    {
+   
         Vector3 position = new Vector3(-x, y, 0);
         int elementInt = levelMap[row, col];
         GameObject newObj = null;
@@ -68,22 +82,18 @@ public class LevelGenerator : MonoBehaviour
 
             case 1:
                 newObj = Instantiate(outerCorner);
-                newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
                 break;
 
             case 2:
                 newObj = Instantiate(outerWall);
-                newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
                 break;
 
             case 3:
                 newObj = Instantiate(innerCorner);
-                newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
                 break;
 
             case 4:
                 newObj = Instantiate(innerWall);
-                newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
                 break;
 
             case 5:
@@ -106,6 +116,9 @@ public class LevelGenerator : MonoBehaviour
         if (newObj != null)
         {
             newObj.transform.position = position;
+            newObj.transform.rotation = Quaternion.Euler(0, 0, getRotation(row, col));
+            newObj.transform.parent = levelCorner.transform;
+            newObj.transform.localScale = new Vector3(xScale, yScale, 0);
         }
     }
 
@@ -128,7 +141,6 @@ public class LevelGenerator : MonoBehaviour
                     return 90;
                 }
             }
-           
         }
 
         if (elementInt == 1 || elementInt == 3) // if it is a corner
@@ -144,7 +156,6 @@ public class LevelGenerator : MonoBehaviour
                 {
                     if (right == elementInt || right == elementInt + 1)
                     {
-                        print("there is something to the right");
                         if (up == elementInt || up == elementInt + 1)
                         {
                             return 90;
@@ -156,7 +167,6 @@ public class LevelGenerator : MonoBehaviour
                     }
                     else
                     {
-                        print("there is nothing to the right");
                         if (up == elementInt || up == elementInt + 1)
                         {
                             return 180;
@@ -179,7 +189,6 @@ public class LevelGenerator : MonoBehaviour
                 {
                     if (left == elementInt || left == elementInt + 1)
                     {
-                        print("there is something to the left");
                         if (up == elementInt || up == elementInt + 1)
                         {
                             return 180;
@@ -191,7 +200,6 @@ public class LevelGenerator : MonoBehaviour
                     }
                     else
                     {
-                        print("there is nothing to the left");
                         if (up == elementInt || up == elementInt + 1)
                         {
                             return 90;
