@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pellet
+  - Power
+  - InnerWall
+  - InnerCorner
+  - OuterWall
+  - OuterCorner
+  - TJunction
   layers:
   - Default
   - TransparentFX
