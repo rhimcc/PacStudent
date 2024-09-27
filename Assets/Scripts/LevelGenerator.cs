@@ -6,23 +6,23 @@ public class LevelGenerator : MonoBehaviour
 {
     int spriteSize = 8;
     int[,] levelMap =
-    {
-    {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
-    {2,5,5,5,5,5,5,5,5,5,5,5,5,4},
-    {2,5,3,4,4,3,5,3,4,4,4,3,5,4},
-    {2,6,4,0,0,4,5,4,0,0,0,4,5,4},
-    {2,5,3,4,4,3,5,3,4,4,4,3,5,3},
-    {2,5,5,5,5,5,5,5,5,5,5,5,5,5},
-    {2,5,3,4,4,3,5,3,3,5,3,4,4,4},
-    {2,5,3,4,4,3,5,4,4,5,3,4,4,3},
-    {2,5,5,5,5,5,5,4,4,5,5,5,5,4},
-    {1,2,2,2,2,1,5,4,3,4,4,3,0,4},
-    {0,0,0,0,0,2,5,4,3,4,4,3,0,3},
-    {0,0,0,0,0,2,5,4,4,0,0,0,0,0},
-    {0,0,0,0,0,2,5,4,4,0,3,4,4,0},
-    {2,2,2,2,2,1,5,3,3,0,4,0,0,0},
-    {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
-    };
+ {
+{1,2,2,2,2,2,2,2,2,2,2,2,2,7},
+{2,5,5,5,5,5,5,5,5,5,5,5,5,4},
+{2,5,3,4,4,3,5,3,4,4,4,3,5,4},
+{2,6,4,0,0,4,5,4,0,0,0,4,5,4},
+{2,5,3,4,4,3,5,3,4,4,4,3,5,3},
+{2,5,5,5,5,5,5,5,5,5,5,5,5,5},
+{2,5,3,4,4,3,5,3,3,5,3,4,4,4},
+{2,5,3,4,4,3,5,4,4,5,3,4,4,3},
+{2,5,5,5,5,5,5,4,4,5,5,5,5,4},
+{1,2,2,2,2,1,5,4,3,4,4,3,0,4},
+{0,0,0,0,0,2,5,4,3,4,4,3,0,3},
+{0,0,0,0,0,2,5,4,4,0,0,0,0,0},
+{0,0,0,0,0,2,5,4,4,0,3,4,4,0},
+{2,2,2,2,2,1,5,3,3,0,4,0,0,0},
+{0,0,0,0,0,0,5,0,0,0,4,0,0,0},
+};
 
     public GameObject outerCorner;
     public GameObject outerWall;
@@ -179,6 +179,8 @@ public class LevelGenerator : MonoBehaviour
                 }
               
             }
+
+        
             if (right == -1) // if it is on the very far right
             {
                 if (amountOfNeighbouringElements(row, col) > 2)
@@ -213,45 +215,95 @@ public class LevelGenerator : MonoBehaviour
 
             }
 
+            if (right == 7 || left == 7 || up == 7 || down == 7) // Check if next to a T-junction
+            {
+                if (left == 7)
+                {
+                    if (up == 3 || up == 4)
+                    {
+                        return 180;
+                    }
+                    if (down == 3 || down == 4)
+                    {
+                        return 270;
+                    }
+                }
+                if (right == 7)
+                {
+                    if (up == 3 || up == 4)
+                    {
+                        return 90;
+                    }
+                    if (down == 3 || down == 4)
+                    {
+                        return 0;
+                    }
+                }
+              
+            }
+
+
             if (amountOfNeighbouringElements(row, col) == 2)
             {
                 if (left == elementInt || left == elementInt + 1 && wallIsHorizontal(row, col - 1)) // if left is connected to a wall or a corner, and the connected wall is horizontal
                 {
-                    if (up == elementInt || up == elementInt + 1)
+                    if (up == elementInt || up == elementInt + 1 || up == 7)
                     {
-                        print("left, up");
                         return 180;
                     }
-                    if (down == elementInt || down == elementInt + 1)
+                    if (down == elementInt || down == elementInt + 1 || down == 7)
                     {
-
-                        print("left, down");
                         return 270;
                     }
                 }
                 if (right == elementInt || right == elementInt + 1 && wallIsHorizontal(row, col + 1)) // if the right is connected to wall or corner and the connected wall is horizontal
                 {
-                    if (up == elementInt || up == elementInt + 1)
+                    if (up == elementInt || up == elementInt + 1 || up == 7)
                     {
-
-                        print("right, up");
                         return 90;
                     }
-                    if (down == elementInt || down == elementInt + 1)
+                    if (down == elementInt || down == elementInt + 1 || down == 7)
                     {
-
-                        print("right, down");
                         return 0;
                     }
                 }
 
             }
+
+            
             if (amountOfNeighbouringElements(row, col) > 2) {
             
                 return getAngleOfPellet(row, col);
             }
 
             
+        }
+
+        if (elementInt == 7)
+        {
+            print("(" + row + ", " + col + ")" + " is tjunction");
+            print("left: " + left);
+            print("right: " + right);
+            print("up: " + up);
+            print("down: " + down);
+
+            if (!(up == 1 || up == 2 || up == 7))
+            {
+                return 0;
+            }
+            if (!(left == 1 || left == 2 || left == 7))
+            {
+                return 90;
+            }
+            if (!(down == 1 || down == 2 || down == 7))
+            {
+                return 180;
+            }
+            if (!(right == 1 || right == 2 || right == 7))
+            {
+                return 0;
+            }
+
         }
         return 0;
     }
