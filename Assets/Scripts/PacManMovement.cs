@@ -6,12 +6,15 @@ public class PacManMovement : MonoBehaviour
 {
     Animator animationController;
     Tweener tweener;
+    AudioSource audioSource;
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         animationController = GetComponent<Animator>();
         tweener = GetComponent<Tweener>();
         animationController.SetBool("Right", true);
         tweener.AddTween(transform, transform.position, new Vector3(-60, 108, 0));
+        audioSource.Play();
     }
 
     void Update()
