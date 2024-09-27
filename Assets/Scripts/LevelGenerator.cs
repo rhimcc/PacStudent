@@ -133,7 +133,6 @@ public class LevelGenerator : MonoBehaviour
         int right = (col < colCount - 1) ? levelMap[row, col + 1] : -1;
         int up = (row > 0) ? levelMap[row - 1, col] : -1;
         int down = (row < rowCount - 1) ? levelMap[row + 1, col] : -1;
-        print("row: " + row + ", col: " + col + ", left: " + left + ", right: " + right + ", up: " + up + ", down: " + down + ", ELEMENT: " + elementInt);
 
         if (elementInt == 2 || elementInt == 4) // if it is a wall
         {
@@ -285,11 +284,6 @@ public class LevelGenerator : MonoBehaviour
 
         if (elementInt == 7)
         {
-            print("(" + row + ", " + col + ")" + " is tjunction");
-            print("left: " + left);
-            print("right: " + right);
-            print("up: " + up);
-            print("down: " + down);
 
             if (!(up == 1 || up == 2 || up == 7))
             {
@@ -368,9 +362,7 @@ public class LevelGenerator : MonoBehaviour
             }
         }
       
-       
-        print("amount of neighboring: " + amount);
-        return amount;
+               return amount;
     }
 
     int getAngleOfPellet(int row, int col) // is only called if a corner is surrounded by 3 or 4 elements
@@ -383,7 +375,6 @@ public class LevelGenerator : MonoBehaviour
         {
             if (levelMap[row + 1, col + 1] == 5 || levelMap[row + 1, col + 1] == 6) // bottom right corner
             {
-                print("pellet is in bottom right");
                 return 0;
             }
         }
@@ -392,7 +383,6 @@ public class LevelGenerator : MonoBehaviour
             if (levelMap[row - 1, col + 1] == 6 || levelMap[row - 1, col + 1] == 5) // top right corner
             {
 
-                print("pellet is in top right");
                 return 90;
             }
         }
@@ -401,8 +391,6 @@ public class LevelGenerator : MonoBehaviour
         {
             if (levelMap[row - 1, col - 1] == 6 || levelMap[row - 1, col - 1] == 5) // top left corner
             {
-
-                print("pellet is in top left");
                 return 180;
             }
         }
@@ -412,7 +400,6 @@ public class LevelGenerator : MonoBehaviour
             if (levelMap[row + 1, col - 1] == 6 || levelMap[row + 1, col - 1] == 5) // bottom left corner
             {
 
-                print("pellet is in bottom left");
                 return 270;
             }
         }
