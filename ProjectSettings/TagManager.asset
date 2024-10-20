@@ -11,6 +11,7 @@ TagManager:
   - OuterWall
   - OuterCorner
   - TJunction
+  - QuitButton
   layers:
   - Default
   - TransparentFX
