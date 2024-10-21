@@ -30,6 +30,7 @@ public class PacStudentController : MonoBehaviour
     string currentInput;
     public AudioClip[] movement;
     public AudioSource audioSource;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +39,6 @@ public class PacStudentController : MonoBehaviour
         tweener = gameObject.GetComponent<Tweener>();
         currentPos = new int[] { 1, 1 };
         currentInput = ""; // Initialize currentInput
-
     }
 
     // Update is called once per frame
@@ -52,11 +52,13 @@ public class PacStudentController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S)) lastInput = "S";
         if (Input.GetKeyDown(KeyCode.A)) lastInput = "A";
         if (Input.GetKeyDown(KeyCode.D)) lastInput = "D";
+
         if (tweener.activeTween == null)
         {
             if (CanMove(lastInput))
             {
                 currentInput = lastInput;
+                SetAnimation(currentInput);
                 Move(lastInput);
             }
             else
@@ -73,7 +75,7 @@ public class PacStudentController : MonoBehaviour
     bool CanMove(string direction)
     {
         int[] targetPos = new int[2];
-
+       
         switch (direction)
         {
             case "W":
@@ -102,6 +104,7 @@ public class PacStudentController : MonoBehaviour
             int targetInt = levelMap[targetPos[0], targetPos[1]];
             return (targetInt == 5 || targetInt == 6 || targetInt == 0);
         }
+
 
         return false; // Out of bounds
     }
@@ -148,6 +151,41 @@ public class PacStudentController : MonoBehaviour
         }
         currentPos = targetPos; // Update the current position
         tweener.AddTween(transform, transform.position, targetPosition); // Call the tweener
+
+    }
+
+    void SetAnimation(string direction)
+    {
+        switch (direction)
+        {
+            case "W":
+                animator.SetBool("Up", true);
+                animator.SetBool("Down", false);
+                animator.SetBool("Left", false);
+                animator.SetBool("Right", false);
+                break;
+            case "S":
+                animator.SetBool("Down", true);
+                animator.SetBool("Up", false);
+                animator.SetBool("Left", false);
+                animator.SetBool("Right", false);
+
+                break;
+            case "D":
+                animator.SetBool("Right", true);
+                animator.SetBool("Up", false);
+                animator.SetBool("Down", false);
+                animator.SetBool("Left", false);
+
+                break;
+            case "A":
+                animator.SetBool("Left", true);
+                animator.SetBool("Up", false);
+                animator.SetBool("Down", false);
+                animator.SetBool("Right", false);
+
+                break;
+        }
     }
 }
 
