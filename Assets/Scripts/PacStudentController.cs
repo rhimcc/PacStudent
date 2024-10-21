@@ -28,9 +28,13 @@ public class PacStudentController : MonoBehaviour
     int[] currentPos;
     string lastInput;
     string currentInput;
+    public AudioClip[] movement;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = movement[0];
         tweener = gameObject.GetComponent<Tweener>();
         currentPos = new int[] { 1, 1 };
         currentInput = ""; // Initialize currentInput
@@ -132,6 +136,15 @@ public class PacStudentController : MonoBehaviour
                 targetPos[1] = currentPos[1] + 1;
                 targetPosition = currentPosition += new Vector3(8, 0, 0);
                 break;
+        }
+        if (levelMap[targetPos[0], targetPos[1]] == 5)
+        {
+            audioSource.clip = movement[1];
+            audioSource.Play();
+        } else
+        {
+            audioSource.clip = movement[0];
+            audioSource.Play();
         }
         currentPos = targetPos; // Update the current position
         tweener.AddTween(transform, transform.position, targetPosition); // Call the tweener
