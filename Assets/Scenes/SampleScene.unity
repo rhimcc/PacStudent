@@ -42956,6 +42956,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c610f3bf56e2f4a1ba419d30d4651425, type: 3}
   - {fileID: 8300000, guid: ba4550ef1b537405e9d2163220c2e534, type: 3}
   audioSource: {fileID: 1502551225}
+  animator: {fileID: 1502551220}
 --- !u!1 &1504454288
 GameObject:
   m_ObjectHideFlags: 0
