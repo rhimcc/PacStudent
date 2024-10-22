@@ -66,6 +66,9 @@ public class PacStudentController : MonoBehaviour
                 if (CanMove(currentInput))
                 {
                     Move(currentInput);
+                } else
+                {
+                    animator.speed = 0;
                 }
             }
         }
@@ -151,7 +154,7 @@ public class PacStudentController : MonoBehaviour
         }
         currentPos = targetPos; // Update the current position
         tweener.AddTween(transform, transform.position, targetPosition); // Call the tweener
-
+        animator.speed = 1;
     }
 
     void SetAnimation(string direction)
