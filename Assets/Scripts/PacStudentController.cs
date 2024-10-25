@@ -35,10 +35,12 @@ public class PacStudentController : MonoBehaviour
     bool reducing = false;
     bool horizontalBorder;
     bool verticalBorder;
+    ParticleSystem particleSystem;
 
     // Start is called before the first frame update
     void Start()
     {
+        particleSystem = GameObject.Find("PacManTrail").GetComponent<ParticleSystem>();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = movement[0];
         tweener = gameObject.GetComponent<Tweener>();
@@ -66,6 +68,7 @@ public class PacStudentController : MonoBehaviour
             {
                 currentInput = lastInput;
                 SetAnimation(currentInput);
+                SetTrail(currentInput);
                 Move(lastInput);
             }
             else
@@ -77,6 +80,7 @@ public class PacStudentController : MonoBehaviour
                 else
                 {
                     animator.speed = 0;
+                    audioSource.Stop();
                 }
             }
         }
@@ -223,6 +227,7 @@ public class PacStudentController : MonoBehaviour
         currentPos = new int[] { targetPos[0], targetPos[1] };  // Create new array to avoid reference issues
         tweener.AddTween(transform, transform.position, targetPosition);
         animator.speed = 1;
+        
     }
     void SetAnimation(string direction)
     {
@@ -255,6 +260,38 @@ public class PacStudentController : MonoBehaviour
                 animator.SetBool("Right", false);
                 break;
         }
+    }
+
+    void SetTrail(string direction)
+    {
+        Transform particleTransform = particleSystem.transform;
+        Vector3 rotation = particleTransform.eulerAngles;
+        Vector3 position = transform.position + new Vector3(0, -5, 0);
+        switch (direction)
+        {
+            case "W":
+                rotation.z = 90;
+                position += new Vector3(0, -2, 0);
+                break;
+
+            case "S":
+                rotation.z = 90;
+                position += new Vector3(0, 2, 0);
+
+                break;
+
+            case "D":
+                position += new Vector3(-2, 0, 0);
+
+                break;
+            case "A":
+                position += new Vector3(2, 0, 0);
+
+                break;
+        }
+        particleTransform.eulerAngles = rotation;
+        particleTransform.position = position;
+
     }
 
     int DetectQuadrant(string direction)
