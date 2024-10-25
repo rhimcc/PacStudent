@@ -178,7 +178,6 @@ public class PacStudentController : MonoBehaviour
             default:
                 return false;
         }
-        print(targetPos[0] + " " + targetPos[1]);
         if (targetPos[0] >= 0 && targetPos[0] < levelMap.GetLength(0) &&
             targetPos[1] >= 0 && targetPos[1] < levelMap.GetLength(1))
         {
@@ -322,7 +321,6 @@ public class PacStudentController : MonoBehaviour
         }
         if (position.x >= -8 && position.x <= 8)
         {
-            print("at a border");
             horizontalBorder = true;
         }
  
