@@ -26,11 +26,15 @@ public class PacStudentController : MonoBehaviour
         };
 
     int[] currentPos;
+    int[] targetPos;
+
     string lastInput;
     string currentInput;
     public AudioClip[] movement;
     public AudioSource audioSource;
     public Animator animator;
+    bool reducing = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +42,8 @@ public class PacStudentController : MonoBehaviour
         audioSource.clip = movement[0];
         tweener = gameObject.GetComponent<Tweener>();
         currentPos = new int[] { 1, 1 };
+        targetPos = new int[] { 1, 1 };
+
         currentInput = ""; // Initialize currentInput
     }
 
@@ -66,7 +72,8 @@ public class PacStudentController : MonoBehaviour
                 if (CanMove(currentInput))
                 {
                     Move(currentInput);
-                } else
+                }
+                else
                 {
                     animator.speed = 0;
                 }
@@ -77,86 +84,144 @@ public class PacStudentController : MonoBehaviour
 
     bool CanMove(string direction)
     {
-        int[] targetPos = new int[2];
-       
+        // Reset targetPos to current position at start of check
+        targetPos[0] = currentPos[0];
+        targetPos[1] = currentPos[1];
+        int lastXindex = levelMap.GetLength(1) - 1;
+        int lastYindex = levelMap.GetLength(0) - 1;
+        int quadrant = DetectQuadrant(direction);
+        bool border = DetectBorder(direction);
+
         switch (direction)
         {
             case "W":
-                targetPos[0] = currentPos[0] - 1;
                 targetPos[1] = currentPos[1];
+                if (border)
+                {
+                    if (quadrant == 1 || quadrant == 2)
+                    {
+                        targetPos[0] = lastYindex;
+                    } else
+                    {
+                        targetPos[0] = lastYindex - 1;
+                    }
+
+                } else if (quadrant == 1 || quadrant == 2)
+                {
+                    targetPos[0] = currentPos[0] - 1;
+                }
+                else
+                {
+                    targetPos[0] = currentPos[0] + 1;
+                }
                 break;
+
             case "S":
-                targetPos[0] = currentPos[0] + 1;
                 targetPos[1] = currentPos[1];
+                if (border)
+                {
+                    if (quadrant == 1 || quadrant == 2)
+                    {
+                        targetPos[0] = lastYindex;
+                    }
+                    else
+                    {
+                        targetPos[0] = lastYindex - 1;
+                    }
+                } else 
+                if (quadrant == 1 || quadrant == 2)
+                {
+                    targetPos[0] = currentPos[0] + 1;
+                }
+                else
+                {
+                    targetPos[0] = currentPos[0] - 1;
+                }
                 break;
+
             case "A":
                 targetPos[0] = currentPos[0];
-                targetPos[1] = currentPos[1] - 1;
+                if (border)
+                {
+                    targetPos[1] = lastXindex;
+                }
+                else
+            if (quadrant == 1 || quadrant == 4)
+                {
+                    targetPos[1] = currentPos[1] - 1;
+                } else
+                {
+                    targetPos[1] = currentPos[1] + 1;
+                }
                 break;
+
             case "D":
                 targetPos[0] = currentPos[0];
-                targetPos[1] = currentPos[1] + 1;
+                if (border)
+                {
+                    targetPos[1] = lastXindex;
+                }
+                else
+                if (quadrant == 1 || quadrant == 4)
+                {
+                    targetPos[1] = currentPos[1] + 1;
+                }
+                else
+                {
+                    targetPos[1] = currentPos[1] - 1;
+                }
                 break;
-            default:
-                return false; // No valid direction
-        }
 
+            default:
+                return false;
+        }
+        print(targetPos[0] + " " + targetPos[1]);
         if (targetPos[0] >= 0 && targetPos[0] < levelMap.GetLength(0) &&
             targetPos[1] >= 0 && targetPos[1] < levelMap.GetLength(1))
         {
-            int targetInt = levelMap[targetPos[0], targetPos[1]];
-            return (targetInt == 5 || targetInt == 6 || targetInt == 0);
+            int targetTile = levelMap[targetPos[0], targetPos[1]];
+            return (targetTile == 5 || targetTile == 6 || targetTile == 0);
         }
 
-
-        return false; // Out of bounds
+        return false;
     }
 
     void Move(string direction)
     {
-        int[] targetPos = new int[2];
         Vector3 targetPosition = new Vector3(0, 0, 0);
         Vector3 currentPosition = transform.position;
 
-
-        // Determine the target position based on the input direction
         switch (direction)
         {
             case "W":
-                targetPos[0] = currentPos[0] - 1;
-                targetPos[1] = currentPos[1];
-                targetPosition = currentPosition += new Vector3(0, 8, 0);
+                targetPosition = currentPosition + new Vector3(0, 8, 0);
                 break;
             case "S":
-                targetPos[0] = currentPos[0] + 1;
-                targetPos[1] = currentPos[1];
-                targetPosition = currentPosition += new Vector3(0, -8, 0);
+                targetPosition = currentPosition + new Vector3(0, -8, 0);
                 break;
             case "A":
-                targetPos[0] = currentPos[0];
-                targetPos[1] = currentPos[1] - 1;
-                targetPosition = currentPosition += new Vector3(-8, 0, 0);
+                targetPosition = currentPosition + new Vector3(-8, 0, 0);
                 break;
             case "D":
-                targetPos[0] = currentPos[0];
-                targetPos[1] = currentPos[1] + 1;
-                targetPosition = currentPosition += new Vector3(8, 0, 0);
+                targetPosition = currentPosition + new Vector3(8, 0, 0);
                 break;
         }
+
         if (levelMap[targetPos[0], targetPos[1]] == 5)
         {
             audioSource.clip = movement[1];
             audioSource.Play();
-        } else
+        }
+        else
         {
             audioSource.clip = movement[0];
             audioSource.Play();
         }
-        currentPos = targetPos; // Update the current position
-        tweener.AddTween(transform, transform.position, targetPosition); // Call the tweener
+
+        currentPos = new int[] { targetPos[0], targetPos[1] };  // Create new array to avoid reference issues
+        tweener.AddTween(transform, transform.position, targetPosition);
         animator.speed = 1;
     }
-
     void SetAnimation(string direction)
     {
         switch (direction)
@@ -186,10 +251,83 @@ public class PacStudentController : MonoBehaviour
                 animator.SetBool("Up", false);
                 animator.SetBool("Down", false);
                 animator.SetBool("Right", false);
-
                 break;
         }
     }
+
+    int DetectQuadrant(string direction)
+    {
+        Vector3 position = transform.position;
+        switch(direction)
+        {
+            case "W":
+                position += new Vector3(0, 8, 0);
+                break;
+            case "S":
+                position += new Vector3(0, -8, 0);
+                break;
+            case "A":
+                position += new Vector3(-8, 0, 0);
+                break;
+            case "D":
+                position += new Vector3(8, 0, 0);
+                break;
+        }
+        if (position.x <= 0 && position.x >= -108)
+        {
+            if (position.y >= 0 && position.y <= 116)
+            {
+                return 1;
+            }
+            else if (position.y < 0 && position.y >= -108)
+            {
+                return 4;
+            }
+            else return 0;
+        } else
+        {
+
+            if (position.y >= 0 && position.y <= 116)
+            {
+                return 2;
+            }
+            else if(position.y < 0 && position.y >= -108)
+            {
+                return 3;
+            }
+            else return 0;
+        }
+    }
+
+    bool DetectBorder(string direction)
+    {
+        Vector3 position = transform.position;
+        switch (direction)
+        {
+            case "W":
+                position += new Vector3(0, 8, 0);
+                break;
+            case "S":
+                position += new Vector3(0, -8, 0);
+                break;
+            case "A":
+                position += new Vector3(-8, 0, 0);
+                break;
+            case "D":
+                position += new Vector3(8, 0, 0);
+                break;
+        }
+        if (position.x >= -4 && position.x <= 4)
+        {
+            return true;
+        }
+        else
+        {
+            if (position.y >= 0 && position.y <= 8)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
-
-

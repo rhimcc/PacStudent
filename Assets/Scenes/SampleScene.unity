@@ -8706,7 +8706,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327158603}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6091b1504d3a54af7a4a37385152e67d, type: 3}
   m_Name: 
@@ -42958,7 +42958,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ba4550ef1b537405e9d2163220c2e534, type: 3}
   audioSource: {fileID: 1502551225}
   animator: {fileID: 1502551220}
-  particles: {fileID: 0}
 --- !u!1 &1504454288
 GameObject:
   m_ObjectHideFlags: 0
@@ -56147,7 +56146,7 @@ Transform:
   m_GameObject: {fileID: 1792523165}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.40748253, y: -0.10084748, z: -0.011320502}
+  m_LocalPosition: {x: 0.40748253, y: 0, z: -0.011320502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61877,6 +61876,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2039019151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2039019152}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2039019152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039019151}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -48, y: 8, z: -222.10721}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2044423822
 GameObject:
   m_ObjectHideFlags: 0
@@ -64901,3 +64931,4 @@ SceneRoots:
   - {fileID: 1792523166}
   - {fileID: 522236007}
   - {fileID: 1256386654}
+  - {fileID: 2039019152}
