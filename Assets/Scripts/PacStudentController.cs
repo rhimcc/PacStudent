@@ -22,7 +22,6 @@ public class PacStudentController : MonoBehaviour
         {0,0,0,0,0,2,5,4,4,0,3,4,4,0},
         {2,2,2,2,2,1,5,3,3,0,4,0,0,0},
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
-
         };
 
     int[] currentPos;
@@ -34,6 +33,8 @@ public class PacStudentController : MonoBehaviour
     public AudioSource audioSource;
     public Animator animator;
     bool reducing = false;
+    bool horizontalBorder;
+    bool verticalBorder;
 
     // Start is called before the first frame update
     void Start()
@@ -90,13 +91,15 @@ public class PacStudentController : MonoBehaviour
         int lastXindex = levelMap.GetLength(1) - 1;
         int lastYindex = levelMap.GetLength(0) - 1;
         int quadrant = DetectQuadrant(direction);
-        bool border = DetectBorder(direction);
+        horizontalBorder = false;
+        verticalBorder = false;
+        DetectBorder(direction);
 
         switch (direction)
         {
             case "W":
                 targetPos[1] = currentPos[1];
-                if (border)
+                if (verticalBorder)
                 {
                     if (quadrant == 1 || quadrant == 2)
                     {
@@ -118,7 +121,7 @@ public class PacStudentController : MonoBehaviour
 
             case "S":
                 targetPos[1] = currentPos[1];
-                if (border)
+                if (verticalBorder)
                 {
                     if (quadrant == 1 || quadrant == 2)
                     {
@@ -141,7 +144,7 @@ public class PacStudentController : MonoBehaviour
 
             case "A":
                 targetPos[0] = currentPos[0];
-                if (border)
+                if (horizontalBorder)
                 {
                     targetPos[1] = lastXindex;
                 }
@@ -157,7 +160,7 @@ public class PacStudentController : MonoBehaviour
 
             case "D":
                 targetPos[0] = currentPos[0];
-                if (border)
+                if (horizontalBorder)
                 {
                     targetPos[1] = lastXindex;
                 }
@@ -299,7 +302,7 @@ public class PacStudentController : MonoBehaviour
         }
     }
 
-    bool DetectBorder(string direction)
+    void DetectBorder(string direction)
     {
         Vector3 position = transform.position;
         switch (direction)
@@ -317,17 +320,16 @@ public class PacStudentController : MonoBehaviour
                 position += new Vector3(8, 0, 0);
                 break;
         }
-        if (position.x >= -4 && position.x <= 4)
+        if (position.x >= -8 && position.x <= 8)
         {
-            return true;
+            print("at a border");
+            horizontalBorder = true;
         }
-        else
+ 
+        if (position.y >= 0 && position.y <= 8)
         {
-            if (position.y >= 0 && position.y <= 8)
-            {
-                return true;
-            }
+            verticalBorder = true;
         }
-        return false;
+        
     }
 }
