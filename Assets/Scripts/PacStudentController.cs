@@ -367,4 +367,26 @@ public class PacStudentController : MonoBehaviour
         }
         
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            print("Collision with Wall");
+            // Handle wall collision logic here
+        }
+        else if (collision.gameObject.CompareTag("Teleporter"))
+        {
+            print("Collision with Teleporter");
+            // Handle teleporter logic here
+        }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Pellet"))
+        {
+            Destroy(collider.gameObject);
+        }
+    }
 }

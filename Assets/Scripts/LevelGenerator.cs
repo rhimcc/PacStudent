@@ -38,11 +38,12 @@ public class LevelGenerator : MonoBehaviour
     private string[] directions = { "left", "right", "up", "down" };
     private GameObject levelCorner;
     private Camera m_MainCamera;
-    
+    private GameObject map;
 
     // Start is called before the first frame update
     void Start()
     {
+        map = new GameObject("Level Map");
         m_MainCamera = Camera.main;
         m_MainCamera.enabled = true;
         rowCount = levelMap.GetLength(0);
@@ -50,6 +51,7 @@ public class LevelGenerator : MonoBehaviour
         var existingMap = GameObject.Find("LevelMap");
         GameObject.Destroy(existingMap);
         levelCorner = new GameObject("Corner");
+        levelCorner.transform.parent = map.transform;
         m_MainCamera.orthographicSize = rowCount * spriteSize + 4;
 
         for (int row = 0; row < rowCount; row++)
@@ -71,6 +73,7 @@ public class LevelGenerator : MonoBehaviour
         GameObject newCorner = Instantiate(levelCorner);
         newCorner.transform.localScale = new Vector3(xScale, yScale, 0);
         newCorner.transform.position = new Vector3(x, y, 0);
+        newCorner.transform.parent = map.transform;
     }
 
     void createElement(int row, int col, int x, int y, int xScale, int yScale)
