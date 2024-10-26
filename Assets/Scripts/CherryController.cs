@@ -50,7 +50,6 @@ public class CherryController : MonoBehaviour
                 newCherry = true;
                 randomStart = getRandomStart(randomDirection);
                 endPoint = getEndPoint(randomStart, randomDirection);
-                print(endPoint);
                 currentCherry = Instantiate(cherryPrefab, randomStart, Quaternion.identity);
                 tweener = currentCherry.GetComponent<Tweener>();
                 tweener.speed = width / 8;
@@ -98,8 +97,6 @@ Vector3 getRandomStart(int randomStart)
 
     Vector3 getEndPoint(Vector3 randomStart, int randomDirection)
     {
-        print(width);
-        print(randomStart);
         switch (randomDirection)
         {
             case 0: // Top
