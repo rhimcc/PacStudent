@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PacStudentController : MonoBehaviour
 {
@@ -36,6 +38,9 @@ public class PacStudentController : MonoBehaviour
     bool horizontalBorder;
     bool verticalBorder;
     ParticleSystem particleSystem;
+    int score = 0;
+    Text scoreText;
+    List<Vector3> eatenPellets = new List<Vector3>();
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +51,7 @@ public class PacStudentController : MonoBehaviour
         tweener = gameObject.GetComponent<Tweener>();
         currentPos = new int[] { 1, 1 };
         targetPos = new int[] { 1, 1 };
-
+        scoreText = GameObject.Find("Score").GetComponent<Text>();
         currentInput = ""; // Initialize currentInput
     }
 
@@ -213,7 +218,7 @@ public class PacStudentController : MonoBehaviour
                 break;
         }
 
-        if (levelMap[targetPos[0], targetPos[1]] == 5)
+          if (levelMap[targetPos[0], targetPos[1]] == 5 && !eatenPellets.Contains(targetPosition))
         {
             audioSource.clip = movement[1];
             audioSource.Play();
@@ -387,6 +392,15 @@ public class PacStudentController : MonoBehaviour
         if (collider.CompareTag("Pellet"))
         {
             Destroy(collider.gameObject);
+            eatenPellets.Add(collider.gameObject.transform.position);
+            updateScore();
         }
+    }
+
+    void updateScore()
+    {
+        score += 10;
+        scoreText.text = "\n" + score;       
+
     }
 }
