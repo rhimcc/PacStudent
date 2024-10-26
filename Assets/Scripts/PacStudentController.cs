@@ -58,6 +58,7 @@ public class PacStudentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(transform.position);
         if (tweener.activeTween != null && tweener.activeTween.EndPos == transform.position)
         {
             tweener.activeTween = null;
@@ -200,7 +201,7 @@ public class PacStudentController : MonoBehaviour
     void Move(string direction)
     {
         Vector3 targetPosition = new Vector3(0, 0, 0);
-        Vector3 currentPosition = transform.position;
+        Vector3 currentPosition = transform.position;       
 
         switch (direction)
         {
@@ -328,19 +329,22 @@ public class PacStudentController : MonoBehaviour
                 return 4;
             }
             else return 0;
-        } else
+        }
+        else if (position.x >= 0 && position.x <= 108)
         {
 
             if (position.y >= 0 && position.y <= 116)
             {
                 return 2;
             }
-            else if(position.y < 0 && position.y >= -108)
+            else if (position.y < 0 && position.y >= -108)
             {
                 return 3;
             }
             else return 0;
         }
+        else return 0;
+
     }
 
     void DetectBorder(string direction)
@@ -380,11 +384,7 @@ public class PacStudentController : MonoBehaviour
             print("Collision with Wall");
             // Handle wall collision logic here
         }
-        else if (collision.gameObject.CompareTag("Teleporter"))
-        {
-            print("Collision with Teleporter");
-            // Handle teleporter logic here
-        }
+       
     }
 
     void OnTriggerEnter(Collider collider)
@@ -395,12 +395,27 @@ public class PacStudentController : MonoBehaviour
             eatenPellets.Add(collider.gameObject.transform.position);
             updateScore();
         }
+        else if (collider.CompareTag("Tunnel"))
+        {
+            float currentX = transform.position.x;
+            float currentY = transform.position.y;
+            float newX = 0;
+            float newY = currentY;
+            if (currentX > 0)
+            {
+                newX = -100;
+            } else
+            {
+                newX = 100;
+            }
+            transform.position = new Vector3(newX, newY, 0);
+            tweener.activeTween = null;
+        }
     }
 
     void updateScore()
     {
         score += 10;
-        scoreText.text = "\n" + score;       
-
+        scoreText.text = "\n" + score;      
     }
 }
