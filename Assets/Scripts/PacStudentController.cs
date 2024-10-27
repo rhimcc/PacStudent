@@ -414,34 +414,23 @@ public class PacStudentController : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Pellet"))
+        switch(collider.tag)
         {
-            Destroy(collider.gameObject);
-            eatenPellets.Add(collider.gameObject.transform.position);
-            updateScore(10);
-        }
-        else if (collider.CompareTag("Tunnel"))
-        {
-            float currentX = transform.position.x;
-            float currentY = transform.position.y;
-            float newX = 0;
-            float newY = currentY;
-            if (currentX > 0)
-            {
-                newX = -100;
-                currentPos = new int[] { 14, 1 };
-            }
-            else
-            {
-                newX = 100;
-                currentPos = new int[] { 14, 1 };
-            }
-            transform.position = new Vector3(newX, newY, 0);
-            tweener.activeTween = null;
-        } else if (collider.CompareTag("Bonus")) 
-        {
-            Destroy(collider.gameObject);
-            updateScore(100);
+            case "Pellet":
+                HandlePellet(collider);
+                break;
+
+            case "Tunnel":
+                HandleTunnel();
+                break;
+
+            case "Bonus":
+                HandleBonus(collider);
+                break;
+
+            case "Power":
+                HandlePower(collider);
+                break;
         }
     }
 
@@ -450,5 +439,74 @@ public class PacStudentController : MonoBehaviour
         score += points;
         scoreText.text = "\n" + score;
     }
+    // Power pills:
+//? Change the Ghost animator state to ?Scared?.
+//? Change the background music to match this state.
+//? Start a timer for 10 seconds.Make the Ghost Timer UI element
+//visible and set it to this timer.
+//? With 3 seconds left to go on this timer, change the Ghosts to
+//the Recovering state.
+//? After 10 seconds have passed, set the Ghosts back to their
+//Walking states and hide the Ghost Timer UI element.
+
+    void HandleTunnel()
+    {
+        float currentX = transform.position.x;
+        float currentY = transform.position.y;
+        float newX = 0;
+        float newY = currentY;
+        if (currentX > 0)
+        {
+            newX = -100;
+            currentPos = new int[] { 14, 1 };
+        }
+        else
+        {
+            newX = 100;
+            currentPos = new int[] { 14, 1 };
+        }
+        transform.position = new Vector3(newX, newY, 0);
+        tweener.activeTween = null;
+    }
+
+    void HandlePellet(Collider collider)
+    {
+        Destroy(collider.gameObject);
+        eatenPellets.Add(collider.gameObject.transform.position);
+        updateScore(10);    
+    }
+
+    void HandleBonus(Collider collider)
+    {
+        Destroy(collider.gameObject);
+        updateScore(100);
+    }
+
+    void HandlePower(Collider collider)
+    {
+        print("cracker");
+        Destroy(collider.gameObject);
+        GameObject ghost1 = GameObject.Find("Ghost1");
+        GameObject ghost2 = GameObject.Find("Ghost2");
+        GameObject ghost3 = GameObject.Find("Ghost3");
+        GameObject ghost4 = GameObject.Find("Ghost4");
+        Animator ghost1Animator = ghost1.GetComponent<Animator>();
+        ghost1Animator.SetBool("Scared", true);
+        ghost1Animator.SetBool("Right", true);
+        Animator ghost2Animator = ghost2.GetComponent<Animator>();
+        ghost2Animator.SetBool("Scared", true);
+        Animator ghost3Animator = ghost3.GetComponent<Animator>();
+        ghost3Animator.SetBool("Scared", true);
+        Animator ghost4Animator = ghost4.GetComponent<Animator>();
+        ghost4Animator.SetBool("Scared", true);
+
+        GameObject ghostScaredTimer = GameObject.Find("GhostScaredTimer");
+        Text ghostScaredText = ghostScaredTimer.GetComponent<Text>();
+        ghostScaredTimer.SetActive(true);
+        ghostScaredText.text = "\n\n" + 10;
+
+    }
+
+
 }
 
