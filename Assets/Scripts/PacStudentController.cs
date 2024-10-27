@@ -309,53 +309,6 @@ public class PacStudentController : MonoBehaviour
 
     }
 
-    //int DetectQuadrant(string direction)
-    //{
-    //    Vector3 position = transform.position;
-    //    switch (direction)
-    //    {
-    //        case "W":
-    //            position += new Vector3(0, 8, 0);
-    //            break;
-    //        case "S":
-    //            position += new Vector3(0, -8, 0);
-    //            break;
-    //        case "A":
-    //            position += new Vector3(-8, 0, 0);
-    //            break;
-    //        case "D":
-    //            position += new Vector3(8, 0, 0);
-    //            break;
-    //    }
-    //    if (position.x <= 0 && position.x >= -108)
-    //    {
-    //        if (position.y >= 0 && position.y <= 116)
-    //        {
-    //            return 1;
-    //        }
-    //        else if (position.y < 0 && position.y >= -108)
-    //        {
-    //            return 4;
-    //        }
-    //        else return 0;
-    //    }
-    //    else if (position.x >= 0 && position.x <= 116)
-    //    {
-
-    //        if (position.y >= 0 && position.y <= 116)
-    //        {
-    //            return 2;
-    //        }
-    //        else if (position.y < 0 && position.y >= -108)
-    //        {
-    //            return 3;
-    //        }
-    //        else return 0;
-    //    }
-    //    else return 0;
-
-    //}
-
     void DetectBorder(string direction)
     {
         Vector3 position = transform.position;
@@ -465,7 +418,7 @@ public class PacStudentController : MonoBehaviour
         {
             Destroy(collider.gameObject);
             eatenPellets.Add(collider.gameObject.transform.position);
-            updateScore();
+            updateScore(10);
         }
         else if (collider.CompareTag("Tunnel"))
         {
@@ -485,12 +438,16 @@ public class PacStudentController : MonoBehaviour
             }
             transform.position = new Vector3(newX, newY, 0);
             tweener.activeTween = null;
+        } else if (collider.CompareTag("Bonus")) 
+        {
+            Destroy(collider.gameObject);
+            updateScore(100);
         }
     }
 
-    void updateScore()
+    void updateScore(int points)
     {
-        score += 10;
+        score += points;
         scoreText.text = "\n" + score;
     }
 }
