@@ -26,6 +26,8 @@ public class PacStudentController : MonoBehaviour
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
         };
 
+
+
     int[] currentPos;
     int[] targetPos;
 
@@ -58,7 +60,6 @@ public class PacStudentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(transform.position);
         if (tweener.activeTween != null && tweener.activeTween.EndPos == transform.position)
         {
             tweener.activeTween = null;
@@ -96,14 +97,17 @@ public class PacStudentController : MonoBehaviour
     bool CanMove(string direction)
     {
         // Reset targetPos to current position at start of check
+
         targetPos[0] = currentPos[0];
         targetPos[1] = currentPos[1];
         int lastXindex = levelMap.GetLength(1) - 1;
         int lastYindex = levelMap.GetLength(0) - 1;
         int quadrant = DetectQuadrant(direction);
+
         horizontalBorder = false;
         verticalBorder = false;
         DetectBorder(direction);
+
 
         switch (direction)
         {
@@ -114,12 +118,14 @@ public class PacStudentController : MonoBehaviour
                     if (quadrant == 1 || quadrant == 2)
                     {
                         targetPos[0] = lastYindex;
-                    } else
+                    }
+                    else
                     {
                         targetPos[0] = lastYindex - 1;
                     }
 
-                } else if (quadrant == 1 || quadrant == 2)
+                }
+                else if (quadrant == 1 || quadrant == 2)
                 {
                     targetPos[0] = currentPos[0] - 1;
                 }
@@ -141,7 +147,8 @@ public class PacStudentController : MonoBehaviour
                     {
                         targetPos[0] = lastYindex - 1;
                     }
-                } else 
+                }
+                else
                 if (quadrant == 1 || quadrant == 2)
                 {
                     targetPos[0] = currentPos[0] + 1;
@@ -162,7 +169,8 @@ public class PacStudentController : MonoBehaviour
             if (quadrant == 1 || quadrant == 4)
                 {
                     targetPos[1] = currentPos[1] - 1;
-                } else
+                }
+                else
                 {
                     targetPos[1] = currentPos[1] + 1;
                 }
@@ -191,6 +199,7 @@ public class PacStudentController : MonoBehaviour
         if (targetPos[0] >= 0 && targetPos[0] < levelMap.GetLength(0) &&
             targetPos[1] >= 0 && targetPos[1] < levelMap.GetLength(1))
         {
+
             int targetTile = levelMap[targetPos[0], targetPos[1]];
             return (targetTile == 5 || targetTile == 6 || targetTile == 0);
         }
@@ -201,7 +210,7 @@ public class PacStudentController : MonoBehaviour
     void Move(string direction)
     {
         Vector3 targetPosition = new Vector3(0, 0, 0);
-        Vector3 currentPosition = transform.position;       
+        Vector3 currentPosition = transform.position;
 
         switch (direction)
         {
@@ -219,7 +228,7 @@ public class PacStudentController : MonoBehaviour
                 break;
         }
 
-          if (levelMap[targetPos[0], targetPos[1]] == 5 && !eatenPellets.Contains(targetPosition))
+        if (levelMap[targetPos[0], targetPos[1]] == 5 && !eatenPellets.Contains(targetPosition))
         {
             audioSource.clip = movement[1];
             audioSource.Play();
@@ -233,7 +242,7 @@ public class PacStudentController : MonoBehaviour
         currentPos = new int[] { targetPos[0], targetPos[1] };  // Create new array to avoid reference issues
         tweener.AddTween(transform, transform.position, targetPosition);
         animator.speed = 1;
-        
+
     }
     void SetAnimation(string direction)
     {
@@ -300,52 +309,52 @@ public class PacStudentController : MonoBehaviour
 
     }
 
-    int DetectQuadrant(string direction)
-    {
-        Vector3 position = transform.position;
-        switch(direction)
-        {
-            case "W":
-                position += new Vector3(0, 8, 0);
-                break;
-            case "S":
-                position += new Vector3(0, -8, 0);
-                break;
-            case "A":
-                position += new Vector3(-8, 0, 0);
-                break;
-            case "D":
-                position += new Vector3(8, 0, 0);
-                break;
-        }
-        if (position.x <= 0 && position.x >= -108)
-        {
-            if (position.y >= 0 && position.y <= 116)
-            {
-                return 1;
-            }
-            else if (position.y < 0 && position.y >= -108)
-            {
-                return 4;
-            }
-            else return 0;
-        }
-        else if (position.x >= 0 && position.x <= 108)
-        {
+    //int DetectQuadrant(string direction)
+    //{
+    //    Vector3 position = transform.position;
+    //    switch (direction)
+    //    {
+    //        case "W":
+    //            position += new Vector3(0, 8, 0);
+    //            break;
+    //        case "S":
+    //            position += new Vector3(0, -8, 0);
+    //            break;
+    //        case "A":
+    //            position += new Vector3(-8, 0, 0);
+    //            break;
+    //        case "D":
+    //            position += new Vector3(8, 0, 0);
+    //            break;
+    //    }
+    //    if (position.x <= 0 && position.x >= -108)
+    //    {
+    //        if (position.y >= 0 && position.y <= 116)
+    //        {
+    //            return 1;
+    //        }
+    //        else if (position.y < 0 && position.y >= -108)
+    //        {
+    //            return 4;
+    //        }
+    //        else return 0;
+    //    }
+    //    else if (position.x >= 0 && position.x <= 116)
+    //    {
 
-            if (position.y >= 0 && position.y <= 116)
-            {
-                return 2;
-            }
-            else if (position.y < 0 && position.y >= -108)
-            {
-                return 3;
-            }
-            else return 0;
-        }
-        else return 0;
+    //        if (position.y >= 0 && position.y <= 116)
+    //        {
+    //            return 2;
+    //        }
+    //        else if (position.y < 0 && position.y >= -108)
+    //        {
+    //            return 3;
+    //        }
+    //        else return 0;
+    //    }
+    //    else return 0;
 
-    }
+    //}
 
     void DetectBorder(string direction)
     {
@@ -369,22 +378,85 @@ public class PacStudentController : MonoBehaviour
         {
             horizontalBorder = true;
         }
- 
+        if (position.x > 108 || position.x < -108)
+        {
+            horizontalBorder = true;
+        }
+
         if (position.y >= 0 && position.y <= 8)
         {
             verticalBorder = true;
         }
-        
+
     }
 
-    void OnCollisionEnter(Collision collision)
+    int DetectQuadrant(string direction)
+        {
+            Vector3 position = transform.position;
+
+        switch (direction)
+            {
+                case "W":
+                    position += new Vector3(0, 8, 0);
+                    break;
+                case "S":
+                    position += new Vector3(0, -8, 0);
+                    break;
+                case "A":
+                    position += new Vector3(-8, 0, 0);
+                    break;
+                case "D":
+                    position += new Vector3(8, 0, 0);
+                    break;
+            }
+
+
+        if (position.x <= 0 && position.x >= -108)
+            {
+                if (position.y >= 0 && position.y <= 116)
+                {
+                    return 1;
+                }
+                else if (position.y < 0 && position.y >= -108)
+                {
+                    return 4;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else if (position.x >= 0 && position.x <= 116)
+            {
+                if (position.y >= 0 && position.y <= 116)
+                {
+                    return 2;
+                }
+                else if (position.y < 0 && position.y >= -108)
+                {
+                    return 3;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+    
+
+        void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
             print("Collision with Wall");
             // Handle wall collision logic here
         }
-       
+
     }
 
     void OnTriggerEnter(Collider collider)
@@ -404,9 +476,12 @@ public class PacStudentController : MonoBehaviour
             if (currentX > 0)
             {
                 newX = -100;
-            } else
+                currentPos = new int[] { 14, 1 };
+            }
+            else
             {
                 newX = 100;
+                currentPos = new int[] { 14, 1 };
             }
             transform.position = new Vector3(newX, newY, 0);
             tweener.activeTween = null;
@@ -416,6 +491,7 @@ public class PacStudentController : MonoBehaviour
     void updateScore()
     {
         score += 10;
-        scoreText.text = "\n" + score;      
+        scoreText.text = "\n" + score;
     }
 }
+
