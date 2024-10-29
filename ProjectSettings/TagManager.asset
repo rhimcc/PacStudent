@@ -15,6 +15,7 @@ TagManager:
   - Wall
   - Tunnel
   - Bonus
+  - Ghost
   layers:
   - Default
   - TransparentFX
