@@ -42,7 +42,13 @@ public class PacStudentController : MonoBehaviour
     ParticleSystem particleSystem;
     int score = 0;
     Text scoreText;
+    float ghostScaredTime = 10;
+    GameObject ghostScaredTimer;
+    Text ghostScaredText;
     List<Vector3> eatenPellets = new List<Vector3>();
+    GameObject[] ghosts;
+    Animator[] ghostAnimators;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +61,24 @@ public class PacStudentController : MonoBehaviour
         targetPos = new int[] { 1, 1 };
         scoreText = GameObject.Find("Score").GetComponent<Text>();
         currentInput = ""; // Initialize currentInput
+        ghostScaredTimer = GameObject.Find("GhostScaredTimer");
+        ghostScaredText = ghostScaredTimer.GetComponent<Text>();
+
+        GameObject ghost1 = GameObject.Find("Ghost1");
+        GameObject ghost2 = GameObject.Find("Ghost2");
+        GameObject ghost3 = GameObject.Find("Ghost3");
+        GameObject ghost4 = GameObject.Find("Ghost4");
+
+        Animator ghost1Animator = ghost1.GetComponent<Animator>();
+        Animator ghost2Animator = ghost2.GetComponent<Animator>();
+        Animator ghost3Animator = ghost3.GetComponent<Animator>();
+        Animator ghost4Animator = ghost4.GetComponent<Animator>();
+        ghosts = new GameObject[] { ghost1, ghost2, ghost3, ghost4 };
+        ghostAnimators = new Animator[] { ghost1Animator, ghost2Animator, ghost3Animator, ghost4Animator };
+        foreach (Animator animator in ghostAnimators)
+        {
+            animator.SetBool("Right", true);
+        }
     }
 
     // Update is called once per frame
@@ -484,28 +508,55 @@ public class PacStudentController : MonoBehaviour
 
     void HandlePower(Collider collider)
     {
-        print("cracker");
         Destroy(collider.gameObject);
-        GameObject ghost1 = GameObject.Find("Ghost1");
-        GameObject ghost2 = GameObject.Find("Ghost2");
-        GameObject ghost3 = GameObject.Find("Ghost3");
-        GameObject ghost4 = GameObject.Find("Ghost4");
-        Animator ghost1Animator = ghost1.GetComponent<Animator>();
-        ghost1Animator.SetBool("Scared", true);
-        ghost1Animator.SetBool("Right", true);
-        Animator ghost2Animator = ghost2.GetComponent<Animator>();
-        ghost2Animator.SetBool("Scared", true);
-        Animator ghost3Animator = ghost3.GetComponent<Animator>();
-        ghost3Animator.SetBool("Scared", true);
-        Animator ghost4Animator = ghost4.GetComponent<Animator>();
-        ghost4Animator.SetBool("Scared", true);
+        foreach (Animator animator in ghostAnimators)
+        {
+            animator.SetBool("Scared", true);
+            animator.SetBool("Walking", false);
+        }
 
-        GameObject ghostScaredTimer = GameObject.Find("GhostScaredTimer");
-        Text ghostScaredText = ghostScaredTimer.GetComponent<Text>();
-        ghostScaredTimer.SetActive(true);
-        ghostScaredText.text = "\n\n" + 10;
+        StartCoroutine(HandleTimer());
 
     }
+
+
+
+    private IEnumerator HandleTimer()
+    {
+        ghostScaredTimer.SetActive(true);
+        ghostScaredTime = 10;
+
+        while (ghostScaredTime > 0)
+        {
+            string time = "\n\n" + ghostScaredTime;
+            ghostScaredText.text = time;
+
+            yield return new WaitForSeconds(1f);
+            ghostScaredTime--;
+            if (ghostScaredTime == 3)
+            {
+                foreach (Animator animator in ghostAnimators)
+                {
+                    animator.SetBool("Recovering", true);
+                    animator.SetBool("Scared", false);
+
+                }
+            }
+            if (ghostScaredTime == 0)
+            {
+                foreach (Animator animator in ghostAnimators)
+                {
+                    animator.SetBool("Recovering", false);
+                    animator.SetBool("Walking", true);
+
+                }
+                ghostScaredTimer.SetActive(false);
+            }
+        }
+
+        ghostScaredText.text = "\n\n0";
+    }
+
 
 
 }
