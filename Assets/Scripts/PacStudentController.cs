@@ -50,6 +50,7 @@ public class PacStudentController : MonoBehaviour
     GameObject[] lives;
     GameObject deathParticles;
     ParticleSystem deathParticleSystem;
+    int deathCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -91,7 +92,7 @@ public class PacStudentController : MonoBehaviour
         GameObject life1 = GameObject.Find("Life1");
         GameObject life2 = GameObject.Find("Life2");
         GameObject life3 = GameObject.Find("Life3");
-        lives = new GameObject[] { life3, life2, life1 };
+        lives = new GameObject[] { life1, life2, life3 };
 
     }
 
@@ -606,7 +607,11 @@ public class PacStudentController : MonoBehaviour
     currentPos = new int[] { 1, 1 };
     lastInput = null;
     currentInput = null;
-}
+
+     Destroy(lives[deathCount]);
+     deathCount++;
+
+    }
 
 
 
