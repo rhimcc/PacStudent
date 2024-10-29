@@ -26,8 +26,6 @@ public class PacStudentController : MonoBehaviour
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
         };
 
-
-
     int[] currentPos;
     int[] targetPos;
 
@@ -39,6 +37,7 @@ public class PacStudentController : MonoBehaviour
     bool reducing = false;
     bool horizontalBorder;
     bool verticalBorder;
+    GameObject particleTrail;
     ParticleSystem particleSystem;
     int score = 0;
     Text scoreText;
@@ -48,12 +47,21 @@ public class PacStudentController : MonoBehaviour
     List<Vector3> eatenPellets = new List<Vector3>();
     GameObject[] ghosts;
     Animator[] ghostAnimators;
-
+    GameObject[] lives;
+    GameObject deathParticles;
+    ParticleSystem deathParticleSystem;
 
     // Start is called before the first frame update
     void Start()
     {
-        particleSystem = GameObject.Find("PacManTrail").GetComponent<ParticleSystem>();
+        particleTrail = GameObject.Find("PacManTrail");
+        particleSystem = particleTrail.GetComponent<ParticleSystem>();
+        
+        deathParticles = GameObject.Find("DeathParticles");
+        deathParticleSystem = deathParticles.GetComponent<ParticleSystem>();
+        //deathParticles.SetActive(false);
+        //deathParticleSystem.Stop();
+        //deathParticleSystem.Play();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = movement[0];
         tweener = gameObject.GetComponent<Tweener>();
@@ -79,6 +87,12 @@ public class PacStudentController : MonoBehaviour
         {
             animator.SetBool("Right", true);
         }
+
+        GameObject life1 = GameObject.Find("Life1");
+        GameObject life2 = GameObject.Find("Life2");
+        GameObject life3 = GameObject.Find("Life3");
+        lives = new GameObject[] { life3, life2, life1 };
+
     }
 
     // Update is called once per frame
@@ -97,21 +111,27 @@ public class PacStudentController : MonoBehaviour
         {
             if (CanMove(lastInput))
             {
-                currentInput = lastInput;
-                SetAnimation(currentInput);
-                SetTrail(currentInput);
-                Move(lastInput);
+                if (!animator.GetBool("Dead")) { 
+                    currentInput = lastInput;
+                    SetAnimation(currentInput);
+                    particleTrail.SetActive(true);
+                    SetTrail(currentInput);
+                    Move(lastInput);
+                }
             }
             else
             {
                 if (CanMove(currentInput))
                 {
-                    Move(currentInput);
+                    if (!animator.GetBool("Dead")) { 
+                        Move(currentInput);
+                    }
                 }
                 else
                 {
                     animator.speed = 0;
                     audioSource.Stop();
+                    particleTrail.SetActive(false);
                 }
             }
         }
@@ -455,6 +475,10 @@ public class PacStudentController : MonoBehaviour
             case "Power":
                 HandlePower(collider);
                 break;
+
+            case "Ghost":
+                HandleGhost();
+                break;
         }
     }
 
@@ -463,15 +487,6 @@ public class PacStudentController : MonoBehaviour
         score += points;
         scoreText.text = "\n" + score;
     }
-    // Power pills:
-//? Change the Ghost animator state to ?Scared?.
-//? Change the background music to match this state.
-//? Start a timer for 10 seconds.Make the Ghost Timer UI element
-//visible and set it to this timer.
-//? With 3 seconds left to go on this timer, change the Ghosts to
-//the Recovering state.
-//? After 10 seconds have passed, set the Ghosts back to their
-//Walking states and hide the Ghost Timer UI element.
 
     void HandleTunnel()
     {
@@ -556,6 +571,43 @@ public class PacStudentController : MonoBehaviour
 
         ghostScaredText.text = "\n\n0";
     }
+
+    void HandleGhost()
+    {
+        if (ghostAnimators[0].GetBool("Walking")) {
+ 
+            StartCoroutine(HandleDeath());
+        }
+
+    }
+
+    private IEnumerator HandleDeath()
+{
+    animator.SetBool("Dead", true);  // Start the death animation
+    animator.SetBool("Right", false);
+    animator.SetBool("Left", false);
+    animator.SetBool("Up", false);
+    animator.SetBool("Down", false);
+    
+    particleTrail.SetActive(false);
+    deathParticles.SetActive(true);
+    deathParticleSystem.Play();
+
+    yield return new WaitForSeconds(0.9f);
+    animator.SetBool("Dead", false);
+
+    deathParticles.SetActive(false);
+    deathParticleSystem.Stop();
+    transform.position = new Vector3(-100, 100, 0);
+    
+    animator.SetBool("Walking", true);
+    animator.SetBool("Right", true);
+    transform.position = new Vector3(-100, 108, 0);
+    currentPos = new int[] { 1, 1 };
+    lastInput = null;
+    currentInput = null;
+}
+
 
 
 
