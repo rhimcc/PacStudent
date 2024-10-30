@@ -51,6 +51,9 @@ public class PacStudentController : MonoBehaviour
     GameObject deathParticles;
     ParticleSystem deathParticleSystem;
     int deathCount = 0;
+    AudioSource backgroundAudio;
+    GameObject mainCamera;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -60,9 +63,6 @@ public class PacStudentController : MonoBehaviour
         
         deathParticles = GameObject.Find("DeathParticles");
         deathParticleSystem = deathParticles.GetComponent<ParticleSystem>();
-        //deathParticles.SetActive(false);
-        //deathParticleSystem.Stop();
-        //deathParticleSystem.Play();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = movement[0];
         tweener = gameObject.GetComponent<Tweener>();
@@ -70,6 +70,9 @@ public class PacStudentController : MonoBehaviour
         targetPos = new int[] { 1, 1 };
         scoreText = GameObject.Find("Score").GetComponent<Text>();
         currentInput = ""; // Initialize currentInput
+        mainCamera = GameObject.Find("Main Camera");
+        backgroundAudio = mainCamera.GetComponent<AudioSource>();
+
         ghostScaredTimer = GameObject.Find("GhostScaredTimer");
         ghostScaredText = ghostScaredTimer.GetComponent<Text>();
 
@@ -478,7 +481,7 @@ public class PacStudentController : MonoBehaviour
                 break;
 
             case "Ghost":
-                HandleGhost();
+                HandleGhost(collider);
                 break;
         }
     }
@@ -549,69 +552,93 @@ public class PacStudentController : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
             ghostScaredTime--;
-            if (ghostScaredTime == 3)
+            foreach (Animator ghostAnimator in ghostAnimators)
             {
-                foreach (Animator animator in ghostAnimators)
+                if (ghostAnimator.GetBool("Dead"))
                 {
-                    animator.SetBool("Recovering", true);
-                    animator.SetBool("Scared", false);
-
-                }
-            }
-            if (ghostScaredTime == 0)
-            {
-                foreach (Animator animator in ghostAnimators)
+                    ghostAnimator.SetBool("Scared", false);
+                    ghostAnimator.SetBool("Walking", false);
+                    ghostAnimator.SetBool("Recovering", false);
+                } else if (ghostScaredTime == 3) // when it goes from scared to recovering
                 {
-                    animator.SetBool("Recovering", false);
-                    animator.SetBool("Walking", true);
-
+                    ghostAnimator.SetBool("Scared", false);
+                    ghostAnimator.SetBool("Recovering", true);
+                } else if (ghostScaredTime == 0)
+                {
+                    ghostAnimator.SetBool("Recovering", false);
+                    ghostAnimator.SetBool("Walking", true);
+                       
                 }
-                ghostScaredTimer.SetActive(false);
+             
             }
+
+    
         }
 
         ghostScaredText.text = "\n\n0";
     }
 
-    void HandleGhost()
+    void HandleGhost(Collider collider)
     {
-        if (ghostAnimators[0].GetBool("Walking")) {
- 
+        int index = System.Array.IndexOf(ghosts, collider.gameObject);
+        if (ghostAnimators[index].GetBool("Walking")) { 
             StartCoroutine(HandleDeath());
+        } else if (ghostAnimators[index].GetBool("Recovering") || (ghostAnimators[index].GetBool("Scared"))) {
+            HandleEatGhost(collider.gameObject);
         }
 
     }
 
     private IEnumerator HandleDeath()
-{
-    animator.SetBool("Dead", true);  // Start the death animation
-    animator.SetBool("Right", false);
-    animator.SetBool("Left", false);
-    animator.SetBool("Up", false);
-    animator.SetBool("Down", false);
+    {
+        animator.SetBool("Dead", true);  // Start the death animation
+        animator.SetBool("Right", false);
+        animator.SetBool("Left", false);
+        animator.SetBool("Up", false);
+        animator.SetBool("Down", false);
     
-    particleTrail.SetActive(false);
-    deathParticles.SetActive(true);
-    deathParticleSystem.Play();
+        particleTrail.SetActive(false);
+        deathParticles.SetActive(true);
+        deathParticleSystem.Play();
 
-    yield return new WaitForSeconds(0.9f);
-    animator.SetBool("Dead", false);
+        yield return new WaitForSeconds(0.9f);
+        animator.SetBool("Dead", false);
 
-    deathParticles.SetActive(false);
-    deathParticleSystem.Stop();
-    transform.position = new Vector3(-100, 100, 0);
+        deathParticles.SetActive(false);
+        deathParticleSystem.Stop();
+        transform.position = new Vector3(-100, 100, 0);
     
-    animator.SetBool("Walking", true);
-    animator.SetBool("Right", true);
-    transform.position = new Vector3(-100, 108, 0);
-    currentPos = new int[] { 1, 1 };
-    lastInput = null;
-    currentInput = null;
+        animator.SetBool("Right", true);
+        transform.position = new Vector3(-100, 108, 0);
+        currentPos = new int[] { 1, 1 };
+        lastInput = null;
+        currentInput = null;
 
-     Destroy(lives[deathCount]);
-     deathCount++;
+         Destroy(lives[deathCount]);
+         deathCount++;
 
     }
+
+    private void HandleEatGhost(GameObject ghost) {
+       Animator animator = ghost.GetComponent<Animator>();
+        animator.SetBool("Scared", false);
+        animator.SetBool("Recovering", false);
+
+        animator.SetBool("Dead", true);
+       
+       updateScore(300);
+    }
+
+
+    //    The ghost dies and enters their Dead animator state.
+    //▪ If the ghost is moving(e.g. in the 90% section below), they can
+    //either keep moving on their ghost-specific behaviour or stop in
+    //their current position.
+    //▪ Change the background music to match this state.
+    //▪ Add 300 points to the player’s score.
+    //▪ Start a 5 second timer (this does not need to be visible). Once
+    //this 5 seconds has passed, transition the ghost back to the
+    //Walking state.
 
 
 
