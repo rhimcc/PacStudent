@@ -49,10 +49,13 @@ public class PacStudentController : MonoBehaviour
     Animator[] ghostAnimators;
     GameObject[] lives;
     GameObject deathParticles;
+    GameObject collisionParticles;
+    ParticleSystem collisionParticleSystem;
+
     ParticleSystem deathParticleSystem;
     int deathCount = 0;
     GameObject mainCamera;
-    BackgroundMusic backgroundMusic; 
+    BackgroundMusic backgroundMusic;
     
 
     // Start is called before the first frame update
@@ -63,6 +66,11 @@ public class PacStudentController : MonoBehaviour
         
         deathParticles = GameObject.Find("DeathParticles");
         deathParticleSystem = deathParticles.GetComponent<ParticleSystem>();
+        collisionParticles = GameObject.Find("CollisionParticles");
+        collisionParticleSystem = collisionParticles.GetComponent<ParticleSystem>();
+        deathParticles.SetActive(false);
+        collisionParticles.SetActive(false);
+
 
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = movement[0];
@@ -451,22 +459,19 @@ public class PacStudentController : MonoBehaviour
             }
         }
 
-    
 
-        void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            print("Collision with Wall");
-            // Handle wall collision logic here
-        }
 
-    }
+   
+
 
     void OnTriggerEnter(Collider collider)
     {
         switch(collider.tag)
         {
+            case "Wall":
+                HandleWall(collider);
+                break;
+
             case "Pellet":
                 HandlePellet(collider);
                 break;
@@ -487,6 +492,50 @@ public class PacStudentController : MonoBehaviour
                 HandleGhost(collider);
                 break;
         }
+    }
+
+    void HandleWall(Collider collider)
+    {
+        Vector3 direction = Vector3.zero;
+        float rayDistance = 8f;
+
+        switch (currentInput)
+        {
+            case "W":
+                direction = Vector3.up;
+                break;
+            case "S":
+                direction = Vector3.down;
+                break;
+            case "D":
+                direction = Vector3.right;
+                break;
+            case "A":
+                direction = Vector3.left;
+                break;
+        }
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction, out hit, rayDistance))
+        {
+            if (hit.collider.CompareTag("Wall"))
+            {
+                print("hit");
+                Vector3 targetPosition = transform.position + direction * rayDistance;
+                audioSource.PlayOneShot(movement[2]);
+                StartCoroutine(playParticles());
+
+            }
+        }
+    }
+
+    IEnumerator playParticles()
+    {
+        particleTrail.SetActive(false);
+        collisionParticles.SetActive(true);
+        collisionParticleSystem.Play();
+        yield return new WaitForSeconds(1);
+        collisionParticles.SetActive(false);
+        collisionParticleSystem.Stop();
     }
 
     void updateScore(int points)
