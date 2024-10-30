@@ -51,9 +51,9 @@ public class PacStudentController : MonoBehaviour
     GameObject deathParticles;
     ParticleSystem deathParticleSystem;
     int deathCount = 0;
-    AudioSource backgroundAudio;
     GameObject mainCamera;
-   
+    BackgroundMusic backgroundMusic; 
+    
 
     // Start is called before the first frame update
     void Start()
@@ -63,15 +63,18 @@ public class PacStudentController : MonoBehaviour
         
         deathParticles = GameObject.Find("DeathParticles");
         deathParticleSystem = deathParticles.GetComponent<ParticleSystem>();
+
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = movement[0];
+
+        mainCamera = GameObject.Find("Main Camera");
+        backgroundMusic = mainCamera.GetComponent<BackgroundMusic>();
+
         tweener = gameObject.GetComponent<Tweener>();
         currentPos = new int[] { 1, 1 };
         targetPos = new int[] { 1, 1 };
         scoreText = GameObject.Find("Score").GetComponent<Text>();
         currentInput = ""; // Initialize currentInput
-        mainCamera = GameObject.Find("Main Camera");
-        backgroundAudio = mainCamera.GetComponent<AudioSource>();
 
         ghostScaredTimer = GameObject.Find("GhostScaredTimer");
         ghostScaredText = ghostScaredTimer.GetComponent<Text>();
@@ -528,6 +531,7 @@ public class PacStudentController : MonoBehaviour
     void HandlePower(Collider collider)
     {
         Destroy(collider.gameObject);
+        backgroundMusic.PlayGhostScaredMusic();
         foreach (Animator animator in ghostAnimators)
         {
             animator.SetBool("Scared", true);
@@ -567,9 +571,11 @@ public class PacStudentController : MonoBehaviour
                 {
                     ghostAnimator.SetBool("Recovering", false);
                     ghostAnimator.SetBool("Walking", true);
-                       
+                    backgroundMusic.PlayNormalMusic();
+
+
                 }
-             
+
             }
 
     
@@ -581,7 +587,7 @@ public class PacStudentController : MonoBehaviour
     void HandleGhost(Collider collider)
     {
         int index = System.Array.IndexOf(ghosts, collider.gameObject);
-        if (ghostAnimators[index].GetBool("Walking")) { 
+        if (ghostAnimators[index].GetBool("Walking")) {
             StartCoroutine(HandleDeath());
         } else if (ghostAnimators[index].GetBool("Recovering") || (ghostAnimators[index].GetBool("Scared"))) {
             HandleEatGhost(collider.gameObject);
@@ -620,13 +626,16 @@ public class PacStudentController : MonoBehaviour
     }
 
     private void HandleEatGhost(GameObject ghost) {
-       Animator animator = ghost.GetComponent<Animator>();
+        Animator animator = ghost.GetComponent<Animator>();
         animator.SetBool("Scared", false);
         animator.SetBool("Recovering", false);
 
         animator.SetBool("Dead", true);
-       
-       updateScore(300);
+
+        updateScore(300);
+        if (backgroundMusic.GetComponent<AudioSource>().clip.name != "GhostDead") {
+            backgroundMusic.PlayGhostDeadMusic();
+        }
         StartCoroutine(GhostDeadTimer(animator));
     }
 
@@ -635,6 +644,12 @@ public class PacStudentController : MonoBehaviour
         yield return new WaitForSeconds(5);
         ghostAnimator.SetBool("Dead", false);
         ghostAnimator.SetBool("Walking", true);
+        if (backgroundMusic.GetComponent<AudioSource>().clip.name != "GhostNormal")
+        {
+            backgroundMusic.PlayNormalMusic();
+        }
+
+
     }
 
 

@@ -8865,6 +8865,8 @@ MonoBehaviour:
   audioSource: {fileID: 327158608}
   introMusic: {fileID: 8300000, guid: b2b422900102f47c68f4fd5abb1aa509, type: 3}
   normalMusic: {fileID: 8300000, guid: 437cedcb13254403889080ee1f4fc554, type: 3}
+  ghostScaredMusic: {fileID: 8300000, guid: 426e39bed6b5545ef85d363358077461, type: 3}
+  ghostDeadMusic: {fileID: 8300000, guid: f90bf8cfdd32e4deab9ac17950d148ff, type: 3}
 --- !u!114 &327158610
 MonoBehaviour:
   m_ObjectHideFlags: 0
