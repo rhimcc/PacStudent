@@ -627,6 +627,14 @@ public class PacStudentController : MonoBehaviour
         animator.SetBool("Dead", true);
        
        updateScore(300);
+        StartCoroutine(GhostDeadTimer(animator));
+    }
+
+    private IEnumerator GhostDeadTimer(Animator ghostAnimator)
+    {
+        yield return new WaitForSeconds(5);
+        ghostAnimator.SetBool("Dead", false);
+        ghostAnimator.SetBool("Walking", true);
     }
 
 
@@ -634,6 +642,7 @@ public class PacStudentController : MonoBehaviour
     //▪ If the ghost is moving(e.g. in the 90% section below), they can
     //either keep moving on their ghost-specific behaviour or stop in
     //their current position.
+
     //▪ Change the background music to match this state.
     //▪ Add 300 points to the player’s score.
     //▪ Start a 5 second timer (this does not need to be visible). Once
