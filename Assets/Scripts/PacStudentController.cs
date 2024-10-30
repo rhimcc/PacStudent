@@ -145,7 +145,9 @@ public class PacStudentController : MonoBehaviour
                 else
                 {
                     animator.speed = 0;
-                    audioSource.Stop();
+                    if (audioSource.clip.name != "Collision") {
+                        audioSource.Stop();
+                    }
                     particleTrail.SetActive(false);
                 }
             }
@@ -521,7 +523,8 @@ public class PacStudentController : MonoBehaviour
             {
                 print("hit");
                 Vector3 targetPosition = transform.position + direction * rayDistance;
-                audioSource.PlayOneShot(movement[2]);
+                audioSource.clip = movement[2];
+                audioSource.Play();
                 StartCoroutine(playParticles());
 
             }
