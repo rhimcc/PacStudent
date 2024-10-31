@@ -582,6 +582,7 @@ public class PacStudentController : MonoBehaviour
 
     void HandlePower(Collider collider)
     {
+        updateScore(100);
         Destroy(collider.gameObject);
         backgroundMusic.PlayGhostScaredMusic();
         foreach (Animator animator in ghostAnimators)
@@ -624,6 +625,7 @@ public class PacStudentController : MonoBehaviour
                     ghostAnimator.SetBool("Recovering", false);
                     ghostAnimator.SetBool("Walking", true);
                     backgroundMusic.PlayNormalMusic();
+                    ghostScaredTimer.SetActive(false);
 
 
                 }
