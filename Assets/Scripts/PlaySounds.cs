@@ -16,7 +16,7 @@ public class BackgroundMusic : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
         }
 
-        PlayIntroMusic();
+        //PlayNormalMusic();
     }
 
     void PlayIntroMusic()

@@ -43,5 +43,8 @@ public class UIManager : MonoBehaviour
                 button.onClick.AddListener(loadStart); // Add listener
             }
         }
+        StartCoroutine(gameObject.GetComponent<GameTimer>().StartCountDown());
+        
     }
+
 }

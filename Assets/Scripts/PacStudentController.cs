@@ -71,12 +71,12 @@ public class PacStudentController : MonoBehaviour
         deathParticles.SetActive(false);
         collisionParticles.SetActive(false);
 
-
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = movement[0];
+        audioSource.Stop();
 
         mainCamera = GameObject.Find("Main Camera");
         backgroundMusic = mainCamera.GetComponent<BackgroundMusic>();
+        backgroundMusic.PlayNormalMusic();
 
         tweener = gameObject.GetComponent<Tweener>();
         currentPos = new int[] { 1, 1 };
@@ -107,7 +107,8 @@ public class PacStudentController : MonoBehaviour
         GameObject life2 = GameObject.Find("Life2");
         GameObject life3 = GameObject.Find("Life3");
         lives = new GameObject[] { life1, life2, life3 };
-
+        animator.speed = 0;
+        animator.enabled = true;
     }
 
     // Update is called once per frame
@@ -336,6 +337,7 @@ public class PacStudentController : MonoBehaviour
                 animator.SetBool("Right", false);
                 break;
         }
+        animator.speed = 1;
     }
 
     void SetTrail(string direction)
