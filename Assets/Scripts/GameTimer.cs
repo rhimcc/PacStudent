@@ -11,6 +11,11 @@ public class GameTimer : MonoBehaviour
     string[] countdownValues = new string[] {"3", "2", "1", "GO!"};
     GameObject pacman;
     public PacStudentController pacStudentController;
+    bool isRunning = false;
+    int mins;
+    int hours;
+    int seconds;
+    float timer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +25,11 @@ public class GameTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isRunning)
+        {
+            timer += Time.deltaTime; // Increase timer by the time since the last frame
+            UpdateTimerDisplay();
+        }
     }
 
     public IEnumerator StartCountDown()
@@ -31,6 +40,7 @@ public class GameTimer : MonoBehaviour
         countdownValue = 0;
         countdown = GameObject.Find("Countdown");
         countdownTextObject = countdown.GetComponent<Text>();
+
         while (countdownValue < countdownValues.Length)
         {
             print(countdownValues[countdownValue]);
@@ -41,17 +51,18 @@ public class GameTimer : MonoBehaviour
 
         pacStudentController.enabled = true; // Enable the movement script
         countdown.SetActive(false);
+        isRunning = true;
     }
 
-    //    o At the start of the round, on the HUD canvas, show a big countdown of
-    //“3”, “2”, “1”, “GO!” (each displayed 1 second apart).
-    //o During this time, the Game Timer(below) should remain at 0 and the
-    //player and the ghosts should not be able to move(see previous and
-    //later sections).
-    //o After “GO!” has been shown for 1 second:
-    //▪ Hide this UI element and start the game.
-    //▪ Enable player control and ghost movement (if you complete the
-    //90% section below)
-    //▪ Start the background music for when ghosts are in their
-    //Walking state, which should loop if it finishes.
+    public void UpdateTimerDisplay()
+    {
+        GameObject timerObject = GameObject.Find("Time");
+        Text timerText = timerObject.GetComponent<Text>();
+
+        int minutes = (int)(timer / 60);
+        int seconds = (int)(timer % 60);
+        int milliseconds = (int)((timer * 100) % 100); // Convert to milliseconds
+
+        timerText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", minutes, seconds, milliseconds);
+    }
 }
