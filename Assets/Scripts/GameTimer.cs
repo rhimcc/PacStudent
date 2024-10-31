@@ -43,7 +43,6 @@ public class GameTimer : MonoBehaviour
 
         while (countdownValue < countdownValues.Length)
         {
-            print(countdownValues[countdownValue]);
             countdownTextObject.text = countdownValues[countdownValue];
             countdownValue++;
             yield return new WaitForSeconds(1.0f);

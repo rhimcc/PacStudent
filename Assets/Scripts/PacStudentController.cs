@@ -117,7 +117,6 @@ public class PacStudentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(movementAllowed);
         if (tweener.activeTween != null && tweener.activeTween.EndPos == transform.position)
         {
             tweener.activeTween = null;
