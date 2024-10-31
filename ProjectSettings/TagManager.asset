@@ -11,6 +11,11 @@ TagManager:
   - OuterWall
   - OuterCorner
   - TJunction
+  - QuitButton
+  - Wall
+  - Tunnel
+  - Bonus
+  - Ghost
   layers:
   - Default
   - TransparentFX
