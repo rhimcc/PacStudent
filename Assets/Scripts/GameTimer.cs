@@ -15,11 +15,12 @@ public class GameTimer : MonoBehaviour
     int mins;
     int hours;
     int seconds;
-    float timer = 0;
+    public float timer = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -48,7 +49,6 @@ public class GameTimer : MonoBehaviour
             countdownValue++;
             yield return new WaitForSeconds(1.0f);
         }
-
         pacStudentController.enabled = true; // Enable the movement script
         countdown.SetActive(false);
         isRunning = true;
@@ -58,11 +58,14 @@ public class GameTimer : MonoBehaviour
     {
         GameObject timerObject = GameObject.Find("Time");
         Text timerText = timerObject.GetComponent<Text>();
+        timerText.text = FormatTimer();
+    }
 
+    public string FormatTimer()
+    {
         int minutes = (int)(timer / 60);
         int seconds = (int)(timer % 60);
-        int milliseconds = (int)((timer * 100) % 100); // Convert to milliseconds
-
-        timerText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", minutes, seconds, milliseconds);
+        int milliseconds = (int)((timer * 100) % 100);
+        return string.Format("{0:D2}:{1:D2}:{2:D2}", minutes, seconds, milliseconds);
     }
 }

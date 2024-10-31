@@ -101,6 +101,8 @@ public class PacStudentController : MonoBehaviour
         foreach (Animator animator in ghostAnimators)
         {
             animator.SetBool("Right", true);
+            animator.SetBool("Walking", true);
+
         }
 
         GameObject life1 = GameObject.Find("Life1");
@@ -573,7 +575,11 @@ public class PacStudentController : MonoBehaviour
     {
         Destroy(collider.gameObject);
         eatenPellets.Add(collider.gameObject.transform.position);
-        updateScore(10);    
+        updateScore(10);
+        if (eatenPellets.Count == 220)
+        {
+            GameOver();
+        }
     }
 
     void HandleBonus(Collider collider)
@@ -653,6 +659,7 @@ public class PacStudentController : MonoBehaviour
 
     private IEnumerator HandleDeath()
     {
+        print("Dead");
         animator.SetBool("Dead", true);  // Start the death animation
         animator.SetBool("Right", false);
         animator.SetBool("Left", false);
@@ -678,6 +685,11 @@ public class PacStudentController : MonoBehaviour
 
          Destroy(lives[deathCount]);
          deathCount++;
+         if (deathCount == 3)
+        {
+           
+            GameOver();
+        }
 
     }
 
@@ -708,17 +720,16 @@ public class PacStudentController : MonoBehaviour
 
     }
 
+    private void GameOver()
+    {
+        GameObject gameOver = GameObject.Find("GameOver");
+        Text gameOverText = gameOver.GetComponent<Text>();
+        gameOverText.text = "Game Over";
+        GameObject manager = GameObject.Find("Managers");
+        string timer = manager.GetComponent<GameTimer>().FormatTimer();
+        manager.GetComponent<HighScore>().SaveScore(score, timer);
 
-    //    The ghost dies and enters their Dead animator state.
-    //▪ If the ghost is moving(e.g. in the 90% section below), they can
-    //either keep moving on their ghost-specific behaviour or stop in
-    //their current position.
-
-    //▪ Change the background music to match this state.
-    //▪ Add 300 points to the player’s score.
-    //▪ Start a 5 second timer (this does not need to be visible). Once
-    //this 5 seconds has passed, transition the ghost back to the
-    //Walking state.
+    }
 
 
 

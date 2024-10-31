@@ -1245,6 +1245,7 @@ GameObject:
   - component: {fileID: 1137524899}
   - component: {fileID: 1137524898}
   - component: {fileID: 1137524900}
+  - component: {fileID: 1137524901}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1289,6 +1290,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 911e11f474d1e47078c76804acf68822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pacStudentController: {fileID: 0}
+--- !u!114 &1137524901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137524897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4908fb0a343234b68b9805bc6efa3906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1280481024
@@ -1967,7 +1981,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
