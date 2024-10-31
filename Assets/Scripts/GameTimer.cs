@@ -37,7 +37,6 @@ public class GameTimer : MonoBehaviour
     {
         pacman = GameObject.Find("PacMan");
         pacStudentController = pacman.GetComponent<PacStudentController>();
-        pacStudentController.enabled = false;
         countdownValue = 0;
         countdown = GameObject.Find("Countdown");
         countdownTextObject = countdown.GetComponent<Text>();
@@ -49,7 +48,7 @@ public class GameTimer : MonoBehaviour
             countdownValue++;
             yield return new WaitForSeconds(1.0f);
         }
-        pacStudentController.enabled = true; // Enable the movement script
+        pacStudentController.movementAllowed = true;
         countdown.SetActive(false);
         isRunning = true;
     }
@@ -68,4 +67,11 @@ public class GameTimer : MonoBehaviour
         int milliseconds = (int)((timer * 100) % 100);
         return string.Format("{0:D2}:{1:D2}:{2:D2}", minutes, seconds, milliseconds);
     }
+
+    public void StopTime()
+    {
+        isRunning = false;
+    }
 }
+
+

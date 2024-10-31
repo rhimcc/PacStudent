@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +51,7 @@ public class PacStudentController : MonoBehaviour
     GameObject deathParticles;
     GameObject collisionParticles;
     ParticleSystem collisionParticleSystem;
+    public bool movementAllowed;
 
     ParticleSystem deathParticleSystem;
     int deathCount = 0;
@@ -116,6 +117,7 @@ public class PacStudentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(movementAllowed);
         if (tweener.activeTween != null && tweener.activeTween.EndPos == transform.position)
         {
             tweener.activeTween = null;
@@ -125,7 +127,7 @@ public class PacStudentController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) lastInput = "A";
         if (Input.GetKeyDown(KeyCode.D)) lastInput = "D";
 
-        if (tweener.activeTween == null)
+        if (tweener.activeTween == null && movementAllowed)
         {
             if (CanMove(lastInput))
             {
@@ -525,7 +527,6 @@ public class PacStudentController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Wall"))
             {
-                print("hit");
                 Vector3 targetPosition = transform.position + direction * rayDistance;
                 audioSource.clip = movement[2];
                 audioSource.Play();
@@ -578,7 +579,7 @@ public class PacStudentController : MonoBehaviour
         updateScore(10);
         if (eatenPellets.Count == 220)
         {
-            GameOver();
+            StartCoroutine(GameOver());
         }
     }
 
@@ -659,7 +660,6 @@ public class PacStudentController : MonoBehaviour
 
     private IEnumerator HandleDeath()
     {
-        print("Dead");
         animator.SetBool("Dead", true);  // Start the death animation
         animator.SetBool("Right", false);
         animator.SetBool("Left", false);
@@ -687,8 +687,7 @@ public class PacStudentController : MonoBehaviour
          deathCount++;
          if (deathCount == 3)
         {
-           
-            GameOver();
+            StartCoroutine(GameOver());
         }
 
     }
@@ -720,14 +719,20 @@ public class PacStudentController : MonoBehaviour
 
     }
 
-    private void GameOver()
+    private IEnumerator GameOver()
     {
         GameObject gameOver = GameObject.Find("GameOver");
         Text gameOverText = gameOver.GetComponent<Text>();
         gameOverText.text = "Game Over";
         GameObject manager = GameObject.Find("Managers");
-        string timer = manager.GetComponent<GameTimer>().FormatTimer();
+        GameTimer gameTimer = manager.GetComponent<GameTimer>();
+        string timer = gameTimer.FormatTimer();
         manager.GetComponent<HighScore>().SaveScore(score, timer);
+        movementAllowed = false;
+        animator.speed = 0;
+        gameTimer.StopTime();
+        yield return new WaitForSeconds(3);
+        manager.GetComponent<UIManager>().loadStart();
 
     }
 

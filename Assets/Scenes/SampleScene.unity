@@ -48054,6 +48054,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 49c19ec057c4d4271ae4298a9ed7a338, type: 3}
   audioSource: {fileID: 1502551225}
   animator: {fileID: 1502551220}
+  movementAllowed: 0
 --- !u!54 &1502551227
 Rigidbody:
   m_ObjectHideFlags: 0
