@@ -37,8 +37,16 @@ public class GameTimer : MonoBehaviour
     {
         pacman = GameObject.Find("PacMan");
         pacStudentController = pacman.GetComponent<PacStudentController>();
-        GameObject mainCamera = GameObject.Find("Main Camera");
-        GhostController ghostMovement = mainCamera.GetComponent<GhostController>();
+        GameObject ghost1 = GameObject.Find("Ghost1");
+        GameObject ghost2 = GameObject.Find("Ghost2");
+        GameObject ghost3 = GameObject.Find("Ghost3");
+        GameObject ghost4 = GameObject.Find("Ghost4");
+
+        GhostController ghost1Movement = ghost1.GetComponent<GhostController>();
+        GhostController ghost2Movement = ghost2.GetComponent<GhostController>();
+        GhostController ghost3Movement = ghost3.GetComponent<GhostController>();
+        GhostController ghost4Movement = ghost4.GetComponent<GhostController>();
+
         countdownValue = 0;
         countdown = GameObject.Find("Countdown");
         countdownTextObject = countdown.GetComponent<Text>();
@@ -50,7 +58,11 @@ public class GameTimer : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
         }
         pacStudentController.movementAllowed = true;
-        ghostMovement.movementAllowed = true;
+        ghost1Movement.movementAllowed = true;
+        ghost2Movement.movementAllowed = true;
+        ghost3Movement.movementAllowed = true;
+        ghost4Movement.movementAllowed = true;
+
         countdown.SetActive(false);
         isRunning = true;
     }
