@@ -23,26 +23,39 @@ public class GhostController : MonoBehaviour
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
         };
 
-    bool horizontalBorder;
-    bool verticalBorder;
-    int[,] currentPos = new int[,] { { 13, 14 }, { 13, 14 }, { 13, 14 }, { 13, 14 } };
-    int[,] targetPos = new int[,] { { 13, 13 }, { 13, 13 }, { 13, 13 }, { 13, 13 } };
+    bool[] horizontalBorders = new bool[4];
+    bool[] verticalBorders = new bool[4];
+    int[,] currentPos = new int[,] { { 14, 13 }, { 14, 13 }, { 14, 13 }, { 14, 13 } };
+    int[,] targetPos = new int[,] { { 12, 13 }, { 12, 13 }, { 12, 13 }, { 12, 13 } };
     public Tweener[] tweeners;
     public GameObject[] ghosts = new GameObject[4];
+    public bool movementAllowed = false;
+    GameObject pacman;
+    public Animator[] animators;
+    private string[] lastDirections = new string[4] { "", "", "", "" };
+    private Vector3[] ghostDirections = new Vector3[4];
 
 
     // Start is called before the first frame update
     void Start()
     {
+        pacman = GameObject.Find("PacMan");
+        for (int i = 0; i < 4; i++)
+        {
+            ghostDirections[i] = new Vector3(0, 0, 0);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Ghost1Movement();
-        //Ghost2Movement();
-        //Ghost3Movement();
-        Ghost4Movement();
+        if (movementAllowed)
+        {
+            Ghost1Movement(0);
+            Ghost2Movement();
+            //Ghost3Movement();
+            Ghost4Movement();
+        }
     }
 
     void Ghost4Movement()
@@ -50,44 +63,70 @@ public class GhostController : MonoBehaviour
 
     }
 
-    void Ghost1Movement()
+    void Ghost2Movement()
     {
-        if (tweeners[0].activeTween == null)
+        if (tweeners[1].activeTween == null)
         {
-            List<Vector3> validDirections = GetValidDirections(ghosts[0].transform.position, 0);
-            int randomInt = Random.Range(0, validDirections.Count);
-            print(randomInt);
-            Vector3 direction = validDirections[randomInt];
+            List<Vector3> validDirections = GetValidDirections(ghosts[1].transform.position, 1);
+            foreach (Vector3 validDirection in validDirections)
+            {
+                print(validDirection);
+            }
+            ghostDirections[1] = GetSmallestDistance(validDirections);
+            tweeners[1].AddTween(ghosts[1].transform, ghosts[1].transform.position, ghostDirections[1]);
+            UpdateArray(1, GetDirectionFromPosition(1, ghostDirections[1]));
+            SetAnimation(1, ghostDirections[1]);
+
+            string currentDirection = GetDirectionFromPosition(1, ghostDirections[1]);
+            lastDirections[1] = GetOppositeDirection(currentDirection);
+        }
+        if (Vector3.Distance(ghosts[1].transform.position, ghostDirections[1]) < 0.1f)
+        {
+            tweeners[1].activeTween = null;
+            currentPos[1, 0] = targetPos[1, 0];
+            currentPos[1, 1] = targetPos[1, 1];
         }
     }
 
-    List<Vector3> GetValidDirections(Vector3 position, int ghost)
-    {
-        List<Vector3> validDirections = new List<Vector3>();
-        if (IsValidPosition("UP", ghost)) validDirections.Add(position + new Vector3(0, 8, 0));
-        if (IsValidPosition("DOWN", ghost)) validDirections.Add(position + new Vector3(0, -8, 0));
-        if (IsValidPosition("LEFT", ghost)) validDirections.Add(position + new Vector3(-8, 0, 0));
-        if (IsValidPosition("RIGHT", ghost)) validDirections.Add(position + new Vector3(8, 0, 0));
-        return validDirections;
-    }
 
-    bool IsValidPosition(string direction, int ghost)
+    void Ghost1Movement(int ghost)
     {
-        targetPos[ghost, 0] = currentPos[ghost, 0];
-        targetPos[ghost, 1] = currentPos[ghost, 1];
+        if (tweeners[ghost].activeTween == null)
+        {
+            List<Vector3> validDirections = GetValidDirections(ghosts[ghost].transform.position, ghost);
+            ghostDirections[ghost] = GetLargestDistance(validDirections);
+            tweeners[ghost].AddTween(ghosts[ghost].transform, ghosts[ghost].transform.position, ghostDirections[ghost]);
+            UpdateArray(ghost, GetDirectionFromPosition(ghost, ghostDirections[ghost]));
+            SetAnimation(ghost, ghostDirections[ghost]);
+
+            string currentDirection = GetDirectionFromPosition(ghost, ghostDirections[ghost]);
+            lastDirections[ghost] = GetOppositeDirection(currentDirection);
+        }
+        if (Vector3.Distance(ghosts[ghost].transform.position, ghostDirections[ghost]) < 0.1f)
+        {
+            tweeners[ghost].activeTween = null;
+            currentPos[ghost, 0] = targetPos[ghost, 0];
+            currentPos[ghost, 1] = targetPos[ghost, 1];
+        }
+       
+    }
+    void UpdateArray(int ghost, string direction)
+    {
+        int currentX = currentPos[ghost, 0];
+        int currentY = currentPos[ghost, 1];
         int lastXindex = levelMap.GetLength(1) - 1;
         int lastYindex = levelMap.GetLength(0) - 1;
         int quadrant = DetectQuadrant(ghosts[ghost].transform, direction);
 
-        horizontalBorder = false;
-        verticalBorder = false;
-        DetectBorder(ghosts[ghost].transform, direction);
+        horizontalBorders[ghost] = false;
+        verticalBorders[ghost] = false;
+        DetectBorder(ghost, direction);
 
         switch (direction)
         {
             case "UP":
                 targetPos[ghost, 1] = currentPos[ghost, 1];
-                if (verticalBorder)
+                if (verticalBorders[ghost])
                 {
                     if (quadrant == 1 || quadrant == 2)
                     {
@@ -111,7 +150,7 @@ public class GhostController : MonoBehaviour
 
             case "DOWN":
                 targetPos[ghost, 1] = currentPos[ghost, 1];
-                if (verticalBorder)
+                if (verticalBorders[ghost])
                 {
                     if (quadrant == 1 || quadrant == 2)
                     {
@@ -135,7 +174,7 @@ public class GhostController : MonoBehaviour
 
             case "LEFT":
                 targetPos[ghost, 0] = currentPos[ghost, 0];
-                if (horizontalBorder)
+                if (horizontalBorders[ghost])
                 {
                     targetPos[ghost, 1] = lastXindex;
                 }
@@ -152,7 +191,7 @@ public class GhostController : MonoBehaviour
 
             case "RIGHT":
                 targetPos[ghost, 0] = currentPos[ghost, 0];
-                if (horizontalBorder)
+                if (horizontalBorders[ghost])
                 {
                     targetPos[ghost, 1] = lastXindex;
                 }
@@ -167,20 +206,238 @@ public class GhostController : MonoBehaviour
                 }
                 break;
         }
-        if (targetPos[ghost, 0] >= 0 && targetPos[ghost, 0] < levelMap.GetLength(0) &&
-              targetPos[ghost, 1] >= 0 && targetPos[ghost, 1] < levelMap.GetLength(1))
-        {
+    }
 
-            int targetTile = levelMap[targetPos[ghost, 0], targetPos[ghost, 1]];
+    void SetAnimation(int ghost, Vector3 direction)
+    {
+        animators[ghost].SetBool("Walking", true);
+        animators[ghost].SetBool("Left", false);
+        animators[ghost].SetBool("Right", false);
+        animators[ghost].SetBool("Up", false);
+        animators[ghost].SetBool("Down", false);
+        switch(GetDirectionFromPosition(ghost, direction))
+        {
+            case "RIGHT":
+                animators[ghost].SetBool("Right", true);
+                break;
+            case "LEFT":
+                animators[ghost].SetBool("Left", true);
+                break;
+            case "UP":
+                animators[ghost].SetBool("Up", true);
+                break;
+            case "DOWN":
+                animators[ghost].SetBool("Down", true);
+                break;
+        }
+
+    }
+
+    string GetDirectionFromPosition(int ghost, Vector3 direction)
+    {
+        Vector3 ghostPosition = ghosts[ghost].transform.position;
+        Vector3 positionDifference = direction - ghostPosition;
+        if (positionDifference.x > 0) // right
+        {
+            return "RIGHT";
+        }
+        else if (positionDifference.x < 0) // left
+        {
+            return "LEFT";
+
+        }
+        else if (positionDifference.y > 0) // up
+        {
+            return "UP";
+
+        }
+        else if (positionDifference.y < 0) //down
+        {
+            return "DOWN";
+
+        }
+        return "";
+    }
+
+    Vector3 GetLargestDistance(List<Vector3> validDirections)
+    {
+        Vector3 directionWithLargestDistance = new Vector3(0,0,0);
+        float distance = 0;
+        foreach (Vector3 validDirection in validDirections)
+        {
+            float calculatedDistance = CalculateDistance(validDirection, pacman);
+            if (calculatedDistance > distance)
+            {
+                distance = calculatedDistance;
+                directionWithLargestDistance = validDirection;
+            }
+        }
+        return directionWithLargestDistance;
+    }
+
+    Vector3 GetSmallestDistance(List<Vector3> validDirections)
+    {
+        Vector3 directionWithLargestDistance = new Vector3(0, 0, 0);
+        float distance = CalculateDistance(validDirections[0], pacman);
+        foreach (Vector3 validDirection in validDirections)
+        {
+            float calculatedDistance = CalculateDistance(validDirection, pacman);
+            if (calculatedDistance < distance)
+            {
+                distance = calculatedDistance;
+                directionWithLargestDistance = validDirection;
+            }
+        }
+        return directionWithLargestDistance;
+    }
+
+    float CalculateDistance(Vector3 direction, GameObject ghost)
+    {
+        return Vector3.Distance(direction, ghost.transform.position);
+    }
+
+
+    List<Vector3> GetValidDirections(Vector3 position, int ghost, bool allowBacktracking = false)
+    {
+        List<Vector3> validDirections = new List<Vector3>();
+
+        if (IsValidPosition("UP", ghost) && (allowBacktracking || lastDirections[ghost] != "UP"))
+            validDirections.Add(position + new Vector3(0, 8, 0));
+
+        if (IsValidPosition("DOWN", ghost) && (allowBacktracking || lastDirections[ghost] != "DOWN"))
+            validDirections.Add(position + new Vector3(0, -8, 0));
+
+        if (IsValidPosition("LEFT", ghost) && (allowBacktracking || lastDirections[ghost] != "LEFT"))
+            validDirections.Add(position + new Vector3(-8, 0, 0));
+
+        if (IsValidPosition("RIGHT", ghost) && (allowBacktracking || lastDirections[ghost] != "RIGHT"))
+            validDirections.Add(position + new Vector3(8, 0, 0));
+
+        return validDirections;
+    }
+    private string GetOppositeDirection(string direction)
+    {
+        switch (direction)
+        {
+            case "UP": return "DOWN";
+            case "DOWN": return "UP";
+            case "LEFT": return "RIGHT";
+            case "RIGHT": return "LEFT";
+            default: return "";
+        }
+    }
+
+
+    bool IsValidPosition(string direction, int ghost)
+    {
+        int currentX = currentPos[ghost, 0];
+        int currentY = currentPos[ghost, 1];
+        int[] targetPos = new int[] { currentX, currentY };
+        int lastXindex = levelMap.GetLength(1) - 1;
+        int lastYindex = levelMap.GetLength(0) - 1;
+        int quadrant = DetectQuadrant(ghosts[ghost].transform, direction);
+
+        horizontalBorders[ghost] = false;
+        verticalBorders[ghost] = false;
+        DetectBorder(ghost, direction);
+
+        switch (direction)
+        {
+            case "UP":
+                targetPos[1] = currentY;
+                if (verticalBorders[ghost])
+                {
+                    if (quadrant == 1 || quadrant == 2)
+                    {
+                        targetPos[0] = lastYindex;
+                    }
+                    else
+                    {
+                        targetPos[0] = lastYindex - 1;
+                    }
+
+                }
+                else if (quadrant == 1 || quadrant == 2)
+                {
+                    targetPos[0] = currentX - 1;
+                }
+                else
+                {
+                    targetPos[0] = currentX + 1;
+                }
+                break;
+
+            case "DOWN":
+                targetPos[1] = currentY;
+                if (verticalBorders[ghost])
+                {
+                    if (quadrant == 1 || quadrant == 2)
+                    {
+                        targetPos[0] = lastYindex;
+                    }
+                    else
+                    {
+                        targetPos[0] = lastYindex - 1;
+                    }
+                }
+                else
+                if (quadrant == 1 || quadrant == 2)
+                {
+                    targetPos[0] = currentX + 1;
+                }
+                else
+                {
+                    targetPos[0] = currentX - 1;
+                }
+                break;
+
+            case "LEFT":
+                targetPos[0] = currentX;
+                if (horizontalBorders[ghost])
+                {
+                    targetPos[1] = lastXindex;
+                }
+                else
+            if (quadrant == 1 || quadrant == 4)
+                {
+                    targetPos[1] = currentY - 1;
+                }
+                else
+                {
+                    targetPos[1] = currentY + 1;
+                }
+                break;
+
+            case "RIGHT":
+                targetPos[0] = currentX;
+                if (horizontalBorders[ghost])
+                {
+                    targetPos[1] = lastXindex;
+                }
+                else
+                if (quadrant == 1 || quadrant == 4)
+                {
+                    targetPos[1] = currentY + 1;
+                }
+                else
+                {
+                    targetPos[1] = currentY - 1;
+                }
+                break;
+        }
+        if (targetPos[0] >= 0 && targetPos[0] < levelMap.GetLength(0) &&
+              targetPos[1] >= 0 && targetPos[1] < levelMap.GetLength(1))
+        {
+            int targetTile = levelMap[targetPos[0], targetPos[1]];
             return (targetTile == 5 || targetTile == 6 || targetTile == 0);
         }
 
         return false;
     }
 
-    void DetectBorder(Transform transform, string direction)
+    void DetectBorder(int ghost, string direction)
     {
-        Vector3 position = transform.position;
+        Vector3 position = ghosts[ghost].transform.position;
         switch (direction)
         {
             case "UP":
@@ -198,16 +455,16 @@ public class GhostController : MonoBehaviour
         }
         if (position.x >= -8 && position.x <= 8)
         {
-            horizontalBorder = true;
+            horizontalBorders[ghost] = true;
         }
         if (position.x > 108 || position.x < -108)
         {
-            horizontalBorder = true;
+            horizontalBorders[ghost] = true;
         }
 
         if (position.y >= 0 && position.y <= 8)
         {
-            verticalBorder = true;
+            verticalBorders[ghost] = true;
         }
 
     }

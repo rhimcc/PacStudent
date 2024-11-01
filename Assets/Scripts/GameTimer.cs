@@ -37,6 +37,8 @@ public class GameTimer : MonoBehaviour
     {
         pacman = GameObject.Find("PacMan");
         pacStudentController = pacman.GetComponent<PacStudentController>();
+        GameObject mainCamera = GameObject.Find("Main Camera");
+        GhostController ghostMovement = mainCamera.GetComponent<GhostController>();
         countdownValue = 0;
         countdown = GameObject.Find("Countdown");
         countdownTextObject = countdown.GetComponent<Text>();
@@ -48,6 +50,7 @@ public class GameTimer : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
         }
         pacStudentController.movementAllowed = true;
+        ghostMovement.movementAllowed = true;
         countdown.SetActive(false);
         isRunning = true;
     }
