@@ -34,6 +34,7 @@ public class GhostController : MonoBehaviour
     public Animator[] animators;
     private string[] lastDirections = new string[4] { "", "", "", "" };
     private Vector3[] ghostDirections = new Vector3[4];
+    private bool moveGhostsFromCentre = true;
 
 
     // Start is called before the first frame update
@@ -51,16 +52,63 @@ public class GhostController : MonoBehaviour
     {
         if (movementAllowed)
         {
-            Ghost1Movement(0);
-            Ghost2Movement(1);
-            Ghost3Movement(2);
-            Ghost4Movement();
+            if (moveGhostsFromCentre) {
+                MoveGhostsFromCentre();
+            } else
+            {
+                Ghost1Movement(0);
+                Ghost2Movement(1);
+                Ghost3Movement(2);
+                Ghost4Movement(3);
+            }
         }
     }
 
-    void Ghost4Movement()
-    {
 
+    void MoveGhostsFromCentre()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            Vector3 targetPosition = new Vector3(-4, 28, 0);
+            if (tweeners[i].activeTween == null)
+            {
+                tweeners[i].AddTween(ghosts[i].transform, ghosts[i].transform.position, targetPosition);
+            }
+            print(ghosts[i].transform.position + " " + targetPosition);
+            if (Vector3.Distance(ghosts[i].transform.position, targetPosition) < 0.1f)
+            {
+                print("removing");
+                tweeners[i].activeTween = null;
+                currentPos[i, 0] = targetPos[i, 0] - 1;
+                currentPos[i, 1] = targetPos[i, 1];
+                moveGhostsFromCentre = false;
+            }
+            animators[i].SetBool("Right", false);
+            animators[i].SetBool("Up", true);
+        }
+    }
+
+
+    void Ghost4Movement(int ghost)
+    {
+        if (tweeners[ghost].activeTween == null)
+        {
+            List<Vector3> validDirections = GetValidDirections(ghosts[ghost].transform.position, ghost);
+            int randomInt = Random.Range(0, validDirections.Count);
+            ghostDirections[ghost] = validDirections[randomInt];
+            tweeners[ghost].AddTween(ghosts[ghost].transform, ghosts[ghost].transform.position, ghostDirections[ghost]);
+            UpdateArray(ghost, GetDirectionFromPosition(ghost, ghostDirections[ghost]));
+            SetAnimation(ghost, ghostDirections[ghost]);
+
+            string currentDirection = GetDirectionFromPosition(ghost, ghostDirections[ghost]);
+            lastDirections[ghost] = GetOppositeDirection(currentDirection);
+        }
+        if (Vector3.Distance(ghosts[ghost].transform.position, ghostDirections[ghost]) < 0.1f)
+        {
+            tweeners[ghost].activeTween = null;
+            currentPos[ghost, 0] = targetPos[ghost, 0];
+            currentPos[ghost, 1] = targetPos[ghost, 1];
+        }
     }
 
     void Ghost3Movement(int ghost)
