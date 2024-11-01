@@ -52,8 +52,8 @@ public class GhostController : MonoBehaviour
         if (movementAllowed)
         {
             Ghost1Movement(0);
-            Ghost2Movement();
-            //Ghost3Movement();
+            Ghost2Movement(1);
+            Ghost3Movement(2);
             Ghost4Movement();
         }
     }
@@ -63,31 +63,27 @@ public class GhostController : MonoBehaviour
 
     }
 
-    void Ghost2Movement()
+    void Ghost3Movement(int ghost)
     {
-        if (tweeners[1].activeTween == null)
+        if (tweeners[ghost].activeTween == null)
         {
-            List<Vector3> validDirections = GetValidDirections(ghosts[1].transform.position, 1);
-            foreach (Vector3 validDirection in validDirections)
-            {
-                print(validDirection);
-            }
-            ghostDirections[1] = GetSmallestDistance(validDirections);
-            tweeners[1].AddTween(ghosts[1].transform, ghosts[1].transform.position, ghostDirections[1]);
-            UpdateArray(1, GetDirectionFromPosition(1, ghostDirections[1]));
-            SetAnimation(1, ghostDirections[1]);
+            List<Vector3> validDirections = GetValidDirections(ghosts[ghost].transform.position, ghost);
+            int randomInt = Random.Range(0, validDirections.Count);
+            ghostDirections[ghost] = validDirections[randomInt];
+            tweeners[ghost].AddTween(ghosts[ghost].transform, ghosts[ghost].transform.position, ghostDirections[ghost]);
+            UpdateArray(ghost, GetDirectionFromPosition(ghost, ghostDirections[ghost]));
+            SetAnimation(ghost, ghostDirections[ghost]);
 
-            string currentDirection = GetDirectionFromPosition(1, ghostDirections[1]);
-            lastDirections[1] = GetOppositeDirection(currentDirection);
+            string currentDirection = GetDirectionFromPosition(ghost, ghostDirections[ghost]);
+            lastDirections[ghost] = GetOppositeDirection(currentDirection);
         }
-        if (Vector3.Distance(ghosts[1].transform.position, ghostDirections[1]) < 0.1f)
+        if (Vector3.Distance(ghosts[ghost].transform.position, ghostDirections[ghost]) < 0.1f)
         {
-            tweeners[1].activeTween = null;
-            currentPos[1, 0] = targetPos[1, 0];
-            currentPos[1, 1] = targetPos[1, 1];
+            tweeners[ghost].activeTween = null;
+            currentPos[ghost, 0] = targetPos[ghost, 0];
+            currentPos[ghost, 1] = targetPos[ghost, 1];
         }
     }
-
 
     void Ghost1Movement(int ghost)
     {
@@ -110,6 +106,28 @@ public class GhostController : MonoBehaviour
         }
        
     }
+
+    void Ghost2Movement(int ghost)
+    {
+        if (tweeners[ghost].activeTween == null)
+        {
+            List<Vector3> validDirections = GetValidDirections(ghosts[ghost].transform.position, ghost);
+            ghostDirections[ghost] = GetSmallestDistance(validDirections);
+            tweeners[ghost].AddTween(ghosts[ghost].transform, ghosts[ghost].transform.position, ghostDirections[ghost]);
+            UpdateArray(ghost, GetDirectionFromPosition(ghost, ghostDirections[ghost]));
+            SetAnimation(ghost, ghostDirections[ghost]);
+
+            string currentDirection = GetDirectionFromPosition(ghost, ghostDirections[ghost]);
+            lastDirections[ghost] = GetOppositeDirection(currentDirection);
+        }
+        if (Vector3.Distance(ghosts[ghost].transform.position, ghostDirections[ghost]) < 0.1f)
+        {
+            tweeners[ghost].activeTween = null;
+            currentPos[ghost, 0] = targetPos[ghost, 0];
+            currentPos[ghost, 1] = targetPos[ghost, 1];
+        }
+    }
+
     void UpdateArray(int ghost, string direction)
     {
         int currentX = currentPos[ghost, 0];
@@ -277,19 +295,21 @@ public class GhostController : MonoBehaviour
 
     Vector3 GetSmallestDistance(List<Vector3> validDirections)
     {
-        Vector3 directionWithLargestDistance = new Vector3(0, 0, 0);
+        Vector3 directionWithSmallestDistance = validDirections[0];
         float distance = CalculateDistance(validDirections[0], pacman);
         foreach (Vector3 validDirection in validDirections)
         {
+           
             float calculatedDistance = CalculateDistance(validDirection, pacman);
             if (calculatedDistance < distance)
             {
                 distance = calculatedDistance;
-                directionWithLargestDistance = validDirection;
+                directionWithSmallestDistance = validDirection;
             }
         }
-        return directionWithLargestDistance;
+        return directionWithSmallestDistance;
     }
+
 
     float CalculateDistance(Vector3 direction, GameObject ghost)
     {
@@ -300,18 +320,24 @@ public class GhostController : MonoBehaviour
     List<Vector3> GetValidDirections(Vector3 position, int ghost, bool allowBacktracking = false)
     {
         List<Vector3> validDirections = new List<Vector3>();
-
         if (IsValidPosition("UP", ghost) && (allowBacktracking || lastDirections[ghost] != "UP"))
+        {
             validDirections.Add(position + new Vector3(0, 8, 0));
+        }
 
         if (IsValidPosition("DOWN", ghost) && (allowBacktracking || lastDirections[ghost] != "DOWN"))
+        {
             validDirections.Add(position + new Vector3(0, -8, 0));
-
+        }
         if (IsValidPosition("LEFT", ghost) && (allowBacktracking || lastDirections[ghost] != "LEFT"))
+        {
             validDirections.Add(position + new Vector3(-8, 0, 0));
+        }
 
         if (IsValidPosition("RIGHT", ghost) && (allowBacktracking || lastDirections[ghost] != "RIGHT"))
+        {
             validDirections.Add(position + new Vector3(8, 0, 0));
+        }
 
         return validDirections;
     }
