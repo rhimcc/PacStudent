@@ -74,10 +74,8 @@ public class GhostController : MonoBehaviour
             {
                 tweeners[i].AddTween(ghosts[i].transform, ghosts[i].transform.position, targetPosition);
             }
-            print(ghosts[i].transform.position + " " + targetPosition);
             if (Vector3.Distance(ghosts[i].transform.position, targetPosition) < 0.1f)
             {
-                print("removing");
                 tweeners[i].activeTween = null;
                 currentPos[i, 0] = targetPos[i, 0] - 1;
                 currentPos[i, 1] = targetPos[i, 1];
@@ -364,25 +362,30 @@ public class GhostController : MonoBehaviour
         return Vector3.Distance(direction, ghost.transform.position);
     }
 
+    bool positionInCentre(Vector3 position)
+    {
+        return position.x > -33 && position.x < 23 && position.y > -12 && position.y < 20;
+    }
+
 
     List<Vector3> GetValidDirections(Vector3 position, int ghost, bool allowBacktracking = false)
     {
         List<Vector3> validDirections = new List<Vector3>();
-        if (IsValidPosition("UP", ghost) && (allowBacktracking || lastDirections[ghost] != "UP"))
+        if (IsValidPosition("UP", ghost) && (allowBacktracking || lastDirections[ghost] != "UP") && !positionInCentre(position))
         {
             validDirections.Add(position + new Vector3(0, 8, 0));
         }
 
-        if (IsValidPosition("DOWN", ghost) && (allowBacktracking || lastDirections[ghost] != "DOWN"))
+        if (IsValidPosition("DOWN", ghost) && (allowBacktracking || lastDirections[ghost] != "DOWN") && !positionInCentre(position))
         {
             validDirections.Add(position + new Vector3(0, -8, 0));
         }
-        if (IsValidPosition("LEFT", ghost) && (allowBacktracking || lastDirections[ghost] != "LEFT"))
+        if (IsValidPosition("LEFT", ghost) && (allowBacktracking || lastDirections[ghost] != "LEFT") && !positionInCentre(position))
         {
             validDirections.Add(position + new Vector3(-8, 0, 0));
         }
 
-        if (IsValidPosition("RIGHT", ghost) && (allowBacktracking || lastDirections[ghost] != "RIGHT"))
+        if (IsValidPosition("RIGHT", ghost) && (allowBacktracking || lastDirections[ghost] != "RIGHT") && !positionInCentre(position))
         {
             validDirections.Add(position + new Vector3(8, 0, 0));
         }
