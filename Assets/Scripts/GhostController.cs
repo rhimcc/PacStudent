@@ -103,14 +103,18 @@ public class GhostController : MonoBehaviour
         if (tweener.activeTween == null)
         {
             List<Vector3> validDirections = GetValidDirections(gameObject.transform.position);
-            int randomInt = Random.Range(0, validDirections.Count);
-            ghostDirection = validDirections[randomInt];
-            tweener.AddTween(gameObject.transform, gameObject.transform.position, ghostDirection);
-            UpdateArray(GetDirectionFromPosition(ghostDirection));
-            SetAnimation(ghostDirection);
+            Vector3 clockwiseDirection = GetClockwiseDirection(validDirections);
 
-            string currentDirection = GetDirectionFromPosition(ghostDirection);
-            lastDirection = GetOppositeDirection(currentDirection);
+            if (clockwiseDirection != Vector3.zero)
+            {
+                ghostDirection = clockwiseDirection;
+                tweener.AddTween(gameObject.transform, gameObject.transform.position, ghostDirection);
+                UpdateArray(GetDirectionFromPosition(ghostDirection));
+                SetAnimation(ghostDirection);
+
+                string currentDirection = GetDirectionFromPosition(ghostDirection);
+                lastDirection = GetOppositeDirection(currentDirection);
+            }
         }
         if (Vector3.Distance(gameObject.transform.position, ghostDirection) < 0.1f)
         {
@@ -118,6 +122,23 @@ public class GhostController : MonoBehaviour
             currentPos[0] = targetPos[0];
             currentPos[1] = targetPos[1];
         }
+    }
+
+    Vector3 GetClockwiseDirection(List<Vector3> validDirections)
+    {
+        string[] clockwiseOrder = { "RIGHT", "DOWN", "LEFT", "UP" };
+
+        foreach (string preferredDirection in clockwiseOrder)
+        {
+            Vector3 matchingDirection = validDirections.Find(dir =>
+                GetDirectionFromPosition(dir) == preferredDirection);
+
+            if (matchingDirection != Vector3.zero)
+            {
+                return matchingDirection;
+            }
+        }
+        return validDirections.Count > 0 ? validDirections[Random.Range(0, validDirections.Count)] : Vector3.zero;
     }
 
     void Ghost3Movement()
