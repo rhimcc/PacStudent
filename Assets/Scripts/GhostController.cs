@@ -41,7 +41,6 @@ public class GhostController : MonoBehaviour
     bool touchingOuterWall = false;
     Vector3 nextWall = new Vector3(12, 108, 0);
     string wall = "TOP";
-    public bool collisionsAllowed = true;
     public string currentState = "Walking";
     private string[] states = new string[] { "Walking", "Scared", "Recovering", "Dead" };
 
