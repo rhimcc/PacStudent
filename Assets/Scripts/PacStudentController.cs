@@ -639,7 +639,10 @@ public class PacStudentController : MonoBehaviour
                     ghost.GetComponent<GhostController>().currentState = "Walking";
                     ghostAnimator.SetBool("Recovering", false);
                     ghostAnimator.SetBool("Walking", true);
-                    backgroundMusic.PlayNormalMusic();
+                    if (NoGhostsDead())
+                    {
+                        backgroundMusic.PlayNormalMusic();
+                    }
                     ghostScaredTimer.SetActive(false);
 
 
@@ -649,6 +652,18 @@ public class PacStudentController : MonoBehaviour
         }
 
         ghostScaredText.text = "\n\n0";
+    }
+
+    bool NoGhostsDead()
+    {
+        foreach(Animator animator in ghostAnimators)
+        {
+            if (animator.GetBool("Dead"))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     void HandleGhost(Collider collider)
@@ -719,7 +734,10 @@ public class PacStudentController : MonoBehaviour
         ghostAnimator.SetBool("Walking", true);
         if (backgroundMusic.GetComponent<AudioSource>().clip.name != "GhostNormal")
         {
-            backgroundMusic.PlayNormalMusic();
+            if (NoGhostsDead())
+            {
+                backgroundMusic.PlayNormalMusic();
+            }
         }
 
 
