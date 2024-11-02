@@ -253,7 +253,7 @@ public class GhostController : MonoBehaviour
         if (tweener.activeTween == null)
         {
             List<Vector3> validDirections = GetValidDirections(gameObject.transform.position);
-            int randomInt = Random.Range(0, validDirections.Count - 1);
+            int randomInt = Random.Range(0, validDirections.Count);
             ghostDirection = validDirections[randomInt];
             tweener.AddTween(gameObject.transform, gameObject.transform.position, ghostDirection);
             UpdateArray(GetDirectionFromPosition(ghostDirection));
