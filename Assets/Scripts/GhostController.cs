@@ -33,9 +33,14 @@ public class GhostController : MonoBehaviour
     GameObject pacman;
     public Animator animator;
     private string lastDirection = "";
+    private string previousDirection = "UP";
+
     private Vector3 ghostDirection;
     private bool moveGhostFromCentre = true;
     bool allowBacktracking = false;
+    bool touchingOuterWall = false;
+    Vector3 nextWall = new Vector3(12, 108, 0);
+    string wall = "TOP";
 
 
     // Start is called before the first frame update
@@ -103,42 +108,144 @@ public class GhostController : MonoBehaviour
         if (tweener.activeTween == null)
         {
             List<Vector3> validDirections = GetValidDirections(gameObject.transform.position);
-            Vector3 clockwiseDirection = GetClockwiseDirection(validDirections);
-
-            if (clockwiseDirection != Vector3.zero)
-            {
-                ghostDirection = clockwiseDirection;
-                tweener.AddTween(gameObject.transform, gameObject.transform.position, ghostDirection);
-                UpdateArray(GetDirectionFromPosition(ghostDirection));
-                SetAnimation(ghostDirection);
-
-                string currentDirection = GetDirectionFromPosition(ghostDirection);
-                lastDirection = GetOppositeDirection(currentDirection);
-            }
+            ghostDirection = GoToNextWall(validDirections);
+            tweener.AddTween(gameObject.transform, gameObject.transform.position, ghostDirection);
+            UpdateArray(GetDirectionFromPosition(ghostDirection));
+            SetAnimation(ghostDirection);
+            string currentDirection = GetDirectionFromPosition(ghostDirection);
+            previousDirection = currentDirection;
+            lastDirection = GetOppositeDirection(currentDirection);
         }
         if (Vector3.Distance(gameObject.transform.position, ghostDirection) < 0.1f)
         {
+            transform.position = ghostDirection;
             tweener.activeTween = null;
             currentPos[0] = targetPos[0];
             currentPos[1] = targetPos[1];
         }
+        if (Vector3.Distance(gameObject.transform.position, nextWall) < 0.1f)
+        {
+            GetNextWall();
+        }
     }
 
-    Vector3 GetClockwiseDirection(List<Vector3> validDirections)
+    Vector3 GoToNextWall(List<Vector3> validDirections)
     {
-        string[] clockwiseOrder = { "RIGHT", "DOWN", "LEFT", "UP" };
-
-        foreach (string preferredDirection in clockwiseOrder)
+        Vector3 closestDirection = validDirections[0];
+        foreach (Vector3 validDirection in validDirections)
         {
-            Vector3 matchingDirection = validDirections.Find(dir =>
-                GetDirectionFromPosition(dir) == preferredDirection);
-
-            if (matchingDirection != Vector3.zero)
+            if (Vector3.Distance(validDirection, nextWall) < Vector3.Distance(closestDirection, nextWall))
             {
-                return matchingDirection;
+                closestDirection = validDirection;
             }
         }
-        return validDirections.Count > 0 ? validDirections[Random.Range(0, validDirections.Count)] : Vector3.zero;
+        return closestDirection;
+    }
+
+    void GetNextWall()
+    {
+        if (nextWall.x == 100 && nextWall.y == 52) // top of tunnel on the right
+        {
+            nextWall = new Vector3(100, 4, 0); // inside the tunnel on the right
+            return;
+        }
+        if (nextWall.x == 100 && nextWall.y == 4) // inside the tunnel on the right
+        {
+            nextWall = new Vector3(100, -44, 0); // bottom of tunnel on the right
+            return;
+        }
+        if (nextWall.x == -100 && nextWall.y == -44) // bottom of tunnel on the right
+        {
+            nextWall = new Vector3(-100, 4, 0); // inside the tunnel on the right
+            return;
+        }
+        if (nextWall.x == -100 && nextWall.y == 4) // inside the tunnel on the right
+        {
+            nextWall = new Vector3(-100, 52, 0); // bottom of tunnel on the right
+            return;
+        }
+
+        if (nextWall.x == 12 && nextWall.y == -100) // bar at bottom
+        {
+            nextWall = new Vector3(-12, -100, 0);
+        }
+        if (nextWall.x == -12 && nextWall.y == 108) // bar at bottom
+        {
+            nextWall = new Vector3(12, 108, 0);
+        }
+
+
+        if (nextWall.x == 100 && nextWall.y == 108) // top right corner
+        {
+            wall = "RIGHT";
+        }
+        if (nextWall.x == -100 && nextWall.y == -100) // bottom left corner
+        {
+            wall = "LEFT";
+        }
+        if (nextWall.x == -100 && nextWall.y == 108) // top left corner
+        {
+            wall = "TOP";
+        }
+        if (nextWall.x == 100 && nextWall.y == -100) // bottom right corner
+        {
+            wall = "BOTTOM";
+        }
+
+        switch (wall)
+        {
+            case "TOP":
+                nextWall += new Vector3(8, 0, 0);
+                break;
+            case "RIGHT":
+                nextWall += new Vector3(0, -8, 0);
+                break;
+            case "BOTTOM":
+                nextWall += new Vector3(-8, 0, 0);
+                break;
+            case "LEFT":
+                nextWall += new Vector3(0, 8, 0);
+                break;
+        }
+        
+    }
+
+    bool isOuterWall(GameObject gameObject)
+    {
+        Vector3 position = gameObject.transform.position;
+        return position.x >= 108 || position.x <= -108 || position.y >= 116 || position.y <= -116;
+    }
+
+    string GetLeftRotation(string direction)
+    {
+        switch(direction)
+        {
+            case "UP":
+                return "LEFT";
+            case "LEFT":
+                return "DOWN";
+            case "DOWN":
+                return "RIGHT";
+            case "RIGHT":
+                return "UP";
+        }
+        return "";
+    }
+
+    string GetRightRotation(string direction)
+    {
+        switch (direction)
+        {
+            case "LEFT":
+                return "UP";
+            case "DOWN":
+                return "LEFT";
+            case "RIGHT":
+                return "DOWN";
+            case "UP":
+                return "RIGHT";
+        }
+        return "";
     }
 
     void Ghost3Movement()
@@ -361,6 +468,25 @@ public class GhostController : MonoBehaviour
         }
         return "";
     }
+    Vector3 GetPositionFromDirection(string direction)
+    {
+        Vector3 ghostPosition = gameObject.transform.position;
+        switch(direction)
+        {
+            case "UP":
+                return ghostPosition + new Vector3(0, 8, 0);
+            case "DOWN":
+                return ghostPosition + new Vector3(0, -8, 0);
+            case "LEFT":
+                return ghostPosition + new Vector3(-8, 0, 0);
+            case "RIGHT":
+                return ghostPosition + new Vector3(8, 0, 0);
+
+        }
+        return new Vector3(0, 0, 0);
+
+
+    }
 
     Vector3 GetLargestDistance(List<Vector3> validDirections)
     {
@@ -417,25 +543,19 @@ public class GhostController : MonoBehaviour
         allowBacktracking = false;
         if (IsValidPosition("UP") && (allowBacktracking || lastDirection != "UP") && !positionInCentre(upPosition))
         {
-            print("UP");
             validDirections.Add(upPosition);
         }
         if (IsValidPosition("DOWN") && (allowBacktracking || lastDirection != "DOWN") && !positionInCentre(downPosition))
         {
-            print("DOWN");
-
             validDirections.Add(downPosition);
         }
         if (IsValidPosition("LEFT") && (allowBacktracking || lastDirection != "LEFT") && !positionInCentre(leftPosition))
         {
-            print("LEFT");
-
             validDirections.Add(leftPosition);
         }
 
         if (IsValidPosition("RIGHT") && (allowBacktracking || lastDirection != "RIGHT") && !positionInCentre(rightPosition))
         {
-            print("RIGHT");
             validDirections.Add(rightPosition);
         }
 
