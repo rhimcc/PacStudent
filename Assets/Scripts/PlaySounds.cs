@@ -29,23 +29,32 @@ public class BackgroundMusic : MonoBehaviour
 
     public void PlayNormalMusic()
     {
-        audioSource.clip = normalMusic;
-        audioSource.loop = true;
-        audioSource.Play();
+        if (audioSource.clip != normalMusic)
+        {
+            audioSource.clip = normalMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 
     public void PlayGhostScaredMusic()
     {
-        audioSource.clip = ghostScaredMusic;
-        audioSource.loop = true;
-        audioSource.Play();
+        if (audioSource.clip != ghostScaredMusic)
+        {
+            audioSource.clip = ghostScaredMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 
     public void PlayGhostDeadMusic()
     {
-        audioSource.clip = ghostDeadMusic;
-        audioSource.loop = true;
-        audioSource.Play();
+        if (audioSource.clip != ghostDeadMusic)
+        {
+            audioSource.clip = ghostDeadMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
 
     }
 

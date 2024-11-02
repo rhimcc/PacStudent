@@ -593,6 +593,10 @@ public class PacStudentController : MonoBehaviour
         updateScore(100);
         Destroy(collider.gameObject);
         backgroundMusic.PlayGhostScaredMusic();
+        foreach (GameObject ghost in ghosts)
+        {
+            ghost.GetComponent<GhostController>().currentState = "Scared";
+        }
         foreach (Animator animator in ghostAnimators)
         {
             animator.SetBool("Scared", true);
@@ -617,8 +621,9 @@ public class PacStudentController : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
             ghostScaredTime--;
-            foreach (Animator ghostAnimator in ghostAnimators)
+            foreach (GameObject ghost in ghosts)
             {
+                Animator ghostAnimator = ghost.GetComponent<Animator>();
                 if (ghostAnimator.GetBool("Dead"))
                 {
                     ghostAnimator.SetBool("Scared", false);
@@ -626,10 +631,12 @@ public class PacStudentController : MonoBehaviour
                     ghostAnimator.SetBool("Recovering", false);
                 } else if (ghostScaredTime == 3) // when it goes from scared to recovering
                 {
+                    ghost.GetComponent<GhostController>().currentState = "Recovering";
                     ghostAnimator.SetBool("Scared", false);
                     ghostAnimator.SetBool("Recovering", true);
                 } else if (ghostScaredTime == 0)
                 {
+                    ghost.GetComponent<GhostController>().currentState = "Walking";
                     ghostAnimator.SetBool("Recovering", false);
                     ghostAnimator.SetBool("Walking", true);
                     backgroundMusic.PlayNormalMusic();
@@ -639,8 +646,6 @@ public class PacStudentController : MonoBehaviour
                 }
 
             }
-
-    
         }
 
         ghostScaredText.text = "\n\n0";
@@ -695,9 +700,11 @@ public class PacStudentController : MonoBehaviour
         Animator animator = ghost.GetComponent<Animator>();
         animator.SetBool("Scared", false);
         animator.SetBool("Recovering", false);
-
         animator.SetBool("Dead", true);
-
+        GhostController ghostController = ghost.GetComponent<GhostController>();
+        Tweener tweener = ghost.GetComponent<Tweener>();
+        tweener.activeTween = null;
+        
         updateScore(300);
         if (backgroundMusic.GetComponent<AudioSource>().clip.name != "GhostDead") {
             backgroundMusic.PlayGhostDeadMusic();

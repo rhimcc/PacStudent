@@ -41,13 +41,21 @@ public class GhostController : MonoBehaviour
     bool touchingOuterWall = false;
     Vector3 nextWall = new Vector3(12, 108, 0);
     string wall = "TOP";
+    public bool collisionsAllowed = true;
+    public string currentState = "Walking";
+    private string[] states = new string[] { "Walking", "Scared", "Recovering", "Dead" };
 
-
+    private GameObject mainCamera;
+    BackgroundMusic backgroundMusic;
+    public AudioClip[] audioClips;
     // Start is called before the first frame update
     void Start()
     {
         pacman = GameObject.Find("PacMan");
         ghostDirection = new Vector3(0, 0, 0);
+        mainCamera = GameObject.Find("Main Camera");
+        backgroundMusic = mainCamera.GetComponent<BackgroundMusic>();
+
     }
 
     // Update is called once per frame
@@ -66,41 +74,108 @@ public class GhostController : MonoBehaviour
 
     void GhostMovement()
     {
-        switch(gameObject.name)
+        if (animator.GetBool("Scared") || animator.GetBool("Recovering"))
         {
-            case "Ghost1":
-                Ghost1Movement();
-                break;
-            case "Ghost2":
-                Ghost2Movement();
-                break;
-            case "Ghost3":
-                Ghost3Movement();
-                break;
-            case "Ghost4":
-                Ghost4Movement();
-                break;
+            Ghost1Movement();
+        }
+        else
+        {
+            if (animator.GetBool("Dead"))
+            {
+                DeathMovement();
+            }
+            else
+            {
+                switch (gameObject.name)
+                {
+                    case "Ghost1":
+                        Ghost1Movement();
+                        break;
+                    case "Ghost2":
+                        Ghost2Movement();
+                        break;
+                    case "Ghost3":
+                        Ghost3Movement();
+                        break;
+                    case "Ghost4":
+                        Ghost4Movement();
+                        break;
+                }
+            }
         }
     }
 
 
+    void DeathMovement()
+    {
+        Vector3 targetPosition = new Vector3(-4, 4, 0);
+        if (tweener.activeTween == null)
+        {
+            tweener.AddTween(gameObject.transform, gameObject.transform.position, targetPosition);
+        }
+        if (Vector3.Distance(gameObject.transform.position, targetPosition) < 0.1f)
+        {
+            tweener.activeTween = null;
+            transform.position = targetPosition;
+            currentPos = new int[] { 14, 13 };
+            targetPos = new int[] { 12, 13 };
+            animator.SetBool("Left", false);
+            animator.SetBool("Right", false);
+            animator.SetBool("Down", false);
+            animator.SetBool("Up", true);
+            animator.SetBool("Walking", true);
+            animator.SetBool("Dead", false);
+            moveGhostFromCentre = true;
+            CheckIfAnyDead();
+        }
+    }
+
+    void CheckIfAnyDead()
+    {
+        int deadCount = 0;
+        foreach (GameObject ghost in ghosts)
+        {
+            if (ghost.GetComponent<Animator>().GetBool("Dead"))
+            {
+                deadCount++;
+            }
+        }
+        if (deadCount == 0)
+        {
+            switch(currentState)
+            {
+                case "Walking":
+                    backgroundMusic.PlayNormalMusic();
+                    break;
+                case "Scared":
+                    backgroundMusic.PlayGhostScaredMusic();
+                    break;
+                case "Recovering":
+                    backgroundMusic.PlayGhostScaredMusic();
+                    break;
+            }
+        }
+    }
+
+
+
+
     void MoveGhostFromCentre()
     {
-
-            Vector3 targetPosition = new Vector3(-4, 28, 0);
-            if (tweener.activeTween == null)
-            {
-                tweener.AddTween(gameObject.transform, gameObject.transform.position, targetPosition);
-            }
-            if (Vector3.Distance(gameObject.transform.position, targetPosition) < 0.1f)
-            {
-                tweener.activeTween = null;
-                currentPos[0] = targetPos[0] - 1;
-                currentPos[1] = targetPos[1];
-                moveGhostFromCentre = false;
-            }
-            animator.SetBool("Right", false);
-            animator.SetBool("Up", true);
+        Vector3 targetPosition = new Vector3(-4, 28, 0);
+        if (tweener.activeTween == null)
+        {
+            tweener.AddTween(gameObject.transform, gameObject.transform.position, targetPosition);
+        }
+        if (Vector3.Distance(gameObject.transform.position, targetPosition) < 0.1f)
+        {
+            tweener.activeTween = null;
+            currentPos[0] = targetPos[0] - 1;
+            currentPos[1] = targetPos[1];
+            moveGhostFromCentre = false;
+        }
+        animator.SetBool("Right", false);
+        animator.SetBool("Up", true);
     }
 
     void Ghost4Movement()
@@ -413,7 +488,14 @@ public class GhostController : MonoBehaviour
 
     void SetAnimation(Vector3 direction)
     {
-        animator.SetBool("Walking", true);
+        foreach (string state in states)
+        {
+            if (state != currentState)
+            {
+                animator.SetBool(state, false);
+            }
+        }
+        animator.SetBool(currentState, true);
         animator.SetBool("Left", false);
         animator.SetBool("Right", false);
         animator.SetBool("Up", false);
