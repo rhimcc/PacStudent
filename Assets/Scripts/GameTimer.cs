@@ -37,7 +37,16 @@ public class GameTimer : MonoBehaviour
     {
         isRunning = false;
         pacman = GameObject.Find("PacMan");
+        if (pacman == null)
+        {
+            yield break; // Exit the coroutine if PacMan is not found
+        }
+
         pacStudentController = pacman.GetComponent<PacStudentController>();
+        if (pacStudentController == null)
+        {
+            yield break; // Exit the coroutine if the component is not found
+        }
         GameObject ghost1 = GameObject.Find("Ghost1");
         GameObject ghost2 = GameObject.Find("Ghost2");
         GameObject ghost3 = GameObject.Find("Ghost3");
