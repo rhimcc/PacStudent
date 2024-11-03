@@ -16,6 +16,7 @@ TagManager:
   - Tunnel
   - Bonus
   - Ghost
+  - LuckyBlock
   layers:
   - Default
   - TransparentFX

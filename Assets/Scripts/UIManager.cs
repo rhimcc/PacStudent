@@ -27,6 +27,11 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void loadLevel2()
+    {
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene(2);
+    }
     public void loadStart()
     {
         SceneManager.LoadScene(0);
@@ -34,7 +39,7 @@ public class UIManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex == 1) // Check if the loaded scene is Level 1
+        if (scene.buildIndex == 1 || scene.buildIndex == 2) // Check if the loaded scene is Level 1
         {
             GameObject buttonObject = GameObject.FindGameObjectWithTag("QuitButton");
             if (buttonObject != null) // Ensure the button exists
@@ -43,6 +48,7 @@ public class UIManager : MonoBehaviour
                 button.onClick.AddListener(loadStart); // Add listener
             }
         }
+       
         StartCoroutine(gameObject.GetComponent<GameTimer>().StartCountDown());
         
     }
