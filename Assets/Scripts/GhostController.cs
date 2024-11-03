@@ -489,10 +489,7 @@ public class GhostController : MonoBehaviour
     {
         foreach (string state in states)
         {
-            if (state != currentState)
-            {
-                animator.SetBool(state, false);
-            }
+            animator.SetBool(state, false);
         }
         animator.SetBool(currentState, true);
         animator.SetBool("Left", false);
