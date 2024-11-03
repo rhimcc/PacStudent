@@ -57,6 +57,7 @@ public class PacStudentController : MonoBehaviour
     int deathCount = 0;
     GameObject mainCamera;
     BackgroundMusic backgroundMusic;
+    string currentEffect = "";
     
 
     // Start is called before the first frame update
@@ -117,17 +118,33 @@ public class PacStudentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.GetComponent<Level2Controller>() != null) // if it is in level 2
+        {
+            currentEffect = gameObject.GetComponent<Level2Controller>().currentEffect;
+        }
+        
         if (tweener.activeTween != null && tweener.activeTween.EndPos == transform.position)
         {
             tweener.activeTween = null;
         }
-        if (Input.GetKeyDown(KeyCode.W)) lastInput = "W";
-        if (Input.GetKeyDown(KeyCode.S)) lastInput = "S";
-        if (Input.GetKeyDown(KeyCode.A)) lastInput = "A";
-        if (Input.GetKeyDown(KeyCode.D)) lastInput = "D";
+        if (currentEffect == "Reverse controls")
+        {
+            if (Input.GetKeyDown(KeyCode.W)) lastInput = "S";
+            if (Input.GetKeyDown(KeyCode.S)) lastInput = "W";
+            if (Input.GetKeyDown(KeyCode.A)) lastInput = "D";
+            if (Input.GetKeyDown(KeyCode.D)) lastInput = "A";
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.W)) lastInput = "W";
+            if (Input.GetKeyDown(KeyCode.S)) lastInput = "S";
+            if (Input.GetKeyDown(KeyCode.A)) lastInput = "A";
+            if (Input.GetKeyDown(KeyCode.D)) lastInput = "D";
+        }
 
         if (tweener.activeTween == null && movementAllowed)
         {
+            
             if (CanMove(lastInput))
             {
                 if (!animator.GetBool("Dead")) { 
@@ -172,7 +189,7 @@ public class PacStudentController : MonoBehaviour
         horizontalBorder = false;
         verticalBorder = false;
         DetectBorder(direction);
-
+       
 
         switch (direction)
         {
@@ -496,7 +513,10 @@ public class PacStudentController : MonoBehaviour
                 break;
 
             case "Ghost":
-                HandleGhost(collider);
+                if (!animator.GetBool("Dead"))
+                {
+                    HandleGhost(collider);
+                }
                 break;
         }
     }
