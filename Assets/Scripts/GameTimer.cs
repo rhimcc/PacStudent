@@ -35,6 +35,7 @@ public class GameTimer : MonoBehaviour
 
     public IEnumerator StartCountDown()
     {
+
         isRunning = false;
         pacman = GameObject.Find("PacMan");
         if (pacman == null)

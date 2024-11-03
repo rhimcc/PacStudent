@@ -48,37 +48,37 @@ AnimatorStateMachine:
     m_Position: {x: 270, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2184729314344184773}
-    m_Position: {x: 305, y: 195, z: 0}
+    m_Position: {x: 310, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8021979119445551970}
     m_Position: {x: 340, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2133675095586387243}
-    m_Position: {x: 375, y: 325, z: 0}
+    m_Position: {x: 380, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2963291515544018411}
     m_Position: {x: 410, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3481658581981245521}
-    m_Position: {x: 445, y: 455, z: 0}
+    m_Position: {x: 440, y: 460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1213906798473393471}
     m_Position: {x: 480, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8012350556057156103}
-    m_Position: {x: 515, y: 585, z: 0}
+    m_Position: {x: 520, y: 580, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1625681492827537793}
     m_Position: {x: 550, y: 650, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4034137312824862517}
-    m_Position: {x: 585, y: 715, z: 0}
+    m_Position: {x: 580, y: 720, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1010112680838961077}
     m_Position: {x: 620, y: 780, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2655076107372075446}
-    m_Position: {x: 655, y: 845, z: 0}
+    m_Position: {x: 660, y: 840, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8756190133019109762}
     m_Position: {x: 690, y: 910, z: 0}

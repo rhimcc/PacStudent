@@ -16480,7 +16480,6 @@ MonoBehaviour:
   - {fileID: 433214073}
   movementAllowed: 0
   animator: {fileID: 433214077}
-  collisionsAllowed: 1
   currentState: Walking
   audioClips:
   - {fileID: 8300000, guid: 437cedcb13254403889080ee1f4fc554, type: 3}
@@ -18057,7 +18056,6 @@ MonoBehaviour:
   - {fileID: 433214073}
   movementAllowed: 0
   animator: {fileID: 498251511}
-  collisionsAllowed: 1
   currentState: Walking
   audioClips:
   - {fileID: 8300000, guid: 437cedcb13254403889080ee1f4fc554, type: 3}
@@ -31133,7 +31131,6 @@ MonoBehaviour:
   - {fileID: 433214073}
   movementAllowed: 0
   animator: {fileID: 943412625}
-  collisionsAllowed: 1
   currentState: Walking
   audioClips:
   - {fileID: 8300000, guid: 437cedcb13254403889080ee1f4fc554, type: 3}
@@ -48047,7 +48044,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502551219}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 21d245e6d3c17414fb856246052bb130, type: 2}
   m_CullingMode: 0
@@ -63905,7 +63902,6 @@ MonoBehaviour:
   - {fileID: 433214073}
   movementAllowed: 0
   animator: {fileID: 1899985510}
-  collisionsAllowed: 1
   currentState: Walking
   audioClips:
   - {fileID: 8300000, guid: 437cedcb13254403889080ee1f4fc554, type: 3}

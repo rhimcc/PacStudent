@@ -1305,6 +1305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pacStudentController: {fileID: 0}
+  isRunning: 0
   timer: 0
 --- !u!114 &1137524901
 MonoBehaviour:
