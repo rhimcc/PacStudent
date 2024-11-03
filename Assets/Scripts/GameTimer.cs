@@ -11,7 +11,7 @@ public class GameTimer : MonoBehaviour
     string[] countdownValues = new string[] {"3", "2", "1", "GO!"};
     GameObject pacman;
     public PacStudentController pacStudentController;
-    bool isRunning = false;
+    public bool isRunning = false;
     int mins;
     int hours;
     int seconds;
@@ -28,13 +28,14 @@ public class GameTimer : MonoBehaviour
     {
         if (isRunning)
         {
-            timer += Time.deltaTime; // Increase timer by the time since the last frame
+            timer = Time.timeSinceLevelLoad - 4;
             UpdateTimerDisplay();
         }
     }
 
     public IEnumerator StartCountDown()
     {
+        isRunning = false;
         pacman = GameObject.Find("PacMan");
         pacStudentController = pacman.GetComponent<PacStudentController>();
         GameObject ghost1 = GameObject.Find("Ghost1");
@@ -86,6 +87,7 @@ public class GameTimer : MonoBehaviour
     {
         isRunning = false;
     }
+
 }
 
 
