@@ -48694,6 +48694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   luckyBlock: {fileID: 862318238}
+  currentEffect: No Effect
   effectText: {fileID: 888098059}
   effectTimeText: {fileID: 1367657564}
 --- !u!1 &1504454288

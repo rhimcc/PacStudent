@@ -122,12 +122,51 @@ public class PacStudentController : MonoBehaviour
         {
             currentEffect = gameObject.GetComponent<Level2Controller>().currentEffect;
         }
-        
+        if (currentEffect == "Snail Speed")
+        {
+            tweener.speed = 35f;
+        } else if (currentEffect == "Super Speed")
+        {
+            tweener.speed = 65f;
+        } else
+        {
+            tweener.speed = 50f;
+        }
+
+        if (currentEffect == "Increased Pellet Range")
+        {
+            GameObject[] pellets = GameObject.FindGameObjectsWithTag("Pellet");
+            foreach (GameObject pellet in pellets)
+            {
+                pellet.GetComponent<SphereCollider>().radius = 10;
+            }
+        } else {
+            GameObject[] pellets = GameObject.FindGameObjectsWithTag("Pellet");
+            foreach (GameObject pellet in pellets)
+            {
+                pellet.GetComponent<SphereCollider>().radius = 1;
+            }
+        }
+
+        if (currentEffect == "Invisibility")
+        {
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+            Color color = spriteRenderer.color;
+            color.a = 0.5f; // Alpha value between 0 (transparent) and 1 (opaque)
+            spriteRenderer.color = color;
+        } else
+        {
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+            Color color = spriteRenderer.color;
+            color.a = 1f; // Alpha value between 0 (transparent) and 1 (opaque)
+            spriteRenderer.color = color;
+        }
+
         if (tweener.activeTween != null && tweener.activeTween.EndPos == transform.position)
         {
             tweener.activeTween = null;
         }
-        if (currentEffect == "Reverse controls")
+        if (currentEffect == "Reverse Controls")
         {
             if (Input.GetKeyDown(KeyCode.W)) lastInput = "S";
             if (Input.GetKeyDown(KeyCode.S)) lastInput = "W";
@@ -497,7 +536,10 @@ public class PacStudentController : MonoBehaviour
                 break;
 
             case "Pellet":
-                HandlePellet(collider);
+                if (currentEffect != "No Pellets")
+                {
+                    HandlePellet(collider);
+                }
                 break;
 
             case "Tunnel":
@@ -689,7 +731,7 @@ public class PacStudentController : MonoBehaviour
     void HandleGhost(Collider collider)
     {
         int index = System.Array.IndexOf(ghosts, collider.gameObject);
-        if (ghostAnimators[index].GetBool("Walking")) {
+        if (ghostAnimators[index].GetBool("Walking") && currentEffect != "Invisibility") {
             StartCoroutine(HandleDeath());
         } else if (ghostAnimators[index].GetBool("Recovering") || (ghostAnimators[index].GetBool("Scared"))) {
             HandleEatGhost(collider.gameObject);

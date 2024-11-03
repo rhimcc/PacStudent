@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class Level2Controller : MonoBehaviour
 {
-    string[] positiveEffects = new string[] { "Super Speed", "Shield", "Increased Pellet Range" };
-    string[] negativeEffects = new string[] { "Reverse controls", "Snail Speed", "No Pellets" };
+    string[] positiveEffects = new string[] { "Super Speed", "Invisibility", "Increased Pellet Range" };
+    string[] negativeEffects = new string[] { "Reverse Controls", "Snail Speed", "No Pellets" };
     public GameObject luckyBlock;
     bool blockActive = false;
     float time = 0;
@@ -67,6 +67,7 @@ public class Level2Controller : MonoBehaviour
     void GenerateEffect()
     {
         int effectStatus = Random.Range(0, 2);
+
         if (effectStatus == 0)
         {
             currentEffect = positiveEffects[Random.Range(0, positiveEffects.Length)];
